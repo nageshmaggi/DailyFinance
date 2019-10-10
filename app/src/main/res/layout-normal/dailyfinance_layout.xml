@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.08"
+        android:weightSum="1"
+        >
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/calandar_36"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_weight="0.1"
+            android:layout_marginLeft="75dp"
+
+            />
+        <EditText
+            android:id="@+id/etFromDate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:inputType="text"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_weight="0.25"
+            android:background="@drawable/df_datefields"
+            android:editable="false"
+            android:clickable="true"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="To"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:layout_weight="0.1"
+            />
+
+        <EditText
+            android:id="@+id/etToDate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:inputType="text"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_weight="0.25"
+            android:background="@drawable/df_datefields"
+            android:editable="false"
+            android:clickable="true"
+            />
+
+        <Button
+            android:id="@+id/btnGetDf"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Get"
+            android:layout_weight="0.2"
+            android:textSize="11sp"
+            android:layout_marginLeft="2dp"
+            />
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:background="@color/DefaultBtnColor"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="0.84"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvDfReport"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#eee"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_weight="0.08"
+        android:padding="1dp"
+        >
+
+        <!--<ImageView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:src="@drawable/filter_black_96"-->
+            <!--android:padding="10dp"-->
+            <!--android:layout_weight="0.2"-->
+            <!--/>-->
+
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:text="|"-->
+            <!--android:textColor="@color/DefaultBtnColor"-->
+            <!--android:textSize="32sp"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_weight="0.02"-->
+            <!--/>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1"
+            android:layout_marginRight="1.5dp"
+            >
+
+            <TextView
+                android:id="@+id/tvTtlAmt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="TotalAmt : ₹"
+                android:textSize="15sp"
+                android:gravity="end"
+                android:layout_weight="0.5"
+                />
+
+            <TextView
+                android:id="@+id/tvNtAmt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="NetAmt : ₹"
+                android:textSize="15sp"
+                android:gravity="end"
+                android:layout_weight="0.5"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="5dp"
+        >
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="1dp"
+            app:hintTextAppearance="@style/My_Labels"
+            app:boxStrokeWidth="1dp"
+            app:boxBackgroundColor="#fff"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            app:boxCornerRadiusBottomEnd="5dp"
+            android:paddingLeft="10dp"
+            >
+
+            <EditText
+                android:id="@+id/etMobileNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mobile"
+                android:textSize="15sp"
+                android:inputType="phone"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="1dp"
+            app:hintTextAppearance="@style/My_Labels"
+            app:boxStrokeWidth="1dp"
+            app:boxBackgroundColor="#fff"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            app:boxCornerRadiusBottomEnd="5dp"
+            android:paddingLeft="10dp"
+            >
+
+            <EditText
+                android:id="@+id/etDate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Date"
+                android:textSize="15sp"
+                android:drawableRight="@drawable/image_calendar"
+                android:paddingRight="20dp"
+                android:inputType="date"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="1dp"
+            app:hintTextAppearance="@style/My_Labels"
+            app:boxStrokeWidth="1dp"
+            app:boxBackgroundColor="#fff"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            app:boxCornerRadiusBottomEnd="5dp"
+            android:paddingLeft="10dp"
+            >
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:textSize="15sp"
+                android:inputType="textCapCharacters"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilRefNo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="1dp"
+            app:hintTextAppearance="@style/My_Labels"
+            app:boxStrokeWidth="1dp"
+            app:boxBackgroundColor="#fff"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            app:boxCornerRadiusBottomEnd="5dp"
+            android:paddingLeft="10dp"
+            android:layout_marginRight="15dp"
+            >
+
+            <EditText
+                android:id="@+id/etRefNo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="RefNo"
+                android:textSize="15sp"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="1dp"
+            app:hintTextAppearance="@style/My_Labels"
+            app:boxStrokeWidth="1dp"
+            app:boxBackgroundColor="#fff"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            app:boxCornerRadiusBottomEnd="5dp"
+            android:paddingLeft="10dp"
+            >
+
+            <EditText
+                android:id="@+id/etAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Amount"
+                android:textSize="15sp"
+                android:inputType="numberDecimal"
+                android:enabled="false"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_margin="1dp"
+            app:hintTextAppearance="@style/My_Labels"
+            app:boxStrokeWidth="1dp"
+            app:boxBackgroundColor="#fff"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            app:boxCornerRadiusBottomEnd="5dp"
+            android:paddingLeft="10dp"
+            >
+
+            <EditText
+                android:id="@+id/etRemarks"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Remarks"
+                android:textSize="15sp"
+                android:inputType="textMultiLine"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_save"
+                android:textAllCaps="false"
+                android:textColor="@color/button_text_color"
+                android:background="@drawable/custom_button_green"
+                android:drawableLeft="@mipmap/save"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:onClick="OnSaveClick"
+                />
+
+            <Button
+                android:id="@+id/btnClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:text="@string/btn_clear"
+                android:textAllCaps="false"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/button_text_color"
+                android:drawableLeft="@mipmap/reset"
+                android:background="@drawable/custom_button_blue"
+                android:paddingLeft="30dp"
+                android:paddingRight="35dp"
+                android:onClick="OnClearClick"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

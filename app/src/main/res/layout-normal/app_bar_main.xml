@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="m_fusilsolutions.com.dailyfinance.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include
+        layout="@layout/content_main"
+        />
+
+    <Button
+        android:id="@+id/btn_dailyfinance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="@dimen/fab_margin"
+        android:text="@string/btn_dailyfinance"
+        android:textAllCaps="false"
+        android:textColor="@color/button_text_color"
+        android:background="@drawable/custom_button_blue"
+        android:drawableLeft="@mipmap/daily_finance"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        />
+
+    <Button
+        android:id="@+id/btn_collection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:text="@string/btn_collection"
+        android:textAllCaps="false"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/button_text_color"
+        android:background="@drawable/custom_button_green"
+        android:drawableLeft="@mipmap/collection"
+        android:paddingLeft="10dp"
+        android:paddingRight="35dp"
+        />
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="bottom|center"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--android:src="@mipmap/home"-->
+        <!--/>-->
+
+</android.support.design.widget.CoordinatorLayout>

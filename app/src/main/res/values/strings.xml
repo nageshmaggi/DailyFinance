@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Daily Finance</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="btn_dailyfinance">Daily Finance</string>
+
+    <string name="btn_save">Save</string>
+    <string name="btn_clear">Reset</string>
+
+    <string name="btn_collection">Collection</string>
+
+
+    <string name="msg_enter_name">Enter Name</string>
+    <string name="msg_enter_mobileno">Enter MobileNo</string>
+    <string name="msg_enter_amt">Enter Amount</string>
+
+</resources>

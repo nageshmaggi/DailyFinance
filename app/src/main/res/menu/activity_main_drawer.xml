@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Transaction">
+        <menu>
+            <item
+                android:id="@+id/nav_daily_finance"
+                android:icon="@mipmap/daily_finance"
+                android:title="Daily Finance" />
+            <item
+                android:id="@+id/nav_collection"
+                android:icon="@mipmap/collection"
+                android:title="Collection" />
+        </menu>
+    </item>
+
+    <item android:title="Report">
+        <menu>
+            <item
+                android:id="@+id/nav_daily_finance_report"
+                android:icon="@mipmap/collection"
+                android:title="Daily Finance Report" />
+            <item
+                android:id="@+id/nav_collection_report"
+                android:icon="@mipmap/collection"
+                android:title="Collection Report" />
+            <item
+                android:id="@+id/nav_daily_active_finance_report"
+                android:icon="@mipmap/collection"
+                android:title="Daily Active Finance Report" />
+            <item
+                android:id="@+id/nav_memberwise_daily_finance_report"
+                android:icon="@mipmap/collection"
+                android:title="Memberwise Daily Finance Report" />
+        </menu>
+    </item>
+
+
+    <item
+        android:id="@+id/nav_about"
+        android:title="About us"
+        />
+
+    <item
+        android:id="@+id/nav_appinfo"
+        android:title="App info"
+        />
+
+    <item
+        android:title="Powered by FusilSolutions pvt ltd"
+        />
+</menu>
