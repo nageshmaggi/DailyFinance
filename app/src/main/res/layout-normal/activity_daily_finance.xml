@@ -30,6 +30,7 @@
                 app:boxCornerRadiusTopStart="5dp"
                 app:boxCornerRadiusBottomEnd="5dp"
                 android:paddingLeft="10dp"
+                android:layout_weight="0.85"
                 >
 
                 <EditText
@@ -42,6 +43,7 @@
                     />
 
             </android.support.design.widget.TextInputLayout>
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -233,12 +235,15 @@
             </android.support.design.widget.TextInputLayout>
 
             <RelativeLayout
+                android:id="@+id/layout_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                >
 
                 <Button
                     android:id="@+id/btnSave"
@@ -271,6 +276,90 @@
                     />
 
             </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_Admin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:padding="2dp"
+                android:weightSum="1"
+                android:visibility="gone"
+                >
+
+                <Button
+                    android:id="@+id/btnAdminSave"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_save"
+                    android:textAllCaps="false"
+                    android:textColor="@color/button_text_color"
+                    android:background="@drawable/custom_button_green"
+                    android:drawableLeft="@mipmap/save"
+                    android:onClick="OnSaveClick"
+                    android:textAlignment="textStart"
+                    android:gravity="center"
+                    android:paddingLeft="7dp"
+                    android:textSize="15sp"
+                    />
+
+                <Button
+                    android:id="@+id/btnGet"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    android:textAllCaps="false"
+                    android:background="@drawable/custom_button_orange"
+                    android:textColor="@color/button_text_color"
+                    android:drawableLeft="@mipmap/edit"
+                    android:onClick="OnEditClick"
+                    android:textAlignment="textStart"
+                    android:gravity="center"
+                    android:paddingLeft="7dp"
+                    android:textSize="15sp"
+                    />
+
+                <Button
+                    android:id="@+id/btnDelete"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:layout_height="wrap_content"
+                    android:text="Delete"
+                    android:textAllCaps="false"
+                    android:background="@drawable/custom_button_red"
+                    android:textColor="@color/button_text_color"
+                    android:drawableLeft="@mipmap/delete"
+                    android:onClick="OnDeleteClick"
+                    android:textAlignment="textStart"
+                    android:gravity="center"
+                    android:paddingLeft="7dp"
+                    android:textSize="15sp"
+                    />
+
+                <Button
+                    android:id="@+id/btnAdminClear"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_clear"
+                    android:textAllCaps="false"
+                    android:textColor="@color/button_text_color"
+                    android:drawableLeft="@mipmap/reset"
+                    android:background="@drawable/custom_button_blue"
+                    android:onClick="OnClearClick"
+                    android:textAlignment="textStart"
+                    android:gravity="center"
+                    android:paddingLeft="7dp"
+                    android:textSize="15sp"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -10,12 +10,10 @@ import m_fusilsolutions.com.dailyfinance.Constants.Constants;
 
 public class LocalRepoViewModel
 {
-    public DailyFinanceData _financeData;
-    public LocalRepoViewModel(DailyFinanceData financeData){
-        this._financeData = financeData;
+    public LocalRepoViewModel(){
     }
 
-    public void CalculateNetAndPerDayAmt(EditText etNetAmt, EditText etPerDayAmt){
+    public void CalculateNetAndPerDayAmt(DailyFinanceData _financeData,EditText etNetAmt, EditText etPerDayAmt){
         long amt = Long.parseLong(_financeData.getAmount());
         Double netAmt = amt - (Constants.COMMISION_PERCENTAGE * amt);
         long perDayAmt = (int) Double.parseDouble(_financeData.getAmount()) / (Constants.NO_OF_FINANCE_DAYS);

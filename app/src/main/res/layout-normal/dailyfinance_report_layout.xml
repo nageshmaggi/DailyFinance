@@ -103,29 +103,31 @@
         android:padding="1dp"
         >
 
-        <!--<ImageView-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:src="@drawable/filter_black_96"-->
-            <!--android:padding="10dp"-->
-            <!--android:layout_weight="0.2"-->
-            <!--/>-->
+        <ImageView
+            android:id="@+id/ivImgFilter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/filter_black_96"
+            android:padding="10dp"
+            android:layout_weight="0.2"
+            />
 
-        <!--<TextView-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:text="|"-->
-            <!--android:textColor="@color/DefaultBtnColor"-->
-            <!--android:textSize="32sp"-->
-            <!--android:gravity="center"-->
-            <!--android:layout_weight="0.02"-->
-            <!--/>-->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="|"
+            android:textColor="@color/DefaultBtnColor"
+            android:textSize="32sp"
+            android:gravity="center"
+            android:layout_weight="0.02"
+            />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:weightSum="1"
+            android:layout_weight="0.78"
             android:layout_marginRight="1.5dp"
             >
 

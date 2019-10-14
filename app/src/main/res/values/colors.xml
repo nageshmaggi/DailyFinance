@@ -7,4 +7,6 @@
     <color name="button_text_color">#FFF</color>
     <color name="DefaultBlack">#000</color>
     <color name="DefaultBtnColor">#D6D7D7</color>
+    <color name="statusbar_color">#FF3A8149</color>
+    <color name="orange">#FF9100</color>
 </resources>

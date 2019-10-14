@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="15dp"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        >
+
+        <TextView
+            android:id="@+id/tvDialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:textSize="19sp"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            />
+
+        <ImageView
+            android:id="@+id/imgV_close"
+            android:layout_width="25dp"
+            android:layout_height="35dp"
+            android:src="@drawable/cancel"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:background="@color/DefaultBtnColor"
+        android:layout_below="@+id/rl1"
+        android:layout_marginBottom="5dp"
+        />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til1"
+        android:layout_below="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="1dp"
+        app:hintTextAppearance="@style/My_Labels"
+        app:boxStrokeWidth="1dp"
+        app:boxBackgroundColor="#fff"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomStart="5dp"
+        app:boxCornerRadiusTopEnd="5dp"
+        app:boxCornerRadiusTopStart="5dp"
+        app:boxCornerRadiusBottomEnd="5dp"
+        android:paddingLeft="10dp"
+        >
+
+        <EditText
+            android:id="@+id/etVS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="VS"
+            android:textSize="15sp"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til2"
+        android:layout_below="@+id/til1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="1dp"
+        app:hintTextAppearance="@style/My_Labels"
+        app:boxStrokeWidth="1dp"
+        app:boxBackgroundColor="#fff"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomStart="5dp"
+        app:boxCornerRadiusTopEnd="5dp"
+        app:boxCornerRadiusTopStart="5dp"
+        app:boxCornerRadiusBottomEnd="5dp"
+        android:paddingLeft="10dp"
+        >
+
+        <EditText
+            android:id="@+id/etVN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="VN"
+            android:textSize="15sp"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/til2"
+        android:layout_marginBottom="20dp"
+        >
+
+    <Button
+        android:id="@+id/btnget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:text="Ok"
+        android:textAllCaps="false"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/button_text_color"
+        android:drawableLeft="@mipmap/get"
+        android:background="@drawable/custom_button_blue"
+        android:paddingLeft="15dp"
+        android:paddingRight="20dp"
+        android:layout_marginRight="5dp"
+        android:onClick="OnGetClick"
+        />
+
+    </RelativeLayout>
+
+</RelativeLayout>

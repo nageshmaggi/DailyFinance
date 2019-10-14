@@ -16,5 +16,6 @@ public class Constants
     public static final String DFC_VS="DFC";
 
     public static final double COMMISION_PERCENTAGE=0.1;
+    public static final int isAdmin = 1;
 
 }

@@ -12,5 +12,11 @@ public enum TransType {
     GetSearchData,
     GetDailyFinanceReport,
     GetDailyCollectionReport,
-    GetAllActiveDailyFinanceReport
+    GetAllActiveDailyFinanceReport,
+    GetFilteredData,
+    GetFilteredDataDFC,
+    CheckLoginData,
+    GetFinanceDataByVSNo,
+    UpdateDFData,
+    DeleteDFData
 }

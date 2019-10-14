@@ -12,31 +12,53 @@
         android:orientation="vertical"
         android:layout_marginLeft="5dp"
         >
-        <android.support.design.widget.TextInputLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="1dp"
-            app:hintTextAppearance="@style/My_Labels"
-            app:boxStrokeWidth="1dp"
-            app:boxBackgroundColor="#fff"
-            app:boxBackgroundMode="outline"
-            app:boxCornerRadiusBottomStart="5dp"
-            app:boxCornerRadiusTopEnd="5dp"
-            app:boxCornerRadiusTopStart="5dp"
-            app:boxCornerRadiusBottomEnd="5dp"
-            android:paddingLeft="10dp"
+            android:layout_height="52dp"
+            android:orientation="horizontal"
+            android:weightSum="1"
             >
 
-            <EditText
-                android:id="@+id/etMobileNo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Mobile"
-                android:textSize="15sp"
-                android:inputType="phone"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                app:hintTextAppearance="@style/My_Labels"
+                app:boxStrokeWidth="1dp"
+                app:boxBackgroundColor="#fff"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomStart="5dp"
+                app:boxCornerRadiusTopEnd="5dp"
+                app:boxCornerRadiusTopStart="5dp"
+                app:boxCornerRadiusBottomEnd="5dp"
+                android:paddingLeft="10dp"
+                android:layout_weight="0.89"
+                >
+
+                <EditText
+                    android:id="@+id/etMobileNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mobile"
+                    android:textSize="15sp"
+                    android:inputType="phone"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/ivSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.11"
+                android:src="@drawable/search_30"
+                android:padding="7dp"
+
                 />
 
-        </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"

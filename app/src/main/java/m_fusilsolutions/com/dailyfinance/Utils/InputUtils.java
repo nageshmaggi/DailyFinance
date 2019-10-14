@@ -27,7 +27,16 @@ public class InputUtils
         return "<SearchData MobileNo='"+mobileNo+"' />";
     }
 
-    public String getVoucherXele(int menuItemId, String transId,String vs, int vn, String date, String time){
+    public String getLoginXele(String uName, String pwd) {
+        String Xele = "<LoginData UserName='"+ uName +"' UserPassword='"+ pwd +"' />";
+        return Xele;
+    }
+
+    public String getDFDeleteXele(String transId) {
+        return "<Data TransId='"+ transId +"' />";
+    }
+
+    public String getVoucherXele(int menuItemId, String transId,String vs, String vn, String date, String time){
         String voucherXele = "<VoucherData " +
                 " TransId='"+transId+
                 "' MenuItemId='"+menuItemId+
@@ -59,6 +68,27 @@ public class InputUtils
         return xele;
     }
 
+    public String getDFinanceDataByMobileNo(String vs, String vn){
+        return "<SearchData VS='"+vs+"' VN='"+vn+"' />";
+    }
+
+    public String getDFUpdationXelement(DailyFinanceData data, String transid){
+
+        String xele = "<Data " +
+                " TransId='"+transid+
+                "' Date='"+getyyyyDDmmDate(data.getDate())+
+                "' Name='"+data.getName()+
+                "' MobileNo='"+data.getMobileNo()+
+                "' RefNo='"+data.getRefNo()+
+                "' Amount='"+data.getAmount()+
+                "' NetAmount='"+data.getNetAmount()+
+                "' PerDayAmt='"+data.getPerDayAmt()+
+                "' Remarks='"+data.getRemarks()+
+                "' Status='0' " +
+                "/>";
+        return xele;
+    }
+
     public String getCollectionXelement(DailyFinanceData data, String transid, int menuItemId){
 
         String xele = "<CollectionData " +
@@ -66,9 +96,9 @@ public class InputUtils
                 "' MenuItemId='"+menuItemId+
                 "' AgainstId='"+data.getTransId()+
                 "' Date='"+getyyyyDDmmDate(data.getDate())+
-                "' Name='"+data.getName()+
-                "' MobileNo='"+data.getMobileNo()+
-                "' RefNo='"+data.getRefNo()+
+                "' Name='"+
+                "' MobileNo='"+
+                "' RefNo='"+
                 "' Amount='"+data.getAmount()+
                 "' Remarks='"+data.getRemarks()+
                 "' />";

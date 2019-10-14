@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingDefaultResource"
+    android:background="@color/button_text_color"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filter By"
+        android:textColor="@color/button_text_color"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorPrimary"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <RadioGroup
+            android:id="@+id/rgFilterRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <RadioButton
+                android:id="@+id/rbName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textSize="16sp"
+                />
+            <RadioButton
+                android:id="@+id/rbMobNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MobileNo"
+                android:textSize="16sp"
+                />
+            <RadioButton
+                android:id="@+id/rbVsNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="VSNo"
+                android:textSize="16sp"
+                />
+            <RadioButton
+                android:id="@+id/rbRemarks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remarks"
+                android:textSize="16sp"
+                />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            >
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:hint="Enter Keyword"
+                android:background="@drawable/custom_views"
+                android:imeOptions="actionDone"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

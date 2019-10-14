@@ -17,5 +17,6 @@
     <string name="msg_enter_name">Enter Name</string>
     <string name="msg_enter_mobileno">Enter MobileNo</string>
     <string name="msg_enter_amt">Enter Amount</string>
+    <string name="about_us">Fusil Solutions Pvt Ltd</string>
 
 </resources>

@@ -2,6 +2,7 @@ package m_fusilsolutions.com.dailyfinance;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -110,6 +112,8 @@ public class MainActivity extends AppCompatActivity
         swipeLayout.setOnRefreshListener(this);
     }
 
+
+
     @Override
     public void onRefresh() {
         _exeDb.ExecuteResult(SPName.USP_MA_DF_DailyFinance.toString(), "<Data Name='abc'/>", TransType.GetDFTotals.toString(), "1", Constants.HTTP_URL);
@@ -121,39 +125,73 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            ShowLogOutDialog();
         }
+    }
+
+    private void ShowLogOutDialog() {
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+        alertDialogBuilder.setTitle("Are you sure want to Logout?");
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        startActivity(new Intent(MainActivity.this,UserLoginActivity.class));
+                    }
+                });
+        alertDialogBuilder.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (id == R.id.nav_daily_finance) {
             startActivity(new Intent(this, DailyFinance_Activity.class));
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.nav_collection) {
             startActivity(new Intent(this, Collection_Activity.class));
-        }else if (id == R.id.nav_daily_finance_report) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (id == R.id.nav_daily_finance_report) {
             Intent intent = new Intent(this, DailyFinanceReport.class);
-            intent.putExtra("screen",1);
+            intent.putExtra("screen", 1);
             startActivity(intent);
-        }else if (id == R.id.nav_collection_report) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (id == R.id.nav_collection_report) {
             Intent intent = new Intent(this, DailyFinanceReport.class);
-            intent.putExtra("screen",2);
+            intent.putExtra("screen", 2);
             startActivity(intent);
-        }else if(id == R.id.nav_daily_active_finance_report){
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (id == R.id.nav_daily_active_finance_report) {
             Intent intent = new Intent(this, DailyFinanceReport.class);
-            intent.putExtra("screen",3);
+            intent.putExtra("screen", 3);
             startActivity(intent);
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (id == R.id.nav_memberwise_daily_finance_report) {
+            startActivity(new Intent(this, Memberwise_DailyFinaceReport_Activity.class));
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (id == R.id.nav_about) {
+            startActivity(new Intent(this, AboutUs_Activity.class));
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (id == R.id.nav_appinfo) {
+            startActivity(new Intent(this, AppInfo_Activity.class));
+            drawer.closeDrawer(GravityCompat.START);
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -190,12 +228,12 @@ public class MainActivity extends AppCompatActivity
                     rVHome.setNestedScrollingEnabled(false);
                 }
             }
-        }else{
-            if(val.equals("1")){
+        } else {
+            if (val.equals("1")) {
                 _dashBoardList = new ArrayList<>();
                 DashBoardData data1 = new DashBoardData("Totals", "0", R.mipmap.totals);
                 DashBoardData data2 = new DashBoardData("Collected", "0", R.mipmap.collected);
-                DashBoardData data3 = new DashBoardData("Tobe Collected","0", R.mipmap.tobecollected);
+                DashBoardData data3 = new DashBoardData("Tobe Collected", "0", R.mipmap.tobecollected);
                 _dashBoardList.add(data1);
                 _dashBoardList.add(data2);
                 _dashBoardList.add(data3);

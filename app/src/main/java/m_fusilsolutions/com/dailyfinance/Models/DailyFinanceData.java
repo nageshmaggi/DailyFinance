@@ -16,7 +16,8 @@ public class DailyFinanceData  {
     private String NetAmount="";
     private String PerDayAmt="";
     private String Remarks="";
-    private int VN = 0;
+    private String VSNo = "";
+    private int CollectionCount=0;
 
 
 
@@ -105,10 +106,17 @@ public class DailyFinanceData  {
         ServerTime = serverTime;
     }
 
-    public int getVN() {
-        return VN;
+    public String getVSNo() {
+        return VSNo;
     }
-    public void setVN(int VN) {
-        this.VN = VN;
+    public void setVSNo(String VSNo) {
+        this.VSNo = VSNo;
+    }
+
+    public int getCollectionCount() {
+        return CollectionCount;
+    }
+    public void setCollectionCount(int collectionCount) {
+        CollectionCount = collectionCount;
     }
 }

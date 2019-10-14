@@ -18,6 +18,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import m_fusilsolutions.com.dailyfinance.Models.DailyFinanceData;
 import m_fusilsolutions.com.dailyfinance.Models.DashBoardData;
+import m_fusilsolutions.com.dailyfinance.Models.LoginData;
 import m_fusilsolutions.com.dailyfinance.Models.ReportData;
 import m_fusilsolutions.com.dailyfinance.Models.ResultData;
 import m_fusilsolutions.com.dailyfinance.R;
@@ -68,6 +69,28 @@ public class XmlConverter {
                 return nodeList.item(index++);
             }
         };
+    }
+
+    public LoginData LoginUserParentToChildIteration(NodeList _Nodelist, LoginData fdata){
+
+        for(Node node: iterable(_Nodelist))
+        {
+            String nodeName = node.getNodeName();
+            if(nodeName.equals("LoginData"))
+            {
+                if(node.getAttributes().getNamedItem("UserId")!=null)
+                    fdata.CustomerId = node.getAttributes().getNamedItem("UserId").getNodeValue();
+                if(node.getAttributes().getNamedItem("UserName")!=null)
+                    fdata.Name = node.getAttributes().getNamedItem("UserName").getNodeValue();
+                if(node.getAttributes().getNamedItem("UserPassword")!=null)
+                    fdata.Password = node.getAttributes().getNamedItem("UserPassword").getNodeValue();
+            }
+            if(node.hasChildNodes()){
+                NodeList nodeList1=node.getChildNodes();
+                LoginUserParentToChildIteration(nodeList1,fdata);
+            }
+        }
+        return fdata;
     }
 
     public List<DailyFinanceData> PanelDataParentToChildIteration(NodeList nodeList, List<DailyFinanceData> reportList) {
@@ -130,7 +153,7 @@ public class XmlConverter {
                 }
                 if(node.getAttributes().getNamedItem("VN")!=null)
                 {
-                    infoData.setVN(Integer.parseInt(node.getAttributes().getNamedItem("VN").getNodeValue()));
+                    infoData.setVSNo(node.getAttributes().getNamedItem("VN").getNodeValue());
                 }
 
             }
@@ -140,6 +163,107 @@ public class XmlConverter {
             }
         }
         return infoData;
+    }
+
+    public List<DailyFinanceData> ParseGetDFInfoData(NodeList nodeList, List<DailyFinanceData> infoList) {
+        for (Node node : iterable(nodeList))
+        {
+            String nodeName = node.getNodeName();
+            if (nodeName.equals("SearchData")) {
+                DailyFinanceData infoData = new DailyFinanceData();
+                if(node.getAttributes().getNamedItem("Date")!=null)
+                {
+                    infoData.setDate(node.getAttributes().getNamedItem("Date").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("Name")!=null)
+                {
+                    infoData.setName(node.getAttributes().getNamedItem("Name").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("TransId")!=null)
+                {
+                    infoData.setTransId(node.getAttributes().getNamedItem("TransId").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("RefNo")!=null)
+                {
+                    infoData.setRefNo(node.getAttributes().getNamedItem("RefNo").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("Amount")!=null)
+                {
+                    infoData.setAmount(node.getAttributes().getNamedItem("Amount").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("NetAmount")!=null)
+                {
+                    infoData.setNetAmount(node.getAttributes().getNamedItem("NetAmount").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("MobileNo")!=null)
+                {
+                    infoData.setMobileNo(node.getAttributes().getNamedItem("MobileNo").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("PerDayAmt")!=null)
+                {
+                    infoData.setPerDayAmt(node.getAttributes().getNamedItem("PerDayAmt").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("Remarks")!=null)
+                {
+                    infoData.setRemarks(node.getAttributes().getNamedItem("Remarks").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("CollectionCount")!=null)
+                {
+                    infoData.setCollectionCount(Integer.parseInt(node.getAttributes().getNamedItem("CollectionCount").getNodeValue()));
+                }
+                if(node.getAttributes().getNamedItem("VSNo")!=null)
+                {
+                    infoData.setVSNo(node.getAttributes().getNamedItem("VSNo").getNodeValue());
+                }
+                infoList.add(infoData);
+            }
+            if (node.hasChildNodes()) {
+                NodeList nodeList1 = node.getChildNodes();
+                ParseGetDFInfoData(nodeList1, infoList);
+            }
+        }
+        return infoList;
+    }
+
+    public List<DailyFinanceData> ParseCollectionSearchData(NodeList nodeList, List<DailyFinanceData> infoList) {
+        for (Node node : iterable(nodeList))
+        {
+            String nodeName = node.getNodeName();
+            if (nodeName.equals("SearchData")) {
+                DailyFinanceData infoData = new DailyFinanceData();
+
+                if(node.getAttributes().getNamedItem("TransId")!=null)
+                {
+                    infoData.setTransId(node.getAttributes().getNamedItem("TransId").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("Name")!=null) {
+                    infoData.setName(node.getAttributes().getNamedItem("Name").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("VSNo")!=null) {
+                    infoData.setVSNo(node.getAttributes().getNamedItem("VSNo").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("MobileNo")!=null) {
+                    infoData.setMobileNo(node.getAttributes().getNamedItem("MobileNo").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("RefNo")!=null) {
+                    infoData.setRefNo(node.getAttributes().getNamedItem("RefNo").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("Amount")!=null) {
+                    infoData.setAmount(node.getAttributes().getNamedItem("Amount").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("Remarks")!=null) {
+                    infoData.setRemarks(node.getAttributes().getNamedItem("Remarks").getNodeValue());
+                }if(node.getAttributes().getNamedItem("Date")!=null) {
+                    infoData.setDate(node.getAttributes().getNamedItem("Date").getNodeValue());
+                }
+                infoList.add(infoData);
+            }
+            if (node.hasChildNodes()) {
+                NodeList nodeList1 = node.getChildNodes();
+                ParseCollectionSearchData(nodeList1, infoList);
+            }
+        }
+        return infoList;
     }
 
     public DailyFinanceData ParseCollectionSearchData(NodeList nodeList, DailyFinanceData infoData) {

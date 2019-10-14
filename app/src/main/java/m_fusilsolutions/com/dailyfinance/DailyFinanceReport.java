@@ -1,19 +1,26 @@
 package m_fusilsolutions.com.dailyfinance;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import org.w3c.dom.NodeList;
@@ -59,11 +66,16 @@ public class DailyFinanceReport extends AppCompatActivity
     List<ReportData> reportDataList;
     private double _totAmt, _netAmt;
     int screen = 0;
+    ImageView ivImgFilter;
+    View filterView;
+    RadioGroup rgFilterBy;
+    int selectedId = 0;
+    String searchEle="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dailyfinance_layout);
+        setContentView(R.layout.dailyfinance_report_layout);
         Intent intent = getIntent();
         screen = intent.getIntExtra("screen",0);
         rvDfReport = (RecyclerView) findViewById(R.id.rvDfReport);
@@ -72,6 +84,8 @@ public class DailyFinanceReport extends AppCompatActivity
         etToDate = (EditText) findViewById(R.id.etToDate);
         tvTotalAmt = (TextView) findViewById(R.id.tvTtlAmt);
         tvNetAmt = (TextView) findViewById(R.id.tvNtAmt);
+        ivImgFilter = (ImageView) findViewById(R.id.ivImgFilter);
+        ivImgFilter.setOnClickListener(this);
         reportDataList = new ArrayList<>();
         _ct = new CustomToast(this);
         _exeDb = new ExecuteDataBase(this);
@@ -79,6 +93,7 @@ public class DailyFinanceReport extends AppCompatActivity
         etFromDate.setClickable(true);
         etToDate.setFocusable(false);
         etToDate.setClickable(true);
+        ivImgFilter.setOnClickListener(this);
         setActionBar();
 
         btnGetDf.setOnClickListener(new View.OnClickListener() {
@@ -147,8 +162,79 @@ public class DailyFinanceReport extends AppCompatActivity
             CallDatePickerProcess();
         } else if (view.getId() == R.id.etToDate) {
             CallDatePickerProcess();
+        }else if(view.getId() == R.id.ivImgFilter)
+        {
+            FilterProcess();
         }
     }
+
+    private void FilterProcess()
+    {
+        final AlertDialog.Builder filterAdb = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+        LayoutInflater li  =  getLayoutInflater();
+        filterView = li.inflate(R.layout.filter_layout,null);
+        filterAdb.setView(filterView);
+
+        EditText etSearch = (EditText) filterView.findViewById(R.id.etSearch);
+        rgFilterBy = (RadioGroup) filterView.findViewById(R.id.rgFilterRadioGroup);
+        if(selectedId == 0)
+        {
+            rgFilterBy.check(R.id.rbName);
+        }
+        else
+            rgFilterBy.check(selectedId);
+
+        etSearch.setText(searchEle);
+        rgFilterBy.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int id = radioGroup.getCheckedRadioButtonId();
+                RadioButton rBtn = (RadioButton) filterView.findViewById(id);
+                String checkedBtn = rBtn.getText().toString();
+                if(checkedBtn.equals("MobileNo") || checkedBtn.equals("VN"))
+                    etSearch.setInputType(InputType.TYPE_CLASS_NUMBER);
+                else
+                    etSearch.setInputType(InputType.TYPE_CLASS_TEXT);
+            }
+        });
+        filterAdb.setPositiveButton("Get", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                int rgId = rgFilterBy.getCheckedRadioButtonId();
+                selectedId = rgId;
+                if(rgId!=-1 && !etSearch.getText().toString().equals(""))
+                    GetFilteredData(etSearch.getText().toString());
+            }
+        });
+
+        filterAdb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog ad = filterAdb.create();
+        ad.setCancelable(false);
+        ad.setCanceledOnTouchOutside(false);
+        ad.show();
+    }
+
+    private void GetFilteredData(String searchEle) {
+        int rgId = rgFilterBy.getCheckedRadioButtonId();
+        RadioButton rdBtn = (RadioButton) filterView.findViewById(rgId);
+        String strFilterBy = rdBtn.getText().toString();
+
+        if(screen==1) {
+            String xele = "<Data ColumnName='" + strFilterBy + "' SearchElement='" + searchEle + "' />";
+            _exeDb.ExecuteResult(SPName.USP_MA_DF_DailyFinance.toString(), xele, TransType.GetFilteredData.toString(), "2", Constants.HTTP_URL);
+        }
+        else
+        {
+            String xele = "<Data ColumnName='"+strFilterBy+"' SearchElement='"+searchEle+"' />";
+            _exeDb.ExecuteResult(SPName.USP_MA_DF_DailyFinance.toString(),xele,TransType.GetFilteredDataDFC.toString(),"2",Constants.HTTP_URL);
+        }
+    }
+
 
     private void CallDatePickerProcess() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -195,6 +281,29 @@ public class DailyFinanceReport extends AppCompatActivity
                     rvDfReport.setLayoutManager(layoutManager);
                     rvDfReport.setAdapter(adapter);
                     UpdateFooterData();
+                }
+            }else if(val.equals("2")){
+                reportDataList = new ArrayList<>();
+                rvDfReport.setAdapter(null);
+                reportDataList = new XmlConverter().ParseFinanceReportData(nodeList, reportDataList);
+                if (reportDataList.size() > 0) {
+                    ReportAdapter adapter = new ReportAdapter(this, reportDataList,screen);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+                    rvDfReport.setLayoutManager(layoutManager);
+                    rvDfReport.setAdapter(adapter);
+                    UpdateFooterData();
+                }
+            }
+        }else{
+            if(val.equals("1")){
+                reportDataList = new ArrayList<>();
+                rvDfReport.setAdapter(null);
+                if(screen==1 || screen==3) {
+                    tvTotalAmt.setText("Tot Amt: ");
+                    tvNetAmt.setText("Net Amt: ");
+                }else if(screen==2){
+                    tvNetAmt.setVisibility(View.INVISIBLE);
+                    tvTotalAmt.setText("Tot Amt: ");
                 }
             }
         }

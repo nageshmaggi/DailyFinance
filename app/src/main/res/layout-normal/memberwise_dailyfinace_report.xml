@@ -1,279 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="1"
     >
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.08"
+        android:weightSum="1"
+        >
 
-        <LinearLayout
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/calandar_36"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_weight="0.1"
+            android:layout_marginLeft="75dp"
+
+            />
+        <EditText
+            android:id="@+id/etFromDate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:inputType="text"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_weight="0.25"
+            android:background="@drawable/df_datefields"
+            android:editable="false"
+            android:clickable="true"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="To"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:layout_weight="0.1"
+            />
+
+        <EditText
+            android:id="@+id/etToDate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:inputType="text"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_weight="0.25"
+            android:background="@drawable/df_datefields"
+            android:editable="false"
+            android:clickable="true"
+            />
+
+        <Button
+            android:id="@+id/btnGetDf"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Get"
+            android:layout_weight="0.2"
+            android:textSize="11sp"
+            android:layout_marginLeft="2dp"
+            />
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:background="@color/DefaultBtnColor"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="0.84"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvDfReport"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#eee"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_weight="0.08"
+        android:padding="1dp"
+        >
+
+        <ImageView
+            android:id="@+id/ivImgFilter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/filter_black_96"
+            android:padding="10dp"
+            android:layout_weight="0.2"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="|"
+            android:textColor="@color/DefaultBtnColor"
+            android:textSize="32sp"
+            android:gravity="center"
+            android:layout_weight="0.02"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="5dp"
+            android:weightSum="1"
+            android:layout_weight="0.78"
+            android:layout_marginRight="1.5dp"
             >
 
-            <android.support.design.widget.TextInputLayout
+            <TextView
+                android:id="@+id/tvTtlAmt"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="1dp"
-                app:hintTextAppearance="@style/My_Labels"
-                app:boxStrokeWidth="1dp"
-                app:boxBackgroundColor="#fff"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxCornerRadiusBottomEnd="5dp"
-                android:paddingLeft="10dp"
-                >
+                android:layout_height="match_parent"
+                android:text="TotalAmt : ₹"
+                android:textSize="15sp"
+                android:gravity="end"
+                android:layout_weight="0.5"
+                />
 
-                <EditText
-                    android:id="@+id/etMobileNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Mobile"
-                    android:textSize="15sp"
-                    android:inputType="phone"
-                    />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
+            <TextView
+                android:id="@+id/tvNtAmt"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="1dp"
-                app:hintTextAppearance="@style/My_Labels"
-                app:boxStrokeWidth="1dp"
-                app:boxBackgroundColor="#fff"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxCornerRadiusBottomEnd="5dp"
-                android:paddingLeft="10dp"
-                >
-
-                <EditText
-                    android:id="@+id/etDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Date"
-                    android:textSize="15sp"
-                    android:drawableRight="@drawable/image_calendar"
-                    android:paddingRight="20dp"
-                    android:inputType="date"
-                    />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="1dp"
-                app:hintTextAppearance="@style/My_Labels"
-                app:boxStrokeWidth="1dp"
-                app:boxBackgroundColor="#fff"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxCornerRadiusBottomEnd="5dp"
-                android:paddingLeft="10dp"
-                >
-
-                <EditText
-                    android:id="@+id/etName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Name"
-                    android:textSize="15sp"
-                    android:inputType="textCapCharacters"
-                    />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/tilRefNo"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="1dp"
-                app:hintTextAppearance="@style/My_Labels"
-                app:boxStrokeWidth="1dp"
-                app:boxBackgroundColor="#fff"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxCornerRadiusBottomEnd="5dp"
-                android:paddingLeft="10dp"
-                android:layout_marginRight="15dp"
-                >
-
-                <EditText
-                    android:id="@+id/etRefNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="RefNo"
-                    android:textSize="15sp"
-                    />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="1dp"
-                app:hintTextAppearance="@style/My_Labels"
-                app:boxStrokeWidth="1dp"
-                app:boxBackgroundColor="#fff"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxCornerRadiusBottomEnd="5dp"
-                android:paddingLeft="10dp"
-                >
-
-                <EditText
-                    android:id="@+id/etAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Amount"
-                    android:textSize="15sp"
-                    android:inputType="numberDecimal"
-                    />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="1dp"
-                app:hintTextAppearance="@style/My_Labels"
-                app:boxStrokeWidth="1dp"
-                app:boxBackgroundColor="#fff"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxCornerRadiusBottomEnd="5dp"
-                android:paddingLeft="10dp"
-
-                >
-
-                <EditText
-                    android:id="@+id/etNetAmt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Net Amount"
-                    android:textSize="15sp"
-                    android:inputType="numberDecimal"
-                    android:enabled="false"
-                    />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="1dp"
-                app:hintTextAppearance="@style/My_Labels"
-                app:boxStrokeWidth="1dp"
-                app:boxBackgroundColor="#fff"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxCornerRadiusBottomEnd="5dp"
-                android:paddingLeft="10dp"
-
-                >
-
-                <EditText
-                    android:id="@+id/etPerDayAmt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Per Day Amount"
-                    android:textSize="15sp"
-                    android:inputType="numberDecimal"
-                    android:enabled="false"
-                    />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_margin="1dp"
-                app:hintTextAppearance="@style/My_Labels"
-                app:boxStrokeWidth="1dp"
-                app:boxBackgroundColor="#fff"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxCornerRadiusBottomEnd="5dp"
-                android:paddingLeft="10dp"
-                >
-
-                <EditText
-                    android:id="@+id/etRemarks"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Remarks"
-                    android:textSize="15sp"
-                    android:inputType="textMultiLine"
-                    />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp">
-
-                <Button
-                    android:id="@+id/btnSave"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/btn_save"
-                    android:textAllCaps="false"
-                    android:textColor="@color/button_text_color"
-                    android:background="@drawable/custom_button_green"
-                    android:drawableLeft="@mipmap/save"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp"
-                    android:onClick="OnSaveClick"
-                    />
-
-                <Button
-                    android:id="@+id/btnClear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:text="@string/btn_clear"
-                    android:textAllCaps="false"
-                    android:layout_alignParentRight="true"
-                    android:textColor="@color/button_text_color"
-                    android:drawableLeft="@mipmap/reset"
-                    android:background="@drawable/custom_button_blue"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="35dp"
-                    android:onClick="OnClearClick"
-                    />
-
-            </RelativeLayout>
+                android:layout_height="match_parent"
+                android:text="NetAmt : ₹"
+                android:textSize="15sp"
+                android:gravity="end"
+                android:layout_weight="0.5"
+                />
 
         </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
