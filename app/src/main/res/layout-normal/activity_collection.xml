@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,14 +20,16 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="50dp"
             android:orientation="horizontal"
             android:weightSum="1"
+            android:layout_margin="1dp"
+            android:gravity="center"
             >
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_margin="1dp"
                 app:hintTextAppearance="@style/My_Labels"
                 app:boxStrokeWidth="1dp"
@@ -33,60 +40,50 @@
                 app:boxCornerRadiusTopStart="5dp"
                 app:boxCornerRadiusBottomEnd="5dp"
                 android:paddingLeft="10dp"
-                android:layout_weight="0.89"
+                android:layout_weight="0.65"
                 >
 
-                <EditText
-                    android:id="@+id/etMobileNo"
+                <AutoCompleteTextView
+                    android:id="@+id/acTNameOrMobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Mobile"
+                    android:hint="Name Or Mobile Search"
                     android:textSize="15sp"
-                    android:inputType="phone"
                     />
 
             </android.support.design.widget.TextInputLayout>
 
-            <ImageView
-                android:id="@+id/ivSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.11"
-                android:src="@drawable/search_30"
-                android:padding="7dp"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="1dp"
+                app:hintTextAppearance="@style/My_Labels"
+                app:boxStrokeWidth="1dp"
+                app:boxBackgroundColor="#fff"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomStart="5dp"
+                app:boxCornerRadiusTopEnd="5dp"
+                app:boxCornerRadiusTopStart="5dp"
+                app:boxCornerRadiusBottomEnd="5dp"
+                android:paddingLeft="10dp"
+                android:layout_weight="0.35"
+                >
 
-                />
+                <EditText
+                    android:id="@+id/etDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Date"
+                    android:textSize="15sp"
+                    android:drawableRight="@drawable/image_calendar"
+                    android:paddingRight="20dp"
+                    android:inputType="date"
+                    />
 
+            </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="1dp"
-            app:hintTextAppearance="@style/My_Labels"
-            app:boxStrokeWidth="1dp"
-            app:boxBackgroundColor="#fff"
-            app:boxBackgroundMode="outline"
-            app:boxCornerRadiusBottomStart="5dp"
-            app:boxCornerRadiusTopEnd="5dp"
-            app:boxCornerRadiusTopStart="5dp"
-            app:boxCornerRadiusBottomEnd="5dp"
-            android:paddingLeft="10dp"
-            >
-
-            <EditText
-                android:id="@+id/etDate"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Date"
-                android:textSize="15sp"
-                android:drawableRight="@drawable/image_calendar"
-                android:paddingRight="20dp"
-                android:inputType="date"
-                />
-
-        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -115,8 +112,43 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/tilRefNo"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            app:hintTextAppearance="@style/My_Labels"
+            app:boxStrokeWidth="1dp"
+            app:boxBackgroundColor="#fff"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            app:boxCornerRadiusBottomEnd="5dp"
+            android:paddingLeft="10dp"
+            >
+
+            <EditText
+                android:id="@+id/etMobileNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mobile"
+                android:textSize="15sp"
+                />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_margin="1dp"
+            android:gravity="center"
+            >
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilRefNo"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_margin="1dp"
             app:hintTextAppearance="@style/My_Labels"
@@ -129,6 +161,7 @@
             app:boxCornerRadiusBottomEnd="5dp"
             android:paddingLeft="10dp"
             android:layout_marginRight="15dp"
+            android:layout_weight="0.65"
             >
 
             <EditText
@@ -140,6 +173,38 @@
                 />
 
         </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="1dp"
+                app:hintTextAppearance="@style/My_Labels"
+                app:boxStrokeWidth="1dp"
+                app:boxBackgroundColor="#fff"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomStart="5dp"
+                app:boxCornerRadiusTopEnd="5dp"
+                app:boxCornerRadiusTopStart="5dp"
+                app:boxCornerRadiusBottomEnd="5dp"
+                android:paddingLeft="10dp"
+                android:layout_weight="0.35"
+                >
+
+                <EditText
+                    android:id="@+id/etCollDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Coll Date"
+                    android:textSize="15sp"
+                    android:drawableRight="@drawable/image_calendar"
+                    android:paddingRight="20dp"
+                    android:inputType="date"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -195,12 +260,15 @@
         </android.support.design.widget.TextInputLayout>
 
         <RelativeLayout
+            android:id="@+id/layout_normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            >
 
             <Button
                 android:id="@+id/btnSave"
@@ -234,6 +302,92 @@
 
         </RelativeLayout>
 
+        <LinearLayout
+            android:id="@+id/layout_Admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            android:weightSum="1"
+            android:visibility="gone"
+            >
+
+            <Button
+                android:id="@+id/btnAdminSave"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_save"
+                android:textAllCaps="false"
+                android:textColor="@color/button_text_color"
+                android:background="@drawable/custom_button_green"
+                android:drawableLeft="@mipmap/save"
+                android:onClick="OnSaveClick"
+                android:textAlignment="textStart"
+                android:gravity="center"
+                android:paddingLeft="7dp"
+                android:textSize="15sp"
+                />
+
+            <Button
+                android:id="@+id/btnGet"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                android:textAllCaps="false"
+                android:background="@drawable/custom_button_orange"
+                android:textColor="@color/button_text_color"
+                android:drawableLeft="@mipmap/edit"
+                android:onClick="OnEditClick"
+                android:textAlignment="textStart"
+                android:gravity="center"
+                android:paddingLeft="7dp"
+                android:textSize="15sp"
+                />
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:textAllCaps="false"
+                android:background="@drawable/custom_button_red"
+                android:textColor="@color/button_text_color"
+                android:drawableLeft="@mipmap/delete"
+                android:onClick="OnDeleteClick"
+                android:textAlignment="textStart"
+                android:gravity="center"
+                android:paddingLeft="7dp"
+                android:textSize="15sp"
+                />
+
+            <Button
+                android:id="@+id/btnAdminClear"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_clear"
+                android:textAllCaps="false"
+                android:textColor="@color/button_text_color"
+                android:drawableLeft="@mipmap/reset"
+                android:background="@drawable/custom_button_blue"
+                android:onClick="OnClearClick"
+                android:textAlignment="textStart"
+                android:gravity="center"
+                android:paddingLeft="7dp"
+                android:textSize="15sp"
+                />
+
+        </LinearLayout>
+
     </LinearLayout>
 
-</RelativeLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

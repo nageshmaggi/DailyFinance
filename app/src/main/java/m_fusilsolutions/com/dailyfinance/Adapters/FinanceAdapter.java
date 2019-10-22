@@ -44,7 +44,7 @@ public class FinanceAdapter extends RecyclerView.Adapter<FinanceAdapter.MyViewHo
     @NonNull
     @Override
     public FinanceAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layoutView = LayoutInflater.from(cTxt).inflate(R.layout.report_row_layout,parent,false);
+        View layoutView = LayoutInflater.from(cTxt).inflate(R.layout.collection_row_layout,parent,false);
         return new FinanceAdapter.MyViewHolder(layoutView);
     }
 
@@ -52,13 +52,13 @@ public class FinanceAdapter extends RecyclerView.Adapter<FinanceAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         DailyFinanceData data = _collectionList.get(position);
         holder.tvName.setText(data.getName());
-        holder.tvPerDayAmt.setText("PerDayAmt : ₹ " + data.getPerDayAmt());
         holder.tvMobNo.setText(data.getMobileNo());
         holder.tvRefNo.setText(data.getRefNo());
         holder.tvTitle.setText(data.getVSNo());
         holder.tvDate.setText(data.getDate());
         holder.tvTotalAmt.setText("TotalAmt : ₹ " + data.getAmount());
         holder.tvNetAmt.setText("NetAmt: ₹ " + data.getNetAmount());
+        holder.tvPerDayAmt.setText("PerDayAmt : ₹ " + data.getPerDayAmt());
         holder.tvRemarks.setText(data.getRemarks());
     }
 
@@ -129,7 +129,7 @@ public class FinanceAdapter extends RecyclerView.Adapter<FinanceAdapter.MyViewHo
                     {
                         String xele = _inputXele.getDFDeleteXele(data.getTransId());
                         _collectionList.remove(position);
-                        _exeDB.ExecuteResult(SPName.USP_MA_DF_DailyFinance.toString(),xele, TransType.DeleteDFData.toString(),"4", Constants.HTTP_URL);
+                        _exeDB.ExecuteResult(SPName.USP_MA_DF_OtherFinanceData.toString(),xele, TransType.DeleteDFData.toString(),"4", Constants.HTTP_URL);
                         dialog.dismiss();
                     }
                 });

@@ -9,6 +9,9 @@ public class LoginData
     public String MobileNo="";
     public String Password="";
     public String LastName="";
+    public String SMSUrl="";
+    public String FinMessage="";
+    public String CollMessage="";
 
     public String getName()
     {

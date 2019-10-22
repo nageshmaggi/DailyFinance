@@ -2,6 +2,7 @@ package m_fusilsolutions.com.dailyfinance;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -24,6 +25,7 @@ import m_fusilsolutions.com.dailyfinance.Constants.TransType;
 import m_fusilsolutions.com.dailyfinance.CustomControls.CustomToast;
 import m_fusilsolutions.com.dailyfinance.Helpers.AsyncResponse;
 import m_fusilsolutions.com.dailyfinance.Helpers.ExecuteDataBase;
+import m_fusilsolutions.com.dailyfinance.Helpers.NetworkUtils;
 import m_fusilsolutions.com.dailyfinance.Helpers.XmlConverter;
 import m_fusilsolutions.com.dailyfinance.Utils.InputUtils;
 
@@ -35,6 +37,7 @@ public class UserLoginActivity extends Activity
     EditText etusername,etuserpassword;
     String username,userpassword;
     ExecuteDataBase db;
+    Typeface typeface, typefaceBold, typefaceBoldItalic;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -45,6 +48,12 @@ public class UserLoginActivity extends Activity
         imageLogo = (ImageView) findViewById(R.id.img_logo);
         etusername = (EditText) findViewById(R.id.email);
         etuserpassword = (EditText) findViewById(R.id.pass);
+        typeface = Typeface.createFromAsset(getAssets(), "Caviar-Dreams.ttf");
+        typefaceBoldItalic = Typeface.createFromAsset(getAssets(), "CaviarDreams_BoldItalic.ttf");
+        typefaceBold = Typeface.createFromAsset(getAssets(), "Caviar_Dreams_Bold.ttf");
+        etusername.setTypeface(typeface);
+        etuserpassword.setTypeface(typeface);
+        btnLogin.setTypeface(typeface);
         db = new ExecuteDataBase(this);
         btnLogin.setOnClickListener(this);
         SetStatusBarColor();
@@ -58,6 +67,8 @@ public class UserLoginActivity extends Activity
                 return false;
             }
         });
+        //etusername.setText("Admin");
+        //etuserpassword.setText("a");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -78,24 +89,27 @@ public class UserLoginActivity extends Activity
         startActivity(a);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onClick(View view)
-    {
-        int id = view.getId();
-        if(id==R.id.txt_login)
-        {
-            username = etusername.getText().toString();
-            userpassword = etuserpassword.getText().toString();
-            if(LoginValidation()) {
-                LoginProcess();
+    public void onClick(View view) {
+        if (new NetworkUtils(this).IsNetworkAvailable()) {
+            int id = view.getId();
+            if (id == R.id.txt_login) {
+                username = etusername.getText().toString();
+                userpassword = etuserpassword.getText().toString();
+                if (LoginValidation()) {
+                    LoginProcess();
+                }
             }
+        } else {
+            startActivity(new Intent(this, NoInternetConnection_Activity.class));
         }
     }
 
     private void LoginProcess()
     {
         String inputxele=new InputUtils(this).getLoginXele(username, userpassword);
-        String sp= SPName.USP_MA_DF_DailyFinance.toString();
+        String sp= SPName.USP_MA_DF_Login.toString();
         String tt= TransType.CheckLoginData.toString();
         db.ExecuteResult(sp,inputxele,tt,"0", Constants.HTTP_URL);
     }

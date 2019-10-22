@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/llMain"
+    >
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvMainCV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="0.9"
+            android:layout_margin="3dp"
+            android:padding="2dp"
+
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0.3"
+                android:weightSum="1.2"
+                >
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.3"
+                    android:textColor="@color/DefaultBlack"
+                    android:gravity="start"
+                    />
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_weight="0.3"
+                    />
+
+                <TextView
+                    android:id="@+id/tvRemarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:textSize="12sp"
+                    android:layout_weight="0.3"
+                    android:paddingTop="2dp"
+                    />
+                <!--                New Change 12102019-->
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:textSize="12sp"
+                    android:layout_weight="0.3"
+                    android:paddingTop="2dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0.28"
+                android:weightSum="0.9"
+                >
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_weight="0.3"
+                    android:gravity="start"
+                    android:textColor="@color/DefaultBlack"
+                    />
+
+                <TextView
+                    android:id="@+id/tvMobNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13.5sp"
+                    android:layout_weight="0.3"
+                    android:gravity="start"
+                    android:textColor="@color/DefaultBlack"
+                    />
+                <TextView
+                    android:id="@+id/tvRefNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_weight="0.3"
+                    android:gravity="start"
+                    />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.32"
+                >
+
+                <TextView
+                    android:id="@+id/tvTotTil"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:text="Total"
+                    android:textSize="13sp"
+                    android:gravity="start"
+                    android:layout_toStartOf="@+id/tvR1M"
+                    android:layout_toLeftOf="@+id/tvR1M"
+                    />
+
+                <TextView
+                    android:id="@+id/tvR1M"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":₹"
+                    android:textSize="13sp"
+                    android:layout_toLeftOf="@+id/tvTotalAmt"
+                    />
+
+                <TextView
+                    android:id="@+id/tvTotalAmt"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.3"
+                    android:textColor="@color/DefaultBlack"
+                    android:gravity="end"
+                    android:layout_alignParentRight="true"
+                    />
+
+                <TextView
+                    android:id="@+id/tvNetTil"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvTotTil"
+                    android:layout_toStartOf="@+id/tvR2M"
+                    android:layout_toLeftOf="@+id/tvR2M"
+                    android:gravity="start"
+                    android:text="Net"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvR2M"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":₹"
+                    android:textSize="13sp"
+                    android:layout_toLeftOf="@+id/tvNetAmt"
+                    android:layout_below="@+id/tvR1M"
+                    />
+
+                <TextView
+                    android:id="@+id/tvNetAmt"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="@color/DefaultBlack"
+                    android:gravity="end"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/tvTotalAmt"
+                    />
+
+                <TextView
+                    android:id="@+id/tvPerDayTil"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:text="PerDay"
+                    android:textSize="13sp"
+                    android:gravity="start"
+                    android:layout_below="@+id/tvNetTil"
+                    android:layout_toStartOf="@+id/tvR3M"
+                    android:layout_toLeftOf="@+id/tvR3M"
+                    />
+
+                <TextView
+                    android:id="@+id/tvR3M"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":₹"
+                    android:textSize="13sp"
+                    android:layout_toLeftOf="@+id/tvPerDayAmt"
+                    android:layout_below="@+id/tvR2M"
+                    />
+
+                <TextView
+                    android:id="@+id/tvPerDayAmt"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="@color/DefaultBlack"
+                    android:gravity="end"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/tvNetAmt"
+                    />
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/ivCollRd"-->
+                    <!--android:layout_marginTop="3dp"-->
+                    <!--android:layout_width="25dp"-->
+                    <!--android:layout_marginRight="5dp"-->
+                    <!--android:layout_height="25dp"-->
+                    <!--android:src="@mipmap/cashin"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_below="@+id/tvPerDayAmt"-->
+                    <!--/>-->
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

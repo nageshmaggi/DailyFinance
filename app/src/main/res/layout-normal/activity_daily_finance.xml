@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     >
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -17,61 +22,72 @@
             android:layout_marginLeft="5dp"
             >
 
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:weightSum="1"
                 android:layout_margin="1dp"
-                app:hintTextAppearance="@style/My_Labels"
-                app:boxStrokeWidth="1dp"
-                app:boxBackgroundColor="#fff"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxCornerRadiusBottomEnd="5dp"
-                android:paddingLeft="10dp"
-                android:layout_weight="0.85"
+                android:gravity="center"
                 >
 
-                <EditText
-                    android:id="@+id/etMobileNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Mobile"
-                    android:textSize="15sp"
-                    android:inputType="phone"
-                    />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="1dp"
+                    app:hintTextAppearance="@style/My_Labels"
+                    app:boxStrokeWidth="1dp"
+                    app:boxBackgroundColor="#fff"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    android:paddingLeft="10dp"
+                    android:layout_weight="0.65"
+                    >
 
-            </android.support.design.widget.TextInputLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/acTNameOrMobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name Or Mobile Search"
+                        android:textSize="15sp"
+                        />
 
+                </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="1dp"
-                app:hintTextAppearance="@style/My_Labels"
-                app:boxStrokeWidth="1dp"
-                app:boxBackgroundColor="#fff"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomStart="5dp"
-                app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxCornerRadiusBottomEnd="5dp"
-                android:paddingLeft="10dp"
-                >
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="1dp"
+                    app:hintTextAppearance="@style/My_Labels"
+                    app:boxStrokeWidth="1dp"
+                    app:boxBackgroundColor="#fff"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    android:paddingLeft="10dp"
+                    android:layout_weight="0.35"
+                    >
 
-                <EditText
-                    android:id="@+id/etDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Date"
-                    android:textSize="15sp"
-                    android:drawableRight="@drawable/image_calendar"
-                    android:paddingRight="20dp"
-                    android:inputType="date"
-                    />
+                    <EditText
+                        android:id="@+id/etDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Date"
+                        android:textSize="15sp"
+                        android:drawableRight="@drawable/image_calendar"
+                        android:paddingRight="20dp"
+                        android:inputType="date"
+                        />
 
-            </android.support.design.widget.TextInputLayout>
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -100,9 +116,8 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/tilRefNo"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 app:hintTextAppearance="@style/My_Labels"
                 app:boxStrokeWidth="1dp"
@@ -113,18 +128,67 @@
                 app:boxCornerRadiusTopStart="5dp"
                 app:boxCornerRadiusBottomEnd="5dp"
                 android:paddingLeft="10dp"
-                android:layout_marginRight="15dp"
                 >
 
                 <EditText
-                    android:id="@+id/etRefNo"
+                    android:id="@+id/etMobileNo"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="RefNo"
+                    android:layout_height="wrap_content"
+                    android:hint="Mobile"
                     android:textSize="15sp"
                     />
 
+
             </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                android:layout_margin="1dp"
+                android:gravity="center"
+                >
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilRefNo"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="1dp"
+                    app:hintTextAppearance="@style/My_Labels"
+                    app:boxStrokeWidth="1dp"
+                    app:boxBackgroundColor="#fff"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    android:paddingLeft="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="0.6"
+                    >
+
+                    <EditText
+                        android:id="@+id/etRefNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="RefNo"
+                        android:textSize="15sp"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <Spinner
+                    android:id="@+id/spWeek"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:textSize="13sp"
+                    android:layout_weight="0.4"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/custom_spinner"
+                    />
+
+            </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -294,7 +358,7 @@
                 <Button
                     android:id="@+id/btnAdminSave"
                     android:layout_width="0dp"
-                    android:layout_weight="0.25"
+                    android:layout_weight="0.30"
                     android:layout_height="wrap_content"
                     android:text="@string/btn_save"
                     android:textAllCaps="false"
@@ -305,13 +369,13 @@
                     android:textAlignment="textStart"
                     android:gravity="center"
                     android:paddingLeft="7dp"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     />
 
                 <Button
                     android:id="@+id/btnGet"
                     android:layout_width="0dp"
-                    android:layout_weight="0.25"
+                    android:layout_weight="0.20"
                     android:layout_height="wrap_content"
                     android:text="Edit"
                     android:textAllCaps="false"
@@ -322,7 +386,7 @@
                     android:textAlignment="textStart"
                     android:gravity="center"
                     android:paddingLeft="7dp"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     />
 
                 <Button
@@ -339,7 +403,7 @@
                     android:textAlignment="textStart"
                     android:gravity="center"
                     android:paddingLeft="7dp"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     />
 
                 <Button
@@ -356,7 +420,7 @@
                     android:textAlignment="textStart"
                     android:gravity="center"
                     android:paddingLeft="7dp"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     />
 
             </LinearLayout>
@@ -364,5 +428,7 @@
         </LinearLayout>
 
     </ScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </android.support.constraint.ConstraintLayout>

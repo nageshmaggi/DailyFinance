@@ -53,7 +53,8 @@ public class GetDocumentResultFromDataBase extends AsyncTask<String,String,Objec
         String inputxele=(String) strings[1];
         String transtype=(String) strings[2];
         String strurl=(String) strings[3];
-        String url="http://"+ strurl +"/ServerServices.svc/fusil/CommonMstForWeb?";
+        //String url="http://"+ strurl +"/ServerServices.svc/fusil/CommonMstForWeb?";
+        String url="http://"+ strurl +"/MobileServices.svc/GetAllReportsMethod?";
         String parameters="spName="+ URLEncoder.encode(spname)+"&inputxele="+ URLEncoder.encode(inputxele)+"&transType="+ URLEncoder.encode(transtype);
         InputStream instream = null;
         Object resultdata = null;

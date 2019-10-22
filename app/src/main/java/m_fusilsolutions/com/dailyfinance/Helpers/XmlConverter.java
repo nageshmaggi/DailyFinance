@@ -8,8 +8,11 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -84,6 +87,12 @@ public class XmlConverter {
                     fdata.Name = node.getAttributes().getNamedItem("UserName").getNodeValue();
                 if(node.getAttributes().getNamedItem("UserPassword")!=null)
                     fdata.Password = node.getAttributes().getNamedItem("UserPassword").getNodeValue();
+                if(node.getAttributes().getNamedItem("SMSUrl")!=null)
+                    fdata.SMSUrl = node.getAttributes().getNamedItem("SMSUrl").getNodeValue();
+                if(node.getAttributes().getNamedItem("FinMessage")!=null)
+                    fdata.FinMessage = node.getAttributes().getNamedItem("FinMessage").getNodeValue();
+                if(node.getAttributes().getNamedItem("CollMessage")!=null)
+                    fdata.CollMessage = node.getAttributes().getNamedItem("CollMessage").getNodeValue();
             }
             if(node.hasChildNodes()){
                 NodeList nodeList1=node.getChildNodes();
@@ -111,6 +120,27 @@ public class XmlConverter {
             }
         }
         return reportList;
+    }
+
+    public List<DashBoardData> ParseDashBoardTopInfoData(NodeList nodeList, List<DashBoardData> dBoardInfoList1) {
+        for (Node node : iterable(nodeList))
+        {
+            String nodeName = node.getNodeName();
+            if (nodeName.equals("Data")) {
+                DashBoardData data1 = new DashBoardData("Total Finance", node.getAttributes().getNamedItem("TotalAmt").getNodeValue(), R.mipmap.total_capital);
+                DashBoardData data2 = new DashBoardData("Total Collection", node.getAttributes().getNamedItem("CollectedAmt").getNodeValue(), R.mipmap.total_collection);
+                DashBoardData data3 = new DashBoardData("Balance", node.getAttributes().getNamedItem("ToBeCollectedAmt").getNodeValue(), R.mipmap.balance);
+                dBoardInfoList1.add(data1);
+                dBoardInfoList1.add(data2);
+                dBoardInfoList1.add(data3);
+                break;
+            }
+            if (node.hasChildNodes()) {
+                NodeList nodeList1 = node.getChildNodes();
+                ParseDashBoardTopInfoData(nodeList1, dBoardInfoList1);
+            }
+        }
+        return dBoardInfoList1;
     }
 
     public List<DashBoardData> ParseDashBoardInfoData(NodeList nodeList, List<DashBoardData> dBoardInfoList) {
@@ -165,12 +195,40 @@ public class XmlConverter {
         return infoData;
     }
 
+    public ArrayList<Map<String,String>> ParseDistinctMemberInfoData(NodeList nodeList, ArrayList<Map<String,String>> infoList) {
+        for (Node node : iterable(nodeList))
+        {
+            String nodeName = node.getNodeName();
+            if (nodeName.equals("Data")) {
+                Map<String,String> infoData = new HashMap<>();
+                if(node.getAttributes().getNamedItem("Name")!=null)
+                {
+                    infoData.put("Name",node.getAttributes().getNamedItem("Name").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("MobileNo")!=null)
+                {
+                    infoData.put("MobileNo",node.getAttributes().getNamedItem("MobileNo").getNodeValue());
+                }
+                infoList.add(infoData);
+            }
+            if (node.hasChildNodes()) {
+                NodeList nodeList1 = node.getChildNodes();
+                ParseDistinctMemberInfoData(nodeList1, infoList);
+            }
+        }
+        return infoList;
+    }
+
     public List<DailyFinanceData> ParseGetDFInfoData(NodeList nodeList, List<DailyFinanceData> infoList) {
         for (Node node : iterable(nodeList))
         {
             String nodeName = node.getNodeName();
             if (nodeName.equals("SearchData")) {
                 DailyFinanceData infoData = new DailyFinanceData();
+                if(node.getAttributes().getNamedItem("TransDate")!=null)
+                {
+                    infoData.setTransDate(node.getAttributes().getNamedItem("TransDate").getNodeValue());
+                }
                 if(node.getAttributes().getNamedItem("Date")!=null)
                 {
                     infoData.setDate(node.getAttributes().getNamedItem("Date").getNodeValue());
@@ -207,6 +265,14 @@ public class XmlConverter {
                 {
                     infoData.setRemarks(node.getAttributes().getNamedItem("Remarks").getNodeValue());
                 }
+                if(node.getAttributes().getNamedItem("Status")!=null)
+                {
+                    infoData.setStatus(Integer.parseInt(node.getAttributes().getNamedItem("Status").getNodeValue()));
+                }
+                if(node.getAttributes().getNamedItem("WeekOff")!=null)
+                {
+                    infoData.setWeekOffDay(Integer.parseInt(node.getAttributes().getNamedItem("WeekOff").getNodeValue()));
+                }
                 if(node.getAttributes().getNamedItem("CollectionCount")!=null)
                 {
                     infoData.setCollectionCount(Integer.parseInt(node.getAttributes().getNamedItem("CollectionCount").getNodeValue()));
@@ -220,6 +286,74 @@ public class XmlConverter {
             if (node.hasChildNodes()) {
                 NodeList nodeList1 = node.getChildNodes();
                 ParseGetDFInfoData(nodeList1, infoList);
+            }
+        }
+        return infoList;
+    }
+
+    public List<DailyFinanceData> ParseGetDFCInfoData(NodeList nodeList, List<DailyFinanceData> infoList) {
+        for (Node node : iterable(nodeList))
+        {
+            String nodeName = node.getNodeName();
+            if (nodeName.equals("SearchData")) {
+                DailyFinanceData infoData = new DailyFinanceData();
+                if(node.getAttributes().getNamedItem("TransDate")!=null)
+                {
+                    infoData.setTransDate(node.getAttributes().getNamedItem("TransDate").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("Date")!=null)
+                {
+                    infoData.setDate(node.getAttributes().getNamedItem("Date").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("Name")!=null)
+                {
+                    infoData.setName(node.getAttributes().getNamedItem("Name").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("TransId")!=null)
+                {
+                    infoData.setTransId(node.getAttributes().getNamedItem("TransId").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("RefNo")!=null)
+                {
+                    infoData.setRefNo(node.getAttributes().getNamedItem("RefNo").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("Amount")!=null)
+                {
+                    infoData.setPerDayAmt(node.getAttributes().getNamedItem("Amount").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("NetAmount")!=null)
+                {
+                    infoData.setNetAmount(node.getAttributes().getNamedItem("NetAmount").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("MobileNo")!=null)
+                {
+                    infoData.setMobileNo(node.getAttributes().getNamedItem("MobileNo").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("Remarks")!=null)
+                {
+                    infoData.setRemarks(node.getAttributes().getNamedItem("Remarks").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("Status")!=null)
+                {
+                    infoData.setStatus(Integer.parseInt(node.getAttributes().getNamedItem("Status").getNodeValue()));
+                }
+                if(node.getAttributes().getNamedItem("WeekOff")!=null)
+                {
+                    infoData.setWeekOffDay(Integer.parseInt(node.getAttributes().getNamedItem("WeekOff").getNodeValue()));
+                }
+                if(node.getAttributes().getNamedItem("CollectionCount")!=null)
+                {
+                    infoData.setCollectionCount(Integer.parseInt(node.getAttributes().getNamedItem("CollectionCount").getNodeValue()));
+                }
+                if(node.getAttributes().getNamedItem("VSNo")!=null)
+                {
+                    infoData.setVSNo(node.getAttributes().getNamedItem("VSNo").getNodeValue());
+                }
+                infoList.add(infoData);
+            }
+            if (node.hasChildNodes()) {
+                NodeList nodeList1 = node.getChildNodes();
+                ParseGetDFCInfoData(nodeList1, infoList);
             }
         }
         return infoList;
@@ -251,10 +385,20 @@ public class XmlConverter {
                 if(node.getAttributes().getNamedItem("Amount")!=null) {
                     infoData.setAmount(node.getAttributes().getNamedItem("Amount").getNodeValue());
                 }
+                if(node.getAttributes().getNamedItem("PerDayAmt")!=null) {
+                    infoData.setPerDayAmt(node.getAttributes().getNamedItem("PerDayAmt").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("NetAmount")!=null) {
+                    infoData.setNetAmount(node.getAttributes().getNamedItem("NetAmount").getNodeValue());
+                }
                 if(node.getAttributes().getNamedItem("Remarks")!=null) {
                     infoData.setRemarks(node.getAttributes().getNamedItem("Remarks").getNodeValue());
-                }if(node.getAttributes().getNamedItem("Date")!=null) {
+                }
+                if(node.getAttributes().getNamedItem("Date")!=null) {
                     infoData.setDate(node.getAttributes().getNamedItem("Date").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("WeekOff")!=null) {
+                    infoData.setWeekOffDay(Integer.parseInt(node.getAttributes().getNamedItem("WeekOff").getNodeValue()));
                 }
                 infoList.add(infoData);
             }
@@ -296,6 +440,30 @@ public class XmlConverter {
         return infoData;
     }
 
+    public List<DailyFinanceData> ParseWeekOffDaysList(NodeList nodeList, List<DailyFinanceData> infoList) {
+        for (Node node : iterable(nodeList))
+        {
+            String nodeName = node.getNodeName();
+            if (nodeName.equals("Data")) {
+                DailyFinanceData infoData = new DailyFinanceData();
+                if(node.getAttributes().getNamedItem("Amount")!=null)
+                {
+                    infoData.setAmount(node.getAttributes().getNamedItem("Amount").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("WeekOffDates")!=null)
+                {
+                    infoData.setDate(node.getAttributes().getNamedItem("WeekOffDates").getNodeValue());
+                }
+                infoList.add(infoData);
+            }
+            if (node.hasChildNodes()) {
+                NodeList nodeList1 = node.getChildNodes();
+                ParseWeekOffDaysList(nodeList1, infoList);
+            }
+        }
+        return infoList;
+    }
+
     public List<ReportData> ParseFinanceReportData(NodeList nodeList, List<ReportData> reportList) {
         for (Node node : iterable(nodeList))
         {
@@ -329,6 +497,12 @@ public class XmlConverter {
                 }
                 if(node.getAttributes().getNamedItem("Remarks")!=null) {
                     reportData.setRemarks(node.getAttributes().getNamedItem("Remarks").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("TransId")!=null) {
+                    reportData.setTransId(node.getAttributes().getNamedItem("TransId").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("Status")!=null) {
+                    reportData.setStatus(node.getAttributes().getNamedItem("Status").getNodeValue());
                 }
                 reportList.add(reportData);
             }

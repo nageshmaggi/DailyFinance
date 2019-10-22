@@ -5,19 +5,32 @@ package m_fusilsolutions.com.dailyfinance.Models;
  */
 
 public class DailyFinanceData  {
-    private String ServerDate="";
-    private String ServerTime="";
-    private String TransId="";
-    private String Date="";
-    private String Name="";
-    private String MobileNo="";
-    private String RefNo="";
-    private String Amount="";
-    private String NetAmount="";
-    private String PerDayAmt="";
-    private String Remarks="";
-    private String VSNo = "";
-    private int CollectionCount=0;
+    public String ServerDate="";
+    public String ServerTime="";
+    public String TransId="";
+    public String Date="";
+    public String Name="";
+    public String MobileNo="";
+    public String RefNo="";
+    public String Amount="";
+    public String NetAmount="";
+    public String PerDayAmt="";
+    public String Remarks="";
+    public String VSNo = "";
+    public int CollectionCount=0;
+    public int WeekOffDay=0;
+    public String TransDate="";
+    public int Status=0;
+    public boolean IsWeekDaySelected = false;
+
+    public DailyFinanceData(String amt,String date){
+        this.Amount = amt;
+        this.Date = date;
+    }
+
+    public DailyFinanceData(){
+
+    }
 
 
 
@@ -119,4 +132,33 @@ public class DailyFinanceData  {
     public void setCollectionCount(int collectionCount) {
         CollectionCount = collectionCount;
     }
+
+    public int getWeekOffDay() {
+        return WeekOffDay;
+    }
+    public void setWeekOffDay(int weekOffDay) {
+        WeekOffDay = weekOffDay;
+    }
+
+    public String getTransDate() {
+        return TransDate;
+    }
+    public void setTransDate(String transDate) {
+        TransDate = transDate;
+    }
+
+    public boolean isWeekDaySelected() {
+        return IsWeekDaySelected;
+    }
+    public void setWeekDaySelected(boolean weekDaySelected) {
+        IsWeekDaySelected = weekDaySelected;
+    }
+
+    public int getStatus() {
+        return Status;
+    }
+    public void setStatus(int status) {
+        Status = status;
+    }
+
 }

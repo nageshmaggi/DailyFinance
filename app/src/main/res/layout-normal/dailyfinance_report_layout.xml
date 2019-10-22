@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-    >
+    tools:ignore="MissingDefaultResource">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,24 +12,28 @@
         android:orientation="horizontal"
         android:layout_weight="0.08"
         android:weightSum="1"
+        android:background="@drawable/gradientfill_header"
+        android:paddingLeft="25dp"
+        android:paddingRight="10dp"
         >
 
         <ImageView
+            android:id="@+id/ivCalendar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:src="@drawable/calandar_36"
+            android:src="@drawable/calendar_64"
             android:gravity="center"
-            android:padding="5dp"
+            android:padding="3dp"
             android:layout_weight="0.1"
-            android:layout_marginLeft="75dp"
-
             />
+
         <EditText
             android:id="@+id/etFromDate"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:inputType="text"
             android:textSize="14sp"
+            android:textColor="@color/DefaultBlack"
             android:gravity="center"
             android:layout_weight="0.25"
             android:background="@drawable/df_datefields"
@@ -37,9 +42,11 @@
             />
 
         <TextView
+            android:id="@+id/tvToTil"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="To"
+            android:textColor="#fff"
             android:gravity="center"
             android:textSize="13sp"
             android:layout_weight="0.1"
@@ -51,6 +58,7 @@
             android:layout_height="match_parent"
             android:inputType="text"
             android:textSize="14sp"
+            android:textColor="@color/DefaultBlack"
             android:gravity="center"
             android:layout_weight="0.25"
             android:background="@drawable/df_datefields"
@@ -63,9 +71,24 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Get"
+            android:textColor="#fff"
+            android:background="@drawable/btn_get_design"
             android:layout_weight="0.2"
             android:textSize="11sp"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+
+            />
+
+        <TextView
+            android:id="@+id/tvReportCount"
+            android:textColor="@color/DefaultBlack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="end"
+            android:layout_weight="0.1"
             />
 
 
@@ -107,8 +130,8 @@
             android:id="@+id/ivImgFilter"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:src="@drawable/filter_black_96"
-            android:padding="10dp"
+            android:src="@drawable/filter_color_96"
+            android:padding="2dp"
             android:layout_weight="0.2"
             />
 
@@ -121,35 +144,132 @@
             android:gravity="center"
             android:layout_weight="0.02"
             />
-
+        <!--        New Changes Made on 16102019 _ Complete layout has been changed-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:weightSum="1"
+            android:weightSum="0.9"
             android:layout_weight="0.78"
             android:layout_marginRight="1.5dp"
             >
+            <!--            New Change 14102019-->
 
-            <TextView
-                android:id="@+id/tvTtlAmt"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="TotalAmt : ₹"
-                android:textSize="15sp"
-                android:gravity="end"
-                android:layout_weight="0.5"
-                />
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                >
 
-            <TextView
-                android:id="@+id/tvNtAmt"
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/tvR1DF"
+                    android:layout_toLeftOf="@+id/tvR1DF"
+                    android:gravity="start"
+                    android:text="Total"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvR1DF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":₹"
+                    android:textSize="13sp"
+                    android:layout_toLeftOf="@+id/tvTtlAmt"
+                    />
+
+                <TextView
+                    android:id="@+id/tvTtlAmt"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:text="00"
+                    android:textSize="13sp"
+                    android:textColor="@color/DefaultBlack"
+                    android:textStyle="bold"
+                    android:gravity="end"
+                    android:layout_alignParentRight="true"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="NetAmt : ₹"
-                android:textSize="15sp"
-                android:gravity="end"
-                android:layout_weight="0.5"
-                />
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                >
+
+                <TextView
+                    android:id="@+id/tvNetTitle"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="-1dp"
+                    android:layout_marginRight="-1dp"
+                    android:layout_toStartOf="@+id/tvR2DF"
+                    android:layout_toLeftOf="@+id/tvR2DF"
+                    android:gravity="start"
+                    android:text="Net"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvR2DF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":₹"
+                    android:textSize="13sp"
+                    android:layout_toLeftOf="@+id/tvNtAmt"
+                    />
+
+                <TextView
+                    android:id="@+id/tvNtAmt"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:text="00"
+                    android:textSize="13sp"
+                    android:layout_alignParentRight="true" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                >
+
+                <TextView
+                    android:id="@+id/tvPerDayTitle"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="-1dp"
+                    android:layout_marginRight="-1dp"
+                    android:layout_toStartOf="@+id/tvR3DF"
+                    android:layout_toLeftOf="@+id/tvR3DF"
+                    android:gravity="start"
+                    android:text="PerDay"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvR3DF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":₹"
+                    android:textSize="13sp"
+                    android:layout_toLeftOf="@+id/tvPDAmt"
+                    />
+
+                <TextView
+                    android:id="@+id/tvPDAmt"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:text="00"
+                    android:textSize="13sp"
+                    android:layout_alignParentRight="true" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 

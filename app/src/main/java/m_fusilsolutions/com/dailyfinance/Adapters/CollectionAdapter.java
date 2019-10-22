@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,7 +36,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.My
     @NonNull
     @Override
     public CollectionAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layoutView = LayoutInflater.from(cTxt).inflate(R.layout.report_row_layout,parent,false);
+        View layoutView = LayoutInflater.from(cTxt).inflate(R.layout.collection_row_layout,parent,false);
         return new CollectionAdapter.MyViewHolder(layoutView);
     }
 
@@ -50,6 +49,8 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.My
         holder.tvTitle.setText(data.getVSNo());
         holder.tvDate.setText(data.getDate());
         holder.tvTotalAmt.setText("TotalAmt : ₹ " + data.getAmount());
+        holder.tvNetAmt.setText("NetAmt: ₹ " + data.getNetAmount());
+        holder.tvPerDayAmt.setText("PerDayAmt : ₹ " + data.getPerDayAmt());
         holder.tvRemarks.setText(data.getRemarks());
     }
 
@@ -61,8 +62,8 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.My
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView tvName,tvDate,tvTitle,tvTotalAmt,tvRemarks,tvMobNo,tvRefNo;
-        ImageView img_delete;
+        TextView tvName,tvDate,tvTitle,tvTotalAmt,tvNetAmt,tvPerDayAmt,tvRemarks,tvMobNo,tvRefNo;
+        //ImageView img_delete;
         LinearLayout llMain;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -72,18 +73,20 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.My
             tvDate = (TextView) itemView.findViewById(R.id.tvDate);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
             tvTotalAmt = (TextView) itemView.findViewById(R.id.tvTotalAmt);
+            tvNetAmt = (TextView) itemView.findViewById(R.id.tvNetAmt);
+            tvPerDayAmt = (TextView) itemView.findViewById(R.id.tvPerDayAmt);
             tvRemarks = (TextView) itemView.findViewById(R.id.tvRemarks);
             tvMobNo = (TextView) itemView.findViewById(R.id.tvMobNo);
             tvRefNo = (TextView) itemView.findViewById(R.id.tvRefNo);
             llMain = (LinearLayout) itemView.findViewById(R.id.llMain);
-            img_delete = (ImageView) itemView.findViewById(R.id.img_delete);
-            if(isEdit){
-                img_delete.setVisibility(View.GONE);
-            }else{
-                img_delete.setVisibility(View.VISIBLE);
-            }
+            //img_delete = (ImageView) itemView.findViewById(R.id.img_delete);
+//            if(isEdit){
+//                img_delete.setVisibility(View.GONE);
+//            }else{
+//                img_delete.setVisibility(View.VISIBLE);
+//            }
             llMain.setOnClickListener(this);
-            img_delete.setOnClickListener(this);
+            //img_delete.setOnClickListener(this);
         }
 
         @Override

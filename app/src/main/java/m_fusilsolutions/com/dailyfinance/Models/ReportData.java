@@ -11,6 +11,8 @@ public class ReportData {
     private String PerDayAmt="";
     private String Remarks="";
     private String VSNo="";
+    private String TransId="";
+    private String Status="";
 
     public String getDate() {
         return Date;
@@ -82,5 +84,21 @@ public class ReportData {
 
     public void setVSNo(String VSNo) {
         this.VSNo = VSNo;
+    }
+
+    public String getTransId() {
+        return TransId;
+    }
+
+    public void setTransId(String transId) {
+        TransId = transId;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 }

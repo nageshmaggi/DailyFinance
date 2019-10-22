@@ -18,10 +18,10 @@ public class AppInfo_Activity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appinfo);
-        tv_relDate = (TextView) findViewById(R.id.release_date);
-        tv_relNo = (TextView) findViewById(R.id.release_no);
-        tv_relDate.setText("Release Date: "+ BuildConfig.RELEASE_DATE);
-        tv_relNo.setText("Version No: "+ BuildConfig.RELEASE_NO);
+        tv_relDate = (TextView) findViewById(R.id.tvReleaseDate);
+        tv_relNo = (TextView) findViewById(R.id.tvReleaseNo);
+        tv_relDate.setText(BuildConfig.RELEASE_DATE);
+        tv_relNo.setText(BuildConfig.RELEASE_NO);
         setActionBar();
     }
 

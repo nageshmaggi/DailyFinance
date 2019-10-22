@@ -7,33 +7,37 @@
         <menu>
             <item
                 android:id="@+id/nav_daily_finance"
-                android:icon="@mipmap/daily_finance"
+                android:icon="@mipmap/df_dailyfinance"
                 android:title="Daily Finance" />
             <item
                 android:id="@+id/nav_collection"
-                android:icon="@mipmap/collection"
+                android:icon="@mipmap/money_collection"
                 android:title="Collection" />
         </menu>
     </item>
 
-    <item android:title="Report">
+    <item android:title="Reports">
         <menu>
             <item
                 android:id="@+id/nav_daily_finance_report"
-                android:icon="@mipmap/collection"
+                android:icon="@mipmap/dfreport"
                 android:title="Daily Finance Report" />
             <item
                 android:id="@+id/nav_collection_report"
-                android:icon="@mipmap/collection"
+                android:icon="@mipmap/colreport"
                 android:title="Collection Report" />
             <item
                 android:id="@+id/nav_daily_active_finance_report"
-                android:icon="@mipmap/collection"
-                android:title="Daily Active Finance Report" />
+                android:icon="@mipmap/activedfreport"
+                android:title="Active Daily Finance Report" />
             <item
                 android:id="@+id/nav_memberwise_daily_finance_report"
-                android:icon="@mipmap/collection"
+                android:icon="@mipmap/memwise_df"
                 android:title="Memberwise Daily Finance Report" />
+            <item
+                android:id="@+id/nav_pending_collection_report"
+                android:icon="@mipmap/pending_collections"
+                android:title="Pending Colections Report" />
         </menu>
     </item>
 

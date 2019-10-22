@@ -74,6 +74,7 @@
             android:layout_height="wrap_content"
             android:hint="VS"
             android:textSize="15sp"
+            android:inputType="textCapCharacters"
             />
 
     </android.support.design.widget.TextInputLayout>
@@ -117,14 +118,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:text="Ok"
+        android:text="OK"
+        android:textSize="16sp"
         android:textAllCaps="false"
         android:layout_alignParentRight="true"
         android:textColor="@color/button_text_color"
-        android:drawableLeft="@mipmap/get"
         android:background="@drawable/custom_button_blue"
         android:paddingLeft="15dp"
-        android:paddingRight="20dp"
+        android:paddingRight="15dp"
         android:layout_marginRight="5dp"
         android:onClick="OnGetClick"
         />

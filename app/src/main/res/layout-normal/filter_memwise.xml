@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingDefaultResource"
+    android:background="@color/button_text_color"
+    >
+    <!--                Created on 15102019-->
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filter By"
+        android:textColor="@color/button_text_color"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorPrimary"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        >
+
+        <RadioGroup
+            android:id="@+id/rgFilterRadioGroupMD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <RadioButton
+                android:id="@+id/rbDateMD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textSize="16sp"
+                />
+
+            <RadioButton
+                android:id="@+id/rbVsNoMD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="VN"
+                android:textSize="16sp"
+                />
+
+            <RadioButton
+                android:id="@+id/rbRemarksMD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remarks"
+                android:textSize="16sp"
+                />
+
+        </RadioGroup>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            >
+
+            <RelativeLayout
+                android:id="@+id/rlDateFields"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                >
+
+                <TextView
+                    android:id="@+id/tvFromTilMD"
+                    android:layout_width="65dp"
+                    android:layout_height="35dp"
+                    android:text="From"
+                    android:textColor="@color/DefaultBlack"
+                    android:textSize="15sp"
+                    android:layout_weight="0.3"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="25dp"
+                    android:layout_toLeftOf="@+id/etFromMW"
+                    />
+
+                <EditText
+                    android:id="@+id/etFromMW"
+                    android:layout_width="150dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="0.5"
+                    android:hint="1/10/219"
+                    android:background="@drawable/custom_views"
+                    android:drawableRight="@drawable/calendar_28"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="15dp"
+                    android:clickable="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true" />
+
+                <TextView
+                    android:id="@+id/tvToDateTilMD"
+                    android:layout_width="65dp"
+                    android:layout_height="35dp"
+                    android:text="To"
+                    android:textColor="@color/DefaultBlack"
+                    android:textSize="18sp"
+                    android:layout_weight="0.3"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="25dp"
+                    android:layout_toLeftOf="@+id/etToMW"
+                    android:layout_below="@+id/tvFromTilMD"
+                    />
+
+                <EditText
+                    android:id="@+id/etToMW"
+                    android:layout_width="150dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="0.5"
+                    android:hint="15/10/2019"
+                    android:background="@drawable/custom_views"
+                    android:drawableRight="@drawable/calendar_28"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="15dp"
+                    android:clickable="true"
+                    android:layout_below="@+id/etFromMW"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/etSearchMDF"
+                android:layout_width="180dp"
+                android:layout_height="35dp"
+                android:inputType="text"
+                android:hint="Enter Keyword"
+                android:background="@drawable/custom_views"
+                android:imeOptions="actionDone"
+                android:layout_below="@+id/rlDateFields"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="25dp"
+                />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -9,17 +9,60 @@
     tools:context="m_fusilsolutions.com.dailyfinance.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+        <!--android:id="@+id/swipe_refresh"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/tvTopDashTil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Totals"
+                android:textSize="16sp"
+                android:textColor="@color/DefaultBlack"
+                android:background="#b3aee1"
+                />
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:background="#b3aee1"
+                android:layout_below="@+id/tvTopDashTil"
+                >
+            </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/tvBottomDashTil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Today's"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="#fff"
+                android:background="@drawable/gradientfill_header"
+                android:layout_below="@+id/recyclerViewTotal"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewDayWise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvBottomDashTil"
+                android:paddingTop="5dp"
+                android:background="@drawable/gradientfill_header"
+                >
+            </android.support.v7.widget.RecyclerView>
+
+        </RelativeLayout>
+
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 
 </android.support.constraint.ConstraintLayout>

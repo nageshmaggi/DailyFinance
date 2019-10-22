@@ -39,7 +39,7 @@
             android:id="@+id/tvcompnyname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Company"
+            android:text="@string/nav_head_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             />
 
@@ -47,7 +47,7 @@
             android:id="@+id/tvcompnyinfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="FusilSolutions pvt ltd"
+            android:text="@string/nav_head_subtitle"
             />
 
     </LinearLayout>

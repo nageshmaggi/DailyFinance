@@ -3,47 +3,178 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
+    android:background="@drawable/gradient_aboutus"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
+    android:paddingTop="150dp"
     >
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="160dp"
         android:layout_margin="3dp"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_gravity="center"
+            android:background="@drawable/gradient_card_about"
             >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Fusil Solution Ptv Ltd"
-            android:gravity="center"
-            />
-
             <TextView
+                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="BanjaraHills, Hyd"
-                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:text="FUSIL SOLUTIONS PRIVATE LTD."
+                android:gravity="start"
+                android:layout_marginLeft="40dp"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="Call Us On: +91 040 23605555"
-                android:gravity="center"
+                android:textColor="#fff"
+                android:text="Hyderabad,India"
+                android:gravity="start"
+                android:layout_marginLeft="40dp"
                 />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="40dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:text="Phone:"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#fff"
+                    android:text=" +91 040 23605555,"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:selectAllOnFocus="true"
+                    android:textIsSelectable="true"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="40dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:text="Phone:"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#fff"
+                    android:text=" +91 9703188885"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:selectAllOnFocus="true"
+                    android:textIsSelectable="true"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="40dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:text="Website:"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#fff"
+                    android:text=" www.fusilsolutions.com"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:selectAllOnFocus="true"
+                    android:textIsSelectable="true"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="40dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:text="Email:"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#fff"
+                    android:text=" Support@fusil.in"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:selectAllOnFocus="true"
+                    android:textIsSelectable="true"
+                    />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

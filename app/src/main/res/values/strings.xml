@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Daily Finance</string>
+    <string name="app_name">Daily Finances</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -18,5 +18,23 @@
     <string name="msg_enter_mobileno">Enter MobileNo</string>
     <string name="msg_enter_amt">Enter Amount</string>
     <string name="about_us">Fusil Solutions Pvt Ltd</string>
+    <string name="AboutUs">FUSIL SOLUTIONS PRIVATE LTD.\nHyderabad,India.\nPhone: +91 040 23605555,\n\t\t\t\t\t\t\t+91 9703188885,
+        \nWebsite: www.fusilsolutions.com\nEmail: Support@fusil.in</string>
+
+
+    <string name="nav_head_title">Daily Finances</string>
+    <string name="nav_head_subtitle">Fusil Solution Pvt Ltd</string>
+
+
+    <string name="nav_draw_trans_finances">Daily Finances</string>
+    <string name="nav_draw_trans_collections">Collections</string>
+
+    <string name="nav_draw_finances_report">Daily Finances Report</string>
+    <string name="nav_draw_collections_report">Collections Report</string>
+    <string name="nav_draw_act_fin_report">Active Daily Finances Report</string>
+    <string name="nav_draw_memwise_report">MemberWise Daily Finances Report</string>
+
+    <string name="ReleaseDate">11-10-2019</string>
+    <string name="VersionNo">1.0</string>
 
 </resources>

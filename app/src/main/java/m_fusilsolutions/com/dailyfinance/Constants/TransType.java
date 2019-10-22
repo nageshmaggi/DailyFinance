@@ -6,17 +6,36 @@ package m_fusilsolutions.com.dailyfinance.Constants;
 
 public enum TransType {
     SaveDFData,
+
     SaveDFCData,
-    GetMaxData,
-    GetDFTotals,
-    GetSearchData,
+
+    GetDailyFinanceTotals,
+    GetFinanceTotals,
+
     GetDailyFinanceReport,
     GetDailyCollectionReport,
+
     GetAllActiveDailyFinanceReport,
-    GetFilteredData,
-    GetFilteredDataDFC,
-    CheckLoginData,
+    GetMemWiseReportData,
+    GetCollectionsAgainstReportData,
+
     GetFinanceDataByVSNo,
     UpdateDFData,
-    DeleteDFData
+    DeleteDFData,
+
+    UpdateCollectionData,
+    DeleteCollectionData,
+    GetCollectionDataByVSNo,
+
+    GetFinanceSearchDataInCollection,
+
+    CheckLoginData,
+
+    GetMaxData,
+
+    GetDistinctFinaceUsers,
+
+
+    GetFinanceCollectionDates
+
 }
