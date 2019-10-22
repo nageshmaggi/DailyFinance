@@ -19,7 +19,7 @@ public class Constants
     public static final double COMMISION_PERCENTAGE=0.1;
 
     public static final String DevName = "Nagesh";
-    public static final String AsName = "sai";
+    public static final String AstName = "sai";
 
 
 }
