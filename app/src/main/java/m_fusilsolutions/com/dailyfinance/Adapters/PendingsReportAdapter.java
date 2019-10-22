@@ -1,18 +1,22 @@
 package m_fusilsolutions.com.dailyfinance.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
+import m_fusilsolutions.com.dailyfinance.Collection_Activity;
 import m_fusilsolutions.com.dailyfinance.Models.ReportData;
+import m_fusilsolutions.com.dailyfinance.PendingCollectionsReport_Activity;
 import m_fusilsolutions.com.dailyfinance.R;
 
 public class PendingsReportAdapter extends RecyclerView.Adapter<PendingsReportAdapter.MyViewHolder> {
@@ -20,7 +24,7 @@ public class PendingsReportAdapter extends RecyclerView.Adapter<PendingsReportAd
     List<ReportData> _collectionList;
     int DF;
 
-    public PendingsReportAdapter(Context cTxt, List<ReportData> collectionList, int DF){
+    public PendingsReportAdapter(Context cTxt, List<ReportData> collectionList,int DF){
         this.cTxt = cTxt;
         this._collectionList = collectionList;
         this.DF = DF;
@@ -29,7 +33,7 @@ public class PendingsReportAdapter extends RecyclerView.Adapter<PendingsReportAd
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layoutView = LayoutInflater.from(cTxt).inflate(R.layout.pending_report_layout,parent,false);
+        View layoutView = LayoutInflater.from(cTxt).inflate(R.layout.memberwise_report_layout,parent,false);
         return new MyViewHolder(layoutView);
     }
 
@@ -46,6 +50,7 @@ public class PendingsReportAdapter extends RecyclerView.Adapter<PendingsReportAd
             if(data.getStatus().equals("0")){
                 holder.tvStaus.setText("Status: Active");
                 holder.tvStaus.setTextColor(cTxt.getResources().getColor(R.color.Green));
+                holder.ivCollection.setVisibility(View.VISIBLE);//22102019
             }
             else{
                 holder.tvStaus.setText("Status: CLosed");
@@ -68,17 +73,17 @@ public class PendingsReportAdapter extends RecyclerView.Adapter<PendingsReportAd
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvName,tvDate,tvTitle,tvTotalAmt,tvNetAmt,tvPerDayAmt,tvRemarks,tvMobNo,tvRefNo,tvStaus,
-                tvNetTil,tvPDtil,tvR2,tvR3;//new change 15102019
-        //ImageView ivCollection;
+                tvNetTil,tvPDtil,tvR2,tvR3;
+        ImageView ivCollection;//22102019
         LinearLayout llMain;
         CardView cvMain;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            //ivCollection = (ImageView) itemView.findViewById(R.id.ivCollRd);//new Change 17102019
-            tvR2 = (TextView) itemView.findViewById(R.id.tvR2M);//new change 15102019
-            tvR3= (TextView) itemView.findViewById(R.id.tvR3M);//new change 15102019
+            ivCollection = (ImageView) itemView.findViewById(R.id.ivCollRd);//22102019
+            tvR2 = (TextView) itemView.findViewById(R.id.tvR2M);
+            tvR3= (TextView) itemView.findViewById(R.id.tvR3M);
             cvMain = (CardView) itemView.findViewById(R.id.cvMainCV);
             tvNetTil = (TextView) itemView.findViewById(R.id.tvNetTil);
             tvPDtil = (TextView) itemView.findViewById(R.id.tvPerDayTil);
@@ -96,25 +101,33 @@ public class PendingsReportAdapter extends RecyclerView.Adapter<PendingsReportAd
             tvMobNo.setTextIsSelectable(true);
             llMain.setOnClickListener(this);
             if(DF==1){
+                ivCollection.setOnClickListener(this);
                 tvPDtil.setVisibility(View.VISIBLE);
                 tvNetTil.setVisibility(View.VISIBLE);
-                tvR2.setVisibility(View.VISIBLE);//new change 15102019
-                tvR3.setVisibility(View.VISIBLE);//new change 15102019
+                tvR2.setVisibility(View.VISIBLE);
+                tvR3.setVisibility(View.VISIBLE);
             }
             else
             {
                 tvPDtil.setVisibility(View.INVISIBLE);
                 tvNetTil.setVisibility(View.INVISIBLE);
-                tvR2.setVisibility(View.INVISIBLE);//new change 15102019
-                tvR3.setVisibility(View.INVISIBLE);//new change 15102019
+                tvR2.setVisibility(View.INVISIBLE);
+                tvR3.setVisibility(View.INVISIBLE);
             }
         }
-
+//22102019
         @Override
         public void onClick(View v) {
-//            int position = getAdapterPosition();
-//            ReportData data = _collectionList.get(position);
-//            ((PendingCollectionsReport_Activity)cTxt).SetRecyclerViewItem(data);
+            int position = getAdapterPosition();
+            ReportData data = _collectionList.get(position);
+            if(v.getId() == R.id.llMain)
+                ((PendingCollectionsReport_Activity)cTxt).SetRecyclerViewItem(data);
+            else if(v.getId() == R.id.ivCollRd)
+            {
+                Intent in = new Intent(cTxt, Collection_Activity.class);
+                in.putExtra("MobileNo",data.getMobileNo());
+                cTxt.startActivity(in);
+            }
         }
     }
 }

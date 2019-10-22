@@ -441,7 +441,7 @@ public class Memberwise_DailyFinaceReport_Activity extends AppCompatActivity imp
                 FinanceSingleTon.getInstance().contactList = new XmlConverter().ParseDistinctMemberInfoData(nodeList, FinanceSingleTon.getInstance().contactList);
 
                 if(FinanceSingleTon.getInstance().contactList!=null && FinanceSingleTon.getInstance().contactList.size() > 0) {
-                    mAdapter = new SimpleAdapter(this, FinanceSingleTon.getInstance().contactList, R.layout.singile_contact, new String[]{"Name", "MobileNo"}, new int[]{R.id.tv_ContactName, R.id.tv_ContactNumber});
+                    mAdapter = new SimpleAdapter(this, FinanceSingleTon.getInstance().contactList, R.layout.single_contact, new String[]{"Name", "MobileNo"}, new int[]{R.id.tv_ContactName, R.id.tv_ContactNumber});
                     etSearch.setAdapter(mAdapter);
                     etSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override

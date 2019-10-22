@@ -1,9 +1,7 @@
 package m_fusilsolutions.com.dailyfinance;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
@@ -55,32 +52,33 @@ import m_fusilsolutions.com.dailyfinance.Helpers.XmlConverter;
 import m_fusilsolutions.com.dailyfinance.Models.ReportData;
 import m_fusilsolutions.com.dailyfinance.Singletons.FinanceSingleTon;
 
+//import m_fusilsolutions.com.dailyfinance.Adapters.PedingsReportAdapter;
+
 public class PendingCollectionsReport_Activity extends AppCompatActivity implements View.OnClickListener, AsyncResponse {
-    EditText etFrom, etTo, etFilterSearch;
+    EditText etFrom,etTo,etFilterSearch;
     AutoCompleteTextView etSearch;//new change 18102019
-    ImageView ivBack, ivFilter;
+    ImageView ivBack,ivFilter;
     RecyclerView rvReports;
-    TextView tvTtlAmt, tvNetAmt, tvPerDayAmt, tvNetTil, tvPDTil,
-            tvR2, tvR3, tvReportCount;
+    TextView tvTtlAmt,tvNetAmt,tvPerDayAmt,tvNetTil,tvPDTil,
+            tvR2,tvR3,tvReportCount;
     RadioGroup rgFilterItems;
     CustomToast _ct;//new change 17102019
 
-    List<ReportData> reportDataList;
+    List<ReportData> reportDataList,DuesList;
     ExecuteDataBase _exeDb;
-    int flag = 0, screen = 0, selectedId = 0;
-    String SearchEle = "";
+    int flag = 0,screen = 0,selectedId = 0;
+    String SearchEle="";
     boolean Clicked = true, flagFrom = false;
     SimpleAdapter mAdapter;
 
-    DatePickerDialog.OnDateSetListener FromdateDialog, ToDateDialog;
+    DatePickerDialog.OnDateSetListener FromdateDialog,ToDateDialog;
     final Calendar myCal = Calendar.getInstance();
     final Calendar myCalt = Calendar.getInstance();
 
-    String fromDate, toDate, mainDate,
+    String fromDate, toDate,mainDate,
             NorPattern = "dd-MM-yyyy",
             DbPattern = "yyyy-MM-dd";
-    String btnName = "Date", strName = "", strMobileNo = "";
-    Typeface  typefaceBold;
+    String btnName="Date",strName="",strMobileNo="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,8 +105,7 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
         ivFilter.setOnClickListener(this);
         //btnSearch.setOnClickListener(this);
         ivBack.setOnClickListener(this);
-        typefaceBold = Typeface.createFromAsset(getAssets(), "Caviar_Dreams_Bold.ttf");
-        etSearch.setTypeface(typefaceBold);
+
         ProcessViews();
 
         FromdateDialog = new DatePickerDialog.OnDateSetListener() {
@@ -137,7 +134,7 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater mi = getMenuInflater();
-        mi.inflate(R.menu.excel_menu, menu);
+        mi.inflate(R.menu.excel_menu,menu);
         menu.findItem(R.id.miExcel).setVisible(false);
         return true;
     }
@@ -171,10 +168,15 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
         int id = item.getItemId();
         if (id == android.R.id.home) {
             finish();
-        } else if (id == R.id.miClear) {
-            if (screen == 1)
+        }
+        else if(id == R.id.miClear){
+            if(screen == 1) {
                 rvReports.setAdapter(null);
-            else if (screen == 2) {
+                reportDataList = null;
+            }
+            else if(screen == 2) {
+                reportDataList = null;
+                DuesList = null;
                 rvReports.setAdapter(null);
                 tvReportCount.setText("0");
                 tvTtlAmt.setText("00");
@@ -188,39 +190,43 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btnSearchMD) {
+        if(v.getId() == R.id.btnSearchMD)
+        {
             reportDataList = new ArrayList<>();
             SearchEle = etSearch.getText().toString();
             etSearch.clearFocus();
             //GetDataDF();
-        } else if (v.getId() == R.id.ivBackMD) {
+        }
+        else if(v.getId() == R.id.ivBackMD){
             Clicked = true;
             ProcessViews();
             //rvReports.setAdapter(null);
-            GetDataDF(strName, strMobileNo);
-        } else if (v.getId() == R.id.ivFilterMD) {
+            GetDataDF(strName,strMobileNo);
+        }
+        else if(v.getId() == R.id.ivFilterMD) {
             FilterCollectionProcess();
         }
         if (v.getId() == R.id.etFromMW) {
             flagFrom = true;
             CallDatePickerProcess();
-        } else if (v.getId() == R.id.etToMW) {
+        }
+        else if (v.getId() == R.id.etToMW) {
             CallDatePickerProcess();
         }
     }
 
     //new change 18102019
-    private void GetDistinctMemberList() {
-        String inpXele = "<Data><StatusData Status='0' /><StatusData Status='1' /></Data>";
-        _exeDb.ExecuteResult(SPName.USP_MA_DF_DistinctFinanceMembers.toString(), inpXele, TransType.GetDistinctFinaceUsers.toString(), "0", Constants.HTTP_URL);
+    private void GetDistinctMemberList(){
+        String inpXele = "<Data><StatusData Status='0' /><StatusData Status='0' /></Data>";
+        _exeDb.ExecuteResult(SPName.USP_MA_DF_DistinctFinanceMembers.toString(),inpXele, TransType.GetDistinctFinaceUsers.toString(),"0", Constants.HTTP_URL);
     }
 
     private void FilterCollectionProcess() {
         int c = 1;
 
-        AlertDialog.Builder adb = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        AlertDialog.Builder adb = new AlertDialog.Builder(this,R.style.MyDialogTheme);
         LayoutInflater li = getLayoutInflater();
-        View lv = li.inflate(R.layout.filter_memwise, null);
+        View lv = li.inflate(R.layout.filter_memwise,null);
         adb.setView(lv);
 
         rgFilterItems = (RadioGroup) lv.findViewById(R.id.rgFilterRadioGroupMD);
@@ -229,15 +235,19 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
         etFilterSearch = (EditText) lv.findViewById(R.id.etSearchMDF);
         RelativeLayout rlDates = (RelativeLayout) lv.findViewById(R.id.rlDateFields);
         etFilterSearch.setVisibility(View.INVISIBLE);
+        RadioButton rbRemarks = (RadioButton) lv.findViewById(R.id.rbRemarksMD);
+        rbRemarks.setVisibility(View.INVISIBLE);
         rlDates.setVisibility(View.INVISIBLE);
-        if (selectedId == 0) {
+        if(selectedId == 0)
+        {
 
             rgFilterItems.check(R.id.rbDateMD);
             etFilterSearch.setVisibility(View.INVISIBLE);
             rlDates.setVisibility(View.VISIBLE);
-        } else {
+        }
+        else {
             rgFilterItems.check(selectedId);
-            if (!btnName.equals("Date"))
+            if(!btnName.equals("Date"))
                 etFilterSearch.setVisibility(View.VISIBLE);
             else
                 rlDates.setVisibility(View.VISIBLE);
@@ -257,14 +267,15 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
                 RadioButton rBtn = (RadioButton) lv.findViewById(id);
                 String checkedBtn = rBtn.getText().toString();
                 btnName = checkedBtn;
-                if (checkedBtn.equals("VN") || checkedBtn.equals("Remarks")) {
+                if(checkedBtn.equals("VN") || checkedBtn.equals("Remarks")) {
                     rlDates.setVisibility(View.INVISIBLE);
                     etFilterSearch.setVisibility(View.VISIBLE);
-                    if (checkedBtn.equals("VN"))
+                    if(checkedBtn.equals("VN"))
                         etFilterSearch.setInputType(InputType.TYPE_CLASS_NUMBER);
                     else
                         etFilterSearch.setInputType(InputType.TYPE_CLASS_TEXT);
-                } else {
+                }
+                else {
                     etFilterSearch.setVisibility(View.INVISIBLE);
                     rlDates.setVisibility(View.VISIBLE);
                     etFilterSearch.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -272,23 +283,26 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
             }
         });
 
-        if (c <= 1) {
+        if(c<=1){
             SetDateProcess();
             c++;
         }
         adb.setPositiveButton("Get", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                int rgId = rgFilterItems.getCheckedRadioButtonId();
-                selectedId = rgId;
-                //if(rgId!=-1 && !etSearch.getText().toString().equals(""))
-                if (rgId != -1)
-                    if (btnName.equals("Date"))
-                        FilterProcess();
-                    else {
-                        String ele = etFilterSearch.getText().toString();
-                        FilterProcessByText(ele, lv);
-                    }
+                if (reportDataList != null || DuesList != null) {//new change 19102019
+                    int rgId = rgFilterItems.getCheckedRadioButtonId();
+                    selectedId = rgId;
+                    //if(rgId!=-1 && !etSearch.getText().toString().equals(""))
+                    if (rgId != -1)
+                        if (btnName.equals("Date"))
+                            FilterProcess();
+                        else {
+                            String ele = etFilterSearch.getText().toString();
+                            FilterProcessByText(ele, lv);
+                        }
+                }
+                else _ct.ShowToast("No Data To Filter",false);
             }
         });
 
@@ -310,34 +324,40 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
         RadioButton rdBtn = (RadioButton) lv.findViewById(rgId);
         String strFilterBy = rdBtn.getText().toString();
 
-        if (screen == 1) {
-            ProcessFilter(strFilterBy, ele);
-        } else {
-            ProcessFilter(strFilterBy, ele);
+        if(screen==1)
+        {
+            ProcessFilter(strFilterBy,ele);
+        }
+        else
+        {
+            ProcessFilter(strFilterBy,ele);
         }
     }
 
     private void ProcessFilter(String strFilterBy, String ele) {
         List<ReportData> FilteredReportList = new ArrayList<>();
-        for (ReportData data : reportDataList) {
-            switch (strFilterBy) {
+        for(ReportData data : DuesList)
+        {
+            switch(strFilterBy)
+            {
                 case "VN":
-                    if (data.getVSNo().contains(ele))
+                    if(data.getVSNo().contains(ele))
                         FilteredReportList.add(data);
                     break;
                 case "Remarks":
-                    if (data.getRemarks().toLowerCase().contains(ele.toLowerCase()))
+                    if(data.getRemarks().toLowerCase().contains(ele.toLowerCase()))
                         FilteredReportList.add(data);
                     break;
             }
         }
         if (FilteredReportList.size() > 0) {
-            ReportAdapter adapter = new ReportAdapter(this, FilteredReportList, screen);
+            ReportAdapter adapter = new ReportAdapter(this, FilteredReportList,screen);
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             rvReports.setLayoutManager(layoutManager);
             rvReports.setAdapter(adapter);
             UpdateFooterData(FilteredReportList);
-        } else _ct.ShowToast("No Data Found", false);//new change 17102019
+        }
+        else _ct.ShowToast("No Data Found",false);//new change 17102019
     }
 
 
@@ -345,10 +365,11 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
         SimpleDateFormat format = new SimpleDateFormat(NorPattern, Locale.UK);
         List<ReportData> FilteredList = new ArrayList<>();
         try {
-            Date sDate = format.parse(etFrom.getText().toString()), eDate = format.parse(etTo.getText().toString());
-            for (ReportData data : reportDataList) {
+            Date sDate = format.parse(etFrom.getText().toString()),eDate = format.parse(etTo.getText().toString());
+            for(ReportData data: DuesList)
+            {
                 Date fDate = format.parse(data.getDate());
-                if (fDate.equals(sDate) || fDate.after(sDate) && fDate.before(eDate) || fDate.equals(eDate)) {
+                if(fDate.equals(sDate) || fDate.after(sDate) && fDate.before(eDate) || fDate.equals(eDate)){
                     FilteredList.add(data);
                 }
             }
@@ -356,13 +377,14 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
             e.printStackTrace();
         }
         if (FilteredList.size() > 0) {
-            ReportAdapter adapter = new ReportAdapter(this, FilteredList, screen);
+            ReportAdapter adapter = new ReportAdapter(this, FilteredList,screen);
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             rvReports.setLayoutManager(layoutManager);
             rvReports.setAdapter(adapter);
             UpdateFooterData(FilteredList);
-        } else
-            _ct.ShowToast("No Data Found", false);//new change 17102019
+        }
+        else
+            _ct.ShowToast("No Data Found",false);//new change 17102019
     }
 
     private void SetDateProcess() {
@@ -377,14 +399,10 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
         toDate = sdf1.format(myCal.getTime());
     }
 
-    private void GetDataDF(String name, String mNo) {//new change 18102019
-//        if (SearchEle.matches("[a-zA-Z]+"))
-//            flag = 1;
-
-        //if (!SearchEle.equals("")) { new change 18102019
+    private void GetDataDF(String name,String mNo)
+    {
         String xele = "<Data Name='" + name + "' MobileNo='" + mNo + "' />";
         _exeDb.ExecuteResult(SPName.USP_MA_DF_ActiveAndMemwiseReport.toString(), xele, TransType.GetMemWiseReportData.toString(), "1", Constants.HTTP_URL);
-        //}
     }
 
     @Override
@@ -396,49 +414,47 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
                 rvReports.setAdapter(null);
                 reportDataList = new XmlConverter().ParseFinanceReportData(nodeList, reportDataList);
                 if (reportDataList.size() > 0) {
-                    PendingsReportAdapter adapter = new PendingsReportAdapter(this, reportDataList, 1);
+                    PendingsReportAdapter adapter = new PendingsReportAdapter(this, reportDataList,1);
                     LinearLayoutManager layoutManager = new LinearLayoutManager(this);
                     rvReports.setLayoutManager(layoutManager);
                     rvReports.setAdapter(adapter);
-                    screen = 1;
+                    screen =1;
                     UpdateFooterData(reportDataList);
                 }
-            } else if (val.equals("2")) {
+            }
+            else if(val.equals("2")){
                 reportDataList = new ArrayList<>();
-                rvReports.setAdapter(null);
+                rvReports.setAdapter(null);//Unused Code--->
                 reportDataList = new XmlConverter().ParseFinanceReportData(nodeList, reportDataList);
                 if (reportDataList.size() > 0) {
-                    PendingsReportAdapter adapter = new PendingsReportAdapter(this, reportDataList, 0);
+                    PendingsReportAdapter adapter = new PendingsReportAdapter(this, reportDataList,0);
                     LinearLayoutManager layoutManager = new LinearLayoutManager(this);
                     rvReports.setLayoutManager(layoutManager);
                     rvReports.setAdapter(adapter);
-                    screen = 2;
+                    screen =2;
                     UpdateFooterData(reportDataList);
-                    hideKeyboard(this);
                 }
-            } else if (val.equals("0")) {//new change 18102019
+            }
+            else if(val.equals("0")) {//new change 18102019
                 FinanceSingleTon.getInstance().contactList = new ArrayList<>();
                 FinanceSingleTon.getInstance().contactList = new XmlConverter().ParseDistinctMemberInfoData(nodeList, FinanceSingleTon.getInstance().contactList);
 
-                if (FinanceSingleTon.getInstance().contactList != null && FinanceSingleTon.getInstance().contactList.size() > 0) {
-                    mAdapter = new SimpleAdapter(this, FinanceSingleTon.getInstance().contactList, R.layout.singile_contact, new String[]{"Name", "MobileNo"}, new int[]{R.id.tv_ContactName, R.id.tv_ContactNumber});
+                if(FinanceSingleTon.getInstance().contactList!=null && FinanceSingleTon.getInstance().contactList.size() > 0) {
+                    mAdapter = new SimpleAdapter(this, FinanceSingleTon.getInstance().contactList, R.layout.single_contact, new String[]{"Name", "MobileNo"}, new int[]{R.id.tv_ContactName, R.id.tv_ContactNumber});
                     etSearch.setAdapter(mAdapter);
                     etSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            //Map<String,String> selecteddata = contactList.get(position);
                             Object object = parent.getItemAtPosition(position);
                             Map<String, String> selecteddata = (Map<String, String>) object;
                             etSearch.setText("");
-                            //etSearch.setText(selecteddata.get("Name"));
                             if (selecteddata != null)//new change 18102019
                             {
                                 strName = selecteddata.get("Name");
                                 strMobileNo = selecteddata.get("MobileNo");
                                 reportDataList = new ArrayList<>();
-                                //SearchEle = etSearch.getText().toString();
                                 etSearch.clearFocus();
-                                GetDataDF(strName, strMobileNo);
+                                GetDataDF(strName,strMobileNo);
                             }
                         }
                     });
@@ -459,24 +475,48 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
 
                     }
                 });
-            }
-        } else
-            _ct.ShowToast("No data found", false);//new change 17102019
-    }
+            }//new change 119102019
+            else if(val.equals("3")){//new change 119102019
+                DuesList = new ArrayList<>();
+                List<String> datesList = new ArrayList<>();//new change 119102019
+                rvReports.setAdapter(null);
+                datesList = new XmlConverter().ParseDatesInfo(nodeList, datesList);//new change 119102019
+                if (reportDataList.size() > 0 && datesList.size()>0)
+                {
+                    String cName = reportDataList.get(0).getName(),
+                            cPDAmt = reportDataList.get(0).getPerDayAmt(),
+                            cRefNo = reportDataList.get(0).getRefNo(),
+                            cVSNo = reportDataList.get(0).getVSNo(),
+                            cMno = reportDataList.get(0).getMobileNo();
 
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
-        View view = activity.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
-            view = new View(activity);
+                    for(int i = 0; i < datesList.size(); i++)
+                    {
+                        ReportData _data  = new ReportData();
+                        _data.setName(cName);
+                        _data.setAmount(cPDAmt);
+                        _data.setVSNo(cVSNo);
+                        _data.setMobileNo(cMno);
+                        _data.setRefNo(cRefNo);
+                        _data.setDate(datesList.get(i));//new change 21100219
+//                        String convDate = ConvertDatestrToDate(datesList.get(i),2);
+//                        _data.setDate(convDate);
+                        DuesList.add(_data);
+                    }
+                    PendingsReportAdapter adapter = new PendingsReportAdapter(this, DuesList, 0);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+                    rvReports.setLayoutManager(layoutManager);
+                    rvReports.setAdapter(adapter);
+                    screen = 2;
+                    UpdateFooterData(DuesList);
+                }
+            }
         }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        else
+            _ct.ShowToast("No data found",false);//new change 17102019
     }
 
     public void SetRecyclerViewItem(ReportData data) {
-        if (Clicked) {
+        if(Clicked) {
             if (data != null) {
                 ivBack.setEnabled(true);
                 ivFilter.setEnabled(true);
@@ -484,15 +524,42 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
                 ivFilter.setVisibility(View.VISIBLE);
                 etSearch.setVisibility(View.INVISIBLE);
                 tvReportCount.setVisibility(View.VISIBLE);
-                //btnSearch.setVisibility(View.INVISIBLE);
-                String xele = "<Data TransId='" + data.getTransId() + "'/>";
-                _exeDb.ExecuteResult(SPName.USP_MA_DF_ActiveAndMemwiseReport.toString(), xele, TransType.GetCollectionsAgainstReportData.toString(), "2", Constants.HTTP_URL);
+                Date cDate = new Date();
+                SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd",Locale.US);
+                String currentDate = sf.format(cDate.getTime());//new change 119102019
+                String financedDate = data.getDate();//new change 119102019
+                financedDate = ConvertDatestrToDate(financedDate,1);//new change 19102019
+//                String xele = "<Data TransId='" + data.getTransId() + "' FinancedDate='"+financedDate+"' CurrentDate='"+currentDate+"'/>";//new change 119102019
+                String xele = "<Data TransId='" + data.getTransId() + "' />";//new change 21102019
+                _exeDb.ExecuteResult(SPName.USP_MA_DF_FinanceCollectionDates.toString(), xele, TransType.GetFinanceCollectionDates.toString(), "3", Constants.HTTP_URL);
                 Clicked = false;
             }
         }
     }
 
-    private int _totAmt, _netAmt, _PdAmt;
+    private String ConvertDatestrToDate(String strDate,int flagval){
+        SimpleDateFormat yyyyMMdd = null,ddMMyyyy = null;
+        Date date = null;
+        try {
+            yyyyMMdd = new SimpleDateFormat("yyyy-MM-dd");
+            ddMMyyyy = new SimpleDateFormat("dd-MM-yyyy");
+
+            if(flagval == 1)
+                date = ddMMyyyy.parse(strDate);
+            else
+                date = yyyyMMdd.parse(strDate);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if(flagval == 1)
+            return yyyyMMdd.format(date);
+        else
+            return ddMMyyyy.format(date);
+    }
+
+    private int _totAmt,_netAmt,_PdAmt;
 
     private void UpdateFooterData(List<ReportData> reportDataList) {
         _totAmt = 0;
@@ -501,17 +568,17 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
         if (reportDataList != null && reportDataList.size() > 0) {
             for (ReportData data : reportDataList) {
                 if (data != null) {
-                    if (screen == 1) {
+                    if(screen==1) {
                         _totAmt += (Integer.parseInt(data.getAmount()));
                         _netAmt += (Integer.parseInt(data.getNetAmount()));
                         _PdAmt += (Integer.parseInt(data.getPerDayAmt()));
-                    } else if (screen == 2) {
+                    }else if(screen==2){
                         _totAmt += (Integer.parseInt(data.getAmount()));
                     }
                 }
             }
         }
-        if (screen == 1) {
+        if(screen==1) {
             tvNetTil.setVisibility(View.VISIBLE);
             tvPDTil.setVisibility(View.VISIBLE);
             tvTtlAmt.setText(String.valueOf(_totAmt));
@@ -519,7 +586,7 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
             tvPerDayAmt.setText(String.valueOf(_PdAmt));
             tvR3.setVisibility(View.VISIBLE);
             tvR2.setVisibility(View.VISIBLE);
-        } else if (screen == 2) {
+        }else if(screen==2){
             tvNetTil.setVisibility(View.INVISIBLE);
             tvPDTil.setVisibility(View.INVISIBLE);
             tvPerDayAmt.setVisibility(View.INVISIBLE);
@@ -540,7 +607,6 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
             DateConvertionProcess(etTo);
         }
     }
-
     //New Change 15102019 Method
     private void DateConvertionProcess(EditText et) {
         SimpleDateFormat sdf = new SimpleDateFormat(NorPattern, Locale.UK);
@@ -549,23 +615,23 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
             String getDate = sdf.format(myCal.getTime());
             fromDate = sdf1.format(myCal.getTime());
             et.setText(getDate);
-        } else {
+        }else {
             String getDate = sdf.format(myCalt.getTime());
             toDate = sdf1.format(myCalt.getTime());
             et.setText(getDate);
         }
     }
-
     //New Change 15102019 Method
     private void CallDatePickerProcess() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            if (flagFrom) {
+            if(flagFrom) {
                 new DatePickerDialog(this, FromdateDialog,
                         myCal.get(Calendar.YEAR),
                         myCal.get(Calendar.MONTH),
                         myCal.get(Calendar.DAY_OF_MONTH)).show();
-            } else {
+            }
+            else{
                 new DatePickerDialog(this, ToDateDialog,
                         myCalt.get(Calendar.YEAR),
                         myCalt.get(Calendar.MONTH),

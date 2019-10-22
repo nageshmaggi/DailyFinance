@@ -14,6 +14,7 @@
         >
 
         <LinearLayout
+            android:id="@+id/llParentLayoutReportsCV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -27,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="0.3"
-                android:weightSum="1.2"
+                android:weightSum="1.5"
                 >
                 <TextView
                     android:id="@+id/tvTitle"
@@ -46,6 +47,15 @@
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:layout_weight="0.3"
+                    />
+
+                <TextView
+                    android:id="@+id/tvColDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_weight="0.3"
+                    android:visibility="gone"
                     />
 
                 <TextView
@@ -108,7 +118,7 @@
 
             <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.32"
                 >
                 <!--        New Change 15102019-->
@@ -209,6 +219,18 @@
                     android:gravity="end"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/tvNetAmt"
+                    />
+
+                <ImageView
+                    android:id="@+id/imgvCollectionBtn"
+                    android:layout_marginTop="3dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/cashin"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/tvPerDayAmt"
+                    android:visibility="gone"
                     />
 
             </RelativeLayout>

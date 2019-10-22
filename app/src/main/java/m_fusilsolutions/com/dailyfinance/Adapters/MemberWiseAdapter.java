@@ -1,17 +1,20 @@
 package m_fusilsolutions.com.dailyfinance.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
+import m_fusilsolutions.com.dailyfinance.Collection_Activity;
 import m_fusilsolutions.com.dailyfinance.Memberwise_DailyFinaceReport_Activity;
 import m_fusilsolutions.com.dailyfinance.Models.ReportData;
 import m_fusilsolutions.com.dailyfinance.R;
@@ -47,6 +50,7 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
             if(data.getStatus().equals("0")){
                 holder.tvStaus.setText("Status: Active");
                 holder.tvStaus.setTextColor(cTxt.getResources().getColor(R.color.Green));
+                holder.ivCollection.setVisibility(View.VISIBLE);
             }
             else{
                 holder.tvStaus.setText("Status: CLosed");
@@ -54,12 +58,10 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
             }
 
         }
-
         holder.tvRemarks.setText(data.getRemarks());
         holder.tvMobNo.setText(data.getMobileNo());
         holder.tvRefNo.setText(data.getRefNo());
     }
-
 
     @Override
     public int getItemCount() {
@@ -69,17 +71,17 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvName,tvDate,tvTitle,tvTotalAmt,tvNetAmt,tvPerDayAmt,tvRemarks,tvMobNo,tvRefNo,tvStaus,
-        tvNetTil,tvPDtil,tvR2,tvR3;//new change 15102019
-        //ImageView ivCollection;
+        tvNetTil,tvPDtil,tvR2,tvR3;
+        ImageView ivCollection;
         LinearLayout llMain;
         CardView cvMain;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            //ivCollection = (ImageView) itemView.findViewById(R.id.ivCollRd);//new Change 17102019
-            tvR2 = (TextView) itemView.findViewById(R.id.tvR2M);//new change 15102019
-            tvR3= (TextView) itemView.findViewById(R.id.tvR3M);//new change 15102019
+            ivCollection = (ImageView) itemView.findViewById(R.id.ivCollRd);
+            tvR2 = (TextView) itemView.findViewById(R.id.tvR2M);
+            tvR3= (TextView) itemView.findViewById(R.id.tvR3M);
             cvMain = (CardView) itemView.findViewById(R.id.cvMainCV);
             tvNetTil = (TextView) itemView.findViewById(R.id.tvNetTil);
             tvPDtil = (TextView) itemView.findViewById(R.id.tvPerDayTil);
@@ -94,13 +96,15 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
             tvMobNo = (TextView) itemView.findViewById(R.id.tvMobNo);
             tvRefNo = (TextView) itemView.findViewById(R.id.tvRefNo);
             tvStaus = (TextView) itemView.findViewById(R.id.tvStatus);
+            ivCollection = (ImageView) itemView.findViewById(R.id.ivCollRd);//221102019
             tvMobNo.setTextIsSelectable(true);
             llMain.setOnClickListener(this);
             if(DF==1){
                 tvPDtil.setVisibility(View.VISIBLE);
                 tvNetTil.setVisibility(View.VISIBLE);
-                tvR2.setVisibility(View.VISIBLE);//new change 15102019
-                tvR3.setVisibility(View.VISIBLE);//new change 15102019
+                tvR2.setVisibility(View.VISIBLE);
+                tvR3.setVisibility(View.VISIBLE);
+                ivCollection.setOnClickListener(this);
             }
             else
             {
@@ -115,7 +119,14 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
         public void onClick(View v) {
             int position = getAdapterPosition();
             ReportData data = _collectionList.get(position);
-            ((Memberwise_DailyFinaceReport_Activity)cTxt).SetRecyclerViewItem(data);
+            if(v.getId() == R.id.llMain)
+                ((Memberwise_DailyFinaceReport_Activity)cTxt).SetRecyclerViewItem(data);
+
+            else if(v.getId() == R.id.ivCollRd){
+                Intent in = new Intent(cTxt,Collection_Activity.class);
+                in.putExtra("MobileNo",data.getMobileNo());
+                cTxt.startActivity(in);
+            }
         }
     }
 }

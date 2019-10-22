@@ -74,6 +74,24 @@ public class XmlConverter {
         };
     }
 
+    public  List<String> ParseDatesInfo(NodeList nodeList,List<String> _dates) {
+
+        for (Node node : iterable(nodeList))
+        {
+            String nodeName = node.getNodeName();
+            if (nodeName.equals("Data")) {
+                String date;
+                date = node.getAttributes().getNamedItem("WeekOffDates").getNodeValue();
+                _dates.add(date);
+            }
+            if (node.hasChildNodes()) {
+                NodeList nodeList1 = node.getChildNodes();
+                ParseDatesInfo(nodeList1, _dates);
+            }
+        }
+        return _dates;
+    }
+
     public LoginData LoginUserParentToChildIteration(NodeList _Nodelist, LoginData fdata){
 
         for(Node node: iterable(_Nodelist))
@@ -503,6 +521,10 @@ public class XmlConverter {
                 }
                 if(node.getAttributes().getNamedItem("Status")!=null) {
                     reportData.setStatus(node.getAttributes().getNamedItem("Status").getNodeValue());
+                }
+                if(node.getAttributes().getNamedItem("CollDate")!=null)
+                {
+                    reportData.setColDate(node.getAttributes().getNamedItem("CollDate").getNodeValue());
                 }
                 reportList.add(reportData);
             }

@@ -89,6 +89,7 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
     public TextView tvWeekDayTotAmt,tvWeekTotCount;
     List<DailyFinanceData> weekOffList;
     String _financeDate="";
+    String intentMobileNo="";
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -97,6 +98,7 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection);
         if (new NetworkUtils(this).IsNetworkAvailable()) {
+            intentMobileNo = getIntent().getStringExtra("MobileNo");
             etMobileNo = (EditText) findViewById(R.id.etMobileNo);
             etCollDate = (EditText) findViewById(R.id.etCollDate);
             etDate = (EditText) findViewById(R.id.etDate);
@@ -130,7 +132,7 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
             _collectionData.setDate(String.valueOf(dtFddMMyyyy.format(new Date())));
             setActionBar();
             SetScreenConfiguration();
-            mAdapter = new SimpleAdapter(this, FinanceSingleTon.getInstance().contactList, R.layout.singile_contact ,new String[] { "Name", "MobileNo" }, new int[] { R.id.tv_ContactName, R.id.tv_ContactNumber});
+            mAdapter = new SimpleAdapter(this, FinanceSingleTon.getInstance().contactList, R.layout.single_contact,new String[] { "Name", "MobileNo" }, new int[] { R.id.tv_ContactName, R.id.tv_ContactNumber});
             actNameOrMobile.setAdapter(mAdapter);
             actNameOrMobile.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -144,8 +146,9 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
                         etMobileNo.setText(selecteddata.get("MobileNo"));
                     }
                     if (!selecteddata.get("MobileNo").isEmpty()) {
-                        String xele = _inputXele.getSearchXele(selecteddata.get("MobileNo"));
-                        _exeDb.ExecuteResult(SPName.USP_MA_DF_FinanceSearchData.toString(), xele, TransType.GetFinanceSearchDataInCollection.toString(), "1", Constants.HTTP_URL);
+                        GetDataByMobileNo(selecteddata.get("MobileNo"));
+//                        String xele = _inputXele.getSearchXele(selecteddata.get("MobileNo"));
+//                        _exeDb.ExecuteResult(SPName.USP_MA_DF_FinanceSearchData.toString(), xele, TransType.GetFinanceSearchDataInCollection.toString(), "1", Constants.HTTP_URL);
                     }
                 }
             });
@@ -168,9 +171,18 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
 
                 }
             });
+            if(intentMobileNo!=null && !intentMobileNo.equals("")){
+                GetDataByMobileNo(intentMobileNo);
+            }
+
         } else {
             startActivity(new Intent(this, NoInternetConnection_Activity.class));
         }
+    }
+
+    private void GetDataByMobileNo(String mNo){
+        String xele = _inputXele.getSearchXele(mNo);
+        _exeDb.ExecuteResult(SPName.USP_MA_DF_FinanceSearchData.toString(), xele, TransType.GetFinanceSearchDataInCollection.toString(), "1", Constants.HTTP_URL);
     }
 
     private void SetScreenConfiguration(){

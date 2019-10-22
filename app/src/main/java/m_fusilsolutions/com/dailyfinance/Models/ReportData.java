@@ -13,6 +13,15 @@ public class ReportData {
     private String VSNo="";
     private String TransId="";
     private String Status="";
+    private String ColDate="";
+
+    public String getColDate() {
+        return ColDate;
+    }
+
+    public void setColDate(String colDate) {
+        ColDate = colDate;
+    }
 
     public String getDate() {
         return Date;

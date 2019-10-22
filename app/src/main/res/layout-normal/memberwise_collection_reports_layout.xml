@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    tools:ignore="MissingDefaultResource">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.08"
+        android:background="@drawable/gradientfill_header"
+        >
+
+        <ImageView
+            android:id="@+id/ivBackCol"
+            android:layout_width="25dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/back_52"
+            android:gravity="center"
+            android:padding="3dp"
+            android:layout_weight="0.1"
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:id="@+id/tvReportCountCol"
+            android:textColor="@color/DefaultBlack"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="end"
+            android:layout_weight="0.1"
+            android:layout_marginTop="19dp"
+            android:paddingRight="1dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="0.82"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvReportCol"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#eee"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:layout_marginRight="1.5dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:id="@+id/ivFilterCol"
+                android:layout_width="65dp"
+                android:layout_height="50dp"
+                android:src="@drawable/filter_color_96"
+                android:padding="5dp"
+                android:layout_weight="0.2"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                />
+
+            <TextView
+                android:id="@+id/tvTotTil"
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/tvR1"
+                android:layout_toLeftOf="@+id/tvR1"
+                android:gravity="start"
+                android:text="Total"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:id="@+id/tvR1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":₹"
+                android:textSize="13sp"
+                android:layout_toLeftOf="@+id/tvTtlAmtCol"
+                />
+
+            <TextView
+                android:id="@+id/tvTtlAmtCol"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_weight="0.3"
+                android:gravity="end"
+                android:textColor="@color/DefaultBlack"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                />
+
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

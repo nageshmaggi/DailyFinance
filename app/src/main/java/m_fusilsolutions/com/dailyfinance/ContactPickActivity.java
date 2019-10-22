@@ -29,7 +29,7 @@ public class ContactPickActivity extends AppCompatActivity{
         contactList = new ArrayList<>();
         etMobileNo = (AutoCompleteTextView) findViewById(R.id.etMobileNo);
         PopulatePeopleList();
-        mAdapter = new SimpleAdapter(this, contactList, R.layout.singile_contact ,new String[] { "Name", "Phone" }, new int[] { R.id.tv_ContactName, R.id.tv_ContactNumber});
+        mAdapter = new SimpleAdapter(this, contactList, R.layout.single_contact,new String[] { "Name", "Phone" }, new int[] { R.id.tv_ContactName, R.id.tv_ContactNumber});
         etMobileNo.setAdapter(mAdapter);
     }
 

@@ -174,7 +174,7 @@ public class DailyFinance_Activity extends
                     android.R.layout.simple_list_item_1, WeekEnums.values()));
             spWeek.setOnItemSelectedListener(this);
             if(FinanceSingleTon.getInstance().contactList!=null && FinanceSingleTon.getInstance().contactList.size() > 0){
-                mAdapter = new SimpleAdapter(this, FinanceSingleTon.getInstance().contactList, R.layout.singile_contact ,new String[] { "Name", "MobileNo" }, new int[] { R.id.tv_ContactName, R.id.tv_ContactNumber});
+                mAdapter = new SimpleAdapter(this, FinanceSingleTon.getInstance().contactList, R.layout.single_contact,new String[] { "Name", "MobileNo" }, new int[] { R.id.tv_ContactName, R.id.tv_ContactNumber});
                 actNameOrMobile.setAdapter(mAdapter);
                 actNameOrMobile.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -219,7 +219,7 @@ public class DailyFinance_Activity extends
     private void ShowContactPickDialog() {
         ArrayList<Map<String, String>> contactList = new ArrayList<>();
         contactList = PopulatePeopleList(contactList);
-        SimpleAdapter mAdapter = new SimpleAdapter(this, contactList, R.layout.singile_contact, new String[]{"Name", "Phone"}, new int[]{R.id.tv_ContactName, R.id.tv_ContactNumber});
+        SimpleAdapter mAdapter = new SimpleAdapter(this, contactList, R.layout.single_contact, new String[]{"Name", "Phone"}, new int[]{R.id.tv_ContactName, R.id.tv_ContactNumber});
         AlertDialog.Builder adb = new AlertDialog.Builder(this, R.style.MyDialogTheme);
         LayoutInflater li = getLayoutInflater();
         View lv = li.inflate(R.layout.contact_pick_dialog, null);
