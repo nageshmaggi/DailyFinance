@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,6 +42,7 @@ import jxl.Workbook;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import m_fusilsolutions.com.dailyfinance.Adapters.PendingsPopUpAdapter;
 import m_fusilsolutions.com.dailyfinance.Adapters.ReportAdapter;
 import m_fusilsolutions.com.dailyfinance.Constants.Constants;
 import m_fusilsolutions.com.dailyfinance.Constants.SPName;
@@ -50,7 +52,10 @@ import m_fusilsolutions.com.dailyfinance.Helpers.AsyncResponse;
 import m_fusilsolutions.com.dailyfinance.Helpers.ExcelHelper;
 import m_fusilsolutions.com.dailyfinance.Helpers.ExecuteDataBase;
 import m_fusilsolutions.com.dailyfinance.Helpers.XmlConverter;
+import m_fusilsolutions.com.dailyfinance.Models.DailyFinanceData;
 import m_fusilsolutions.com.dailyfinance.Models.ReportData;
+
+import static m_fusilsolutions.com.dailyfinance.Helpers.FinanceTypefaces.typefaceBold;
 
 /**
  * Created by Android on 05-10-2019.
@@ -66,6 +71,8 @@ public class DailyFinanceReport_Activity extends AppCompatActivity
             tvR2,tvToTil,
             tvR3,tvPDTil,tvPDAmt;
 
+    public TextView tvWeekDayTotAmt,tvWeekTotCount;//new change 22102019
+
     final Calendar myCal = Calendar.getInstance();
     final Calendar myCalt = Calendar.getInstance();
 
@@ -77,6 +84,7 @@ public class DailyFinanceReport_Activity extends AppCompatActivity
     CustomToast _ct;
     ExecuteDataBase _exeDb;
     List<ReportData> reportDataList;
+    List<DailyFinanceData> weekOffList;//22102019
     private int _totAmt, _netAmt,_pdAmt;
     int screen = 0;
     ImageView ivImgFilter,ivCalendar;
@@ -404,6 +412,13 @@ public class DailyFinanceReport_Activity extends AppCompatActivity
                     UpdateFooterData(reportDataList);
                     tvCount.setText(String.valueOf(reportDataList.size()));
                 }
+            }//22102019
+            else if(val.equals("7")){
+                weekOffList = new ArrayList<>();
+                weekOffList = new XmlConverter().ParseWeekOffDaysList(nodeList,weekOffList);
+                if(weekOffList!=null && weekOffList.size() > 0) {
+                    ShowWeekOffDaysPopUp();
+                }
             }
         }else{
             _ct.ShowToast("No data found",false);
@@ -422,8 +437,12 @@ public class DailyFinanceReport_Activity extends AppCompatActivity
                     tvTotalAmt.setText("00");
                 }
             }
+            else if(val.equals("7")){//new change 22102019
+                _ct.ShowToast("No Pendings Found",false);
+            }
         }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -536,5 +555,64 @@ public class DailyFinanceReport_Activity extends AppCompatActivity
             in.putExtra("TransId",data.getTransId());
             startActivity(in);
         }
+    }
+//22102019
+    public void ShowPendingsProcess(ReportData data) {
+
+        String xele =  "<Data TransId='" + data.getTransId() + "' />";
+        _exeDb.ExecuteResult(SPName.USP_MA_DF_FinanceCollectionDates.toString(), xele, TransType.GetFinanceCollectionDates.toString(), "7", Constants.HTTP_URL);
+    }
+
+    private void ShowWeekOffDaysPopUp() {
+        final boolean[] flag = {false};
+        AlertDialog.Builder adb = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+        LayoutInflater li = getLayoutInflater();
+        View lv = li.inflate(R.layout.week_off_layout_dialog,null);
+        adb.setView(lv);
+        RecyclerView rv = lv.findViewById(R.id.recyclerView);
+        TextView tvdate = lv.findViewById(R.id.tvDate);
+        tvWeekDayTotAmt = lv.findViewById(R.id.tvFtrAmount);
+        tvWeekTotCount = lv.findViewById(R.id.tvFtrCount);
+        TextView tvAmt = lv.findViewById(R.id.tvAmount);
+        TextView tvSelectAll = lv.findViewById(R.id.tvSelectAll);
+        tvSelectAll.setVisibility(View.GONE);//22102019
+        CheckBox cb = lv.findViewById(R.id.cbSelectAll);
+        cb.setVisibility(View.GONE);//22102019
+        Button btnOk = lv.findViewById(R.id.btnOk);//22102019
+        btnOk.setVisibility(View.GONE);//2210219
+        ImageView imgclose = lv.findViewById(R.id.imgV_close);
+        TextView tvTit = lv.findViewById(R.id.titWeek);
+        tvdate.setTypeface(typefaceBold);
+        tvAmt.setTypeface(typefaceBold);
+        tvTit.setTypeface(typefaceBold);
+        tvSelectAll.setTypeface(typefaceBold);
+        tvWeekDayTotAmt.setTypeface(typefaceBold);
+        tvWeekTotCount.setTypeface(typefaceBold);
+        tvWeekDayTotAmt.setText(String.valueOf(getTotalAmtOfWeekOfList().intValue()));
+        tvWeekTotCount.setText(String.valueOf(weekOffList.size()));
+        PendingsPopUpAdapter adapter = new PendingsPopUpAdapter(this,weekOffList);
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setHasFixedSize(true);
+        rv.setNestedScrollingEnabled(false);
+        adb.setView(lv);
+        adb.setCancelable(false);
+        AlertDialog dialog = adb.create();
+        dialog.show();
+        imgclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+    private Double getTotalAmtOfWeekOfList()
+    {
+        double val =0;
+        for(DailyFinanceData data : weekOffList)
+        {
+            val = val+Double.parseDouble(data.getAmount());
+        }
+        return val;
     }
 }

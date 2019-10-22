@@ -51,6 +51,7 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
                 holder.tvStaus.setText("Status: Active");
                 holder.tvStaus.setTextColor(cTxt.getResources().getColor(R.color.Green));
                 holder.ivCollection.setVisibility(View.VISIBLE);
+                holder.ivPendings.setVisibility(View.VISIBLE);
             }
             else{
                 holder.tvStaus.setText("Status: CLosed");
@@ -72,14 +73,14 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
 
         TextView tvName,tvDate,tvTitle,tvTotalAmt,tvNetAmt,tvPerDayAmt,tvRemarks,tvMobNo,tvRefNo,tvStaus,
         tvNetTil,tvPDtil,tvR2,tvR3;
-        ImageView ivCollection;
+        ImageView ivCollection,ivPendings;//22102019
         LinearLayout llMain;
         CardView cvMain;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ivCollection = (ImageView) itemView.findViewById(R.id.ivCollRd);
+            ivPendings = (ImageView) itemView.findViewById(R.id.imgvPendingsBtn);//22102019
             tvR2 = (TextView) itemView.findViewById(R.id.tvR2M);
             tvR3= (TextView) itemView.findViewById(R.id.tvR3M);
             cvMain = (CardView) itemView.findViewById(R.id.cvMainCV);
@@ -105,6 +106,7 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
                 tvR2.setVisibility(View.VISIBLE);
                 tvR3.setVisibility(View.VISIBLE);
                 ivCollection.setOnClickListener(this);
+                ivPendings.setOnClickListener(this);
             }
             else
             {
@@ -126,6 +128,10 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
                 Intent in = new Intent(cTxt,Collection_Activity.class);
                 in.putExtra("MobileNo",data.getMobileNo());
                 cTxt.startActivity(in);
+            }
+
+            else if(v.getId() == R.id.imgvPendingsBtn){
+                ((Memberwise_DailyFinaceReport_Activity)cTxt).ShowPendingsProcess(data);
             }
         }
     }

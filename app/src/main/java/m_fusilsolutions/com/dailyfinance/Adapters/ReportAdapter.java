@@ -48,11 +48,12 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
             holder.tvDate.setText(data.getDate());
             holder.tvNetAmt.setText(data.getNetAmount());
             holder.tvPerDayAmt.setText(data.getPerDayAmt());
-//            if(screen!=3)
+//            if(screen!=3) Changes Done Here 22102019
                 if(data.getStatus().equals("0")){
                     holder.tvStatus.setText("Status: Active");
                     holder.tvStatus.setTextColor(cTxt.getResources().getColor(R.color.Green));
-                    holder.ivCollBtn.setVisibility(View.VISIBLE);
+                    holder.ivCollBtn.setVisibility(View.VISIBLE);//22102019
+                    holder.ivDueBtn.setVisibility(View.VISIBLE);//22102019
                 }
                 else{
                     holder.tvStatus.setText("Status: Closed");
@@ -76,7 +77,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         LinearLayout layout;
-        ImageView ivCollBtn;//21102019
+        ImageView ivCollBtn,ivDueBtn;//22102019
         TextView tvName,tvDate,tvTitle,tvTotalAmt,tvNetAmt,tvPerDayAmt,tvRemarks,tvMobNo,tvRefNo,tvStatus,tvNetTil,tvPDTil,
                 tvR2,tvR3,tvColDate;
 
@@ -94,6 +95,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
             tvColDate = (TextView) itemView.findViewById(R.id.tvColDate);//21102019
             if(screen==1 || screen==3) {
                 ivCollBtn = (ImageView) itemView.findViewById(R.id.imgvCollectionBtn);//21102019
+                ivDueBtn = (ImageView) itemView.findViewById(R.id.imgvPendingsBtn);//22102019
                 layout = (LinearLayout) itemView.findViewById(R.id.llParentLayoutReportsCV);
                 tvPDTil.setVisibility(View.VISIBLE);
                 tvNetTil.setVisibility(View.VISIBLE);
@@ -104,6 +106,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
                 tvStatus = (TextView) itemView.findViewById(R.id.tvStatusDF);
                 layout.setOnClickListener(this);
                 ivCollBtn.setOnClickListener(this);
+                ivDueBtn.setOnClickListener(this);//2210219
             }
             else{
                 tvColDate.setVisibility(View.VISIBLE);
@@ -133,6 +136,9 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
                 Intent in = new Intent(cTxt, Collection_Activity.class);
                 in.putExtra("MobileNo",data.getMobileNo());
                 cTxt.startActivity(in);
+            }
+            else if(v.getId() == R.id.imgvPendingsBtn){
+                ((DailyFinanceReport_Activity)cTxt).ShowPendingsProcess(data);
             }
         }
     }

@@ -233,6 +233,20 @@
                     android:visibility="gone"
                     />
 
+                <!--New Changes Comitted Here 22102019-->
+                <ImageView
+                    android:id="@+id/imgvPendingsBtn"
+                    android:layout_marginTop="3dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="3dp"
+                    android:src="@mipmap/pendings_icons"
+                    android:layout_below="@+id/tvPerDayAmt"
+                    android:layout_toLeftOf="@+id/ivCollRd"
+                    android:layout_toStartOf="@+id/ivCollRd"
+                    android:visibility="gone"
+                    />
+
             </RelativeLayout>
 
         </LinearLayout>

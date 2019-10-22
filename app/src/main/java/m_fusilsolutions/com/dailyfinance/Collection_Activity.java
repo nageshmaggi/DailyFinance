@@ -588,7 +588,7 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
                             }
                         } else {
                             //_ct.ShowToast("Date Must be After Finace Date", true);
-                            new MessageBoxHelper(this).ShowOkMessageBox("Date Must be After Finace Date");
+                            new MessageBoxHelper(this).ShowOkMessageBox("Date Must be After Finance Date");
                         }
                     } else {
                         ShowWeekOffDaysPopUp();

@@ -21,6 +21,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,6 +44,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import m_fusilsolutions.com.dailyfinance.Adapters.MemberWiseAdapter;
+import m_fusilsolutions.com.dailyfinance.Adapters.PendingsPopUpAdapter;
 import m_fusilsolutions.com.dailyfinance.Adapters.ReportAdapter;
 import m_fusilsolutions.com.dailyfinance.Constants.Constants;
 import m_fusilsolutions.com.dailyfinance.Constants.SPName;
@@ -50,6 +53,7 @@ import m_fusilsolutions.com.dailyfinance.CustomControls.CustomToast;
 import m_fusilsolutions.com.dailyfinance.Helpers.AsyncResponse;
 import m_fusilsolutions.com.dailyfinance.Helpers.ExecuteDataBase;
 import m_fusilsolutions.com.dailyfinance.Helpers.XmlConverter;
+import m_fusilsolutions.com.dailyfinance.Models.DailyFinanceData;
 import m_fusilsolutions.com.dailyfinance.Models.ReportData;
 import m_fusilsolutions.com.dailyfinance.Singletons.FinanceSingleTon;
 
@@ -63,8 +67,10 @@ public class Memberwise_DailyFinaceReport_Activity extends AppCompatActivity imp
             tvR2,tvR3,tvReportCount;
     RadioGroup rgFilterItems;
     CustomToast _ct;//new change 17102019
+    public TextView tvWeekDayTotAmt,tvWeekTotCount;//new change 22102019
 
     List<ReportData> reportDataList;
+    List<DailyFinanceData> weekOffList;//22102019
     ExecuteDataBase _exeDb;
     int flag = 0,screen = 0,selectedId = 0;
     String SearchEle="";
@@ -477,6 +483,13 @@ public class Memberwise_DailyFinaceReport_Activity extends AppCompatActivity imp
                     }
                 });
             }
+            else if(val.equals("7")){
+                weekOffList = new ArrayList<>();
+                weekOffList = new XmlConverter().ParseWeekOffDaysList(nodeList,weekOffList);
+                if(weekOffList!=null && weekOffList.size() > 0) {
+                    ShowWeekOffDaysPopUp();
+                }
+            }
         }
         else {
             if (val.equals("2")) {
@@ -485,6 +498,59 @@ public class Memberwise_DailyFinaceReport_Activity extends AppCompatActivity imp
                 Clicked = true;
             }
         }
+    }
+
+    private void ShowWeekOffDaysPopUp() {
+        final boolean[] flag = {false};
+        AlertDialog.Builder adb = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+        LayoutInflater li = getLayoutInflater();
+        View lv = li.inflate(R.layout.week_off_layout_dialog,null);
+        adb.setView(lv);
+        RecyclerView rv = lv.findViewById(R.id.recyclerView);
+        TextView tvdate = lv.findViewById(R.id.tvDate);
+        tvWeekDayTotAmt = lv.findViewById(R.id.tvFtrAmount);
+        tvWeekTotCount = lv.findViewById(R.id.tvFtrCount);
+        TextView tvAmt = lv.findViewById(R.id.tvAmount);
+        TextView tvSelectAll = lv.findViewById(R.id.tvSelectAll);
+        tvSelectAll.setVisibility(View.GONE);//22102019
+        CheckBox cb = lv.findViewById(R.id.cbSelectAll);
+        Button btnOk = lv.findViewById(R.id.btnOk);//22102019
+        btnOk.setVisibility(View.GONE);//2210219
+        cb.setVisibility(View.GONE);//22102019
+        ImageView imgclose = lv.findViewById(R.id.imgV_close);
+        TextView tvTit = lv.findViewById(R.id.titWeek);
+        tvdate.setTypeface(typefaceBold);
+        tvAmt.setTypeface(typefaceBold);
+        tvTit.setTypeface(typefaceBold);
+        tvSelectAll.setTypeface(typefaceBold);
+        tvWeekDayTotAmt.setTypeface(typefaceBold);
+        tvWeekTotCount.setTypeface(typefaceBold);
+        tvWeekDayTotAmt.setText(String.valueOf(getTotalAmtOfWeekOfList().intValue()));
+        tvWeekTotCount.setText(String.valueOf(weekOffList.size()));
+        PendingsPopUpAdapter adapter = new PendingsPopUpAdapter(this,weekOffList);
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setHasFixedSize(true);
+        rv.setNestedScrollingEnabled(false);
+        adb.setView(lv);
+        adb.setCancelable(false);
+        AlertDialog dialog = adb.create();
+        dialog.show();
+        imgclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+    private Double getTotalAmtOfWeekOfList()
+    {
+        double val =0;
+        for(DailyFinanceData data : weekOffList)
+        {
+            val = val+Double.parseDouble(data.getAmount());
+        }
+        return val;
     }
 
     public void SetRecyclerViewItem(ReportData data) {
@@ -583,5 +649,10 @@ public class Memberwise_DailyFinaceReport_Activity extends AppCompatActivity imp
                         myCalt.get(Calendar.DAY_OF_MONTH)).show();
             }
         }
+    }
+
+    public void ShowPendingsProcess(ReportData data) {
+        String xele =  "<Data TransId='" + data.getTransId() + "' />";
+        _exeDb.ExecuteResult(SPName.USP_MA_DF_FinanceCollectionDates.toString(), xele, TransType.GetFinanceCollectionDates.toString(), "7", Constants.HTTP_URL);
     }
 }
