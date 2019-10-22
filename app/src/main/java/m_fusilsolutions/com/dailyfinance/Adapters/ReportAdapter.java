@@ -2,6 +2,7 @@ package m_fusilsolutions.com.dailyfinance.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,11 +48,11 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
             holder.tvDate.setText(data.getDate());
             holder.tvNetAmt.setText(data.getNetAmount());
             holder.tvPerDayAmt.setText(data.getPerDayAmt());
-            //New Change 12102019 in Query too
-            if(screen!=3)
+//            if(screen!=3)
                 if(data.getStatus().equals("0")){
                     holder.tvStatus.setText("Status: Active");
                     holder.tvStatus.setTextColor(cTxt.getResources().getColor(R.color.Green));
+                    holder.ivCollBtn.setVisibility(View.VISIBLE);
                 }
                 else{
                     holder.tvStatus.setText("Status: Closed");
@@ -93,11 +94,9 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
             tvColDate = (TextView) itemView.findViewById(R.id.tvColDate);//21102019
             if(screen==1 || screen==3) {
                 ivCollBtn = (ImageView) itemView.findViewById(R.id.imgvCollectionBtn);//21102019
-                ivCollBtn.setVisibility(View.VISIBLE);
                 layout = (LinearLayout) itemView.findViewById(R.id.llParentLayoutReportsCV);
                 tvPDTil.setVisibility(View.VISIBLE);
                 tvNetTil.setVisibility(View.VISIBLE);
-                //new change 15102019
                 tvR2.setVisibility(View.VISIBLE);
                 tvR3.setVisibility(View.VISIBLE);
                 tvNetAmt = (TextView) itemView.findViewById(R.id.tvNetAmt);
@@ -110,14 +109,15 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
                 tvColDate.setVisibility(View.VISIBLE);
                 tvNetTil.setVisibility(View.INVISIBLE);
                 tvPDTil.setVisibility(View.INVISIBLE);
-                //new change 15102019
                 tvR2.setVisibility(View.INVISIBLE);
                 tvR3.setVisibility(View.INVISIBLE);
             }
             tvRemarks = (TextView) itemView.findViewById(R.id.tvRemarks);
             tvMobNo = (TextView) itemView.findViewById(R.id.tvMobNo);
             tvRefNo = (TextView) itemView.findViewById(R.id.tvRefNo);
-            tvMobNo.setTextIsSelectable(true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                tvMobNo.setTextIsSelectable(true);
+            }
 
 
         }
