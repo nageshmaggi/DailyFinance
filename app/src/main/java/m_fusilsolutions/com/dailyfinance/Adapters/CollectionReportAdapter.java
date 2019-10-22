@@ -36,13 +36,13 @@ public class CollectionReportAdapter extends RecyclerView.Adapter<CollectionRepo
 
         ReportData data = _tableDataList.get(position);
         holder.tvName.setText(data.getName());
-        holder.tvDate.setText(data.getDate());
+        holder.tvDate.setText("P DT : "+data.getDate());
         holder.tvTitle.setText(data.getVSNo());
         holder.tvTotalAmt.setText(data.getAmount());
         holder.tvRemarks.setText(data.getRemarks());
         holder.tvMobNo.setText(data.getMobileNo());
         holder.tvRefNo.setText(data.getRefNo());
-        holder.tvColDate.setText(data.getColDate());
+        holder.tvColDate.setText("C DT : "+data.getColDate());
     }
 
     @Override
@@ -67,6 +67,7 @@ public class CollectionReportAdapter extends RecyclerView.Adapter<CollectionRepo
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
             tvTotalAmt = (TextView) itemView.findViewById(R.id.tvTotalAmt);
             tvColDate = (TextView) itemView.findViewById(R.id.tvColDate);
+            tvColDate.setVisibility(View.VISIBLE);//22102019
                 tvNetTil.setVisibility(View.INVISIBLE);
                 tvPDTil.setVisibility(View.INVISIBLE);
                 tvR2.setVisibility(View.INVISIBLE);

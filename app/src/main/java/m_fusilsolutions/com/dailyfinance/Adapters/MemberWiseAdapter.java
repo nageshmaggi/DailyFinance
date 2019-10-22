@@ -41,10 +41,10 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ReportData data = _collectionList.get(position);
         holder.tvName.setText(data.getName());
-        holder.tvDate.setText(data.getDate());
         holder.tvTitle.setText(data.getVSNo());
         holder.tvTotalAmt.setText(data.getAmount());
         if(DF == 1){
+            holder.tvDate.setText(data.getDate());
             holder.tvNetAmt.setText(data.getNetAmount());
             holder.tvPerDayAmt.setText(data.getPerDayAmt());
             if(data.getStatus().equals("0")){
@@ -59,6 +59,10 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
             }
 
         }
+        else{
+            holder.tvDate.setText("P DT : "+data.getDate());
+            holder.tvColDate.setText("C DT : "+data.getColDate());
+        }
         holder.tvRemarks.setText(data.getRemarks());
         holder.tvMobNo.setText(data.getMobileNo());
         holder.tvRefNo.setText(data.getRefNo());
@@ -72,7 +76,7 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvName,tvDate,tvTitle,tvTotalAmt,tvNetAmt,tvPerDayAmt,tvRemarks,tvMobNo,tvRefNo,tvStaus,
-        tvNetTil,tvPDtil,tvR2,tvR3;
+        tvNetTil,tvPDtil,tvR2,tvR3,tvColDate;
         ImageView ivCollection,ivPendings;//22102019
         LinearLayout llMain;
         CardView cvMain;
@@ -81,6 +85,7 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
             super(itemView);
 
             ivPendings = (ImageView) itemView.findViewById(R.id.imgvPendingsBtn);//22102019
+            tvColDate = (TextView) itemView.findViewById(R.id.tvColDate);//22102019
             tvR2 = (TextView) itemView.findViewById(R.id.tvR2M);
             tvR3= (TextView) itemView.findViewById(R.id.tvR3M);
             cvMain = (CardView) itemView.findViewById(R.id.cvMainCV);
@@ -110,6 +115,7 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
             }
             else
             {
+                tvColDate.setVisibility(View.VISIBLE);
                 tvPDtil.setVisibility(View.INVISIBLE);
                 tvNetTil.setVisibility(View.INVISIBLE);
                 tvR2.setVisibility(View.INVISIBLE);//new change 15102019
