@@ -84,8 +84,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_weight="0.28"
-                android:weightSum="0.9"
+                android:layout_weight="0.3"
+                android:weightSum="1.2"
                 >
 
                 <TextView
@@ -116,12 +116,54 @@
                     android:gravity="start"
                     />
 
+                <RelativeLayout
+                    android:id="@+id/rlColAmtLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:visibility="gone"
+                    >
+                    <TextView
+                        android:id="@+id/tvCollAmtTil"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:text="Collected"
+                        android:textSize="12sp"
+                        android:gravity="start"
+                        android:layout_alignParentLeft="true"
+
+                        />
+                    <!--        New Change 15102019-->
+                    <TextView
+                        android:id="@+id/tvColonTil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":₹"
+                        android:textSize="12sp"
+                        android:layout_toRightOf="@+id/tvCollAmtTil"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvCollAmt"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:text="00"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.3"
+                        android:textColor="@color/DefaultBlack"
+                        android:gravity="end"
+                        android:layout_toRightOf="@+id/tvColonTil"
+                        />
+
+                </RelativeLayout>
+
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.32"
+                android:layout_weight="0.3"
                 >
 
                 <TextView

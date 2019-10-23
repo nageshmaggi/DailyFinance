@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -47,6 +48,7 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
             holder.tvDate.setText(data.getDate());
             holder.tvNetAmt.setText(data.getNetAmount());
             holder.tvPerDayAmt.setText(data.getPerDayAmt());
+            holder.tvColAmt.setText(data.getCollAmt());//23102019
             if(data.getStatus().equals("0")){
                 holder.tvStaus.setText("Status: Active");
                 holder.tvStaus.setTextColor(cTxt.getResources().getColor(R.color.Green));
@@ -76,10 +78,11 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvName,tvDate,tvTitle,tvTotalAmt,tvNetAmt,tvPerDayAmt,tvRemarks,tvMobNo,tvRefNo,tvStaus,
-        tvNetTil,tvPDtil,tvR2,tvR3,tvColDate;
+        tvNetTil,tvPDtil,tvR2,tvR3,tvColDate,tvColAmt;
         ImageView ivCollection,ivPendings;//22102019
         LinearLayout llMain;
         CardView cvMain;
+        RelativeLayout rlColLayout;//23102019
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -106,12 +109,15 @@ public class MemberWiseAdapter extends RecyclerView.Adapter<MemberWiseAdapter.My
             tvMobNo.setTextIsSelectable(true);
             llMain.setOnClickListener(this);
             if(DF==1){
+                rlColLayout = (RelativeLayout) itemView.findViewById(R.id.rlColAmtLayout);//23102019
+                tvColAmt = (TextView) itemView.findViewById(R.id.tvCollAmt);//23102019
                 tvPDtil.setVisibility(View.VISIBLE);
                 tvNetTil.setVisibility(View.VISIBLE);
                 tvR2.setVisibility(View.VISIBLE);
                 tvR3.setVisibility(View.VISIBLE);
                 ivCollection.setOnClickListener(this);
                 ivPendings.setOnClickListener(this);
+                rlColLayout.setVisibility(View.VISIBLE);//23102019
             }
             else
             {

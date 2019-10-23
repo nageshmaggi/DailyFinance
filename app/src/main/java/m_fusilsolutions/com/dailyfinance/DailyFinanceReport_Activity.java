@@ -25,6 +25,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import org.w3c.dom.NodeList;
@@ -68,7 +70,7 @@ public class DailyFinanceReport_Activity extends AppCompatActivity
     Button btnGetDf;
     EditText etFromDate, etToDate;
     TextView tvTotalAmt, tvNetAmt,tvNetTit,tvCount,
-            tvR2,tvToTil,
+            tvR2,tvToTil,tvColAmt,
             tvR3,tvPDTil,tvPDAmt;
 
     public TextView tvWeekDayTotAmt,tvWeekTotCount;//new change 22102019
@@ -85,9 +87,10 @@ public class DailyFinanceReport_Activity extends AppCompatActivity
     ExecuteDataBase _exeDb;
     List<ReportData> reportDataList;
     List<DailyFinanceData> weekOffList;//22102019
-    private int _totAmt, _netAmt,_pdAmt;
+    private int _totAmt, _netAmt,_pdAmt,_totColAmt;
     int screen = 0;
     ImageView ivImgFilter,ivCalendar;
+    RelativeLayout rlSumTotCol;
     View filterView;
     RadioGroup rgFilterBy;
     int selectedId = 0;
@@ -111,11 +114,11 @@ public class DailyFinanceReport_Activity extends AppCompatActivity
         tvR2 = (TextView) findViewById(R.id.tvR2DF);
         ivCalendar = (ImageView) findViewById(R.id.ivCalendar);
         tvToTil = (TextView) findViewById(R.id.tvToTil);
-
+        rlSumTotCol = (RelativeLayout) findViewById(R.id.rlCollectedSummary);//23102019
         tvR3 = (TextView) findViewById(R.id.tvR3DF);
         tvPDTil = (TextView) findViewById(R.id.tvPerDayTitle);
         tvPDAmt = (TextView) findViewById(R.id.tvPDAmt);
-
+        tvColAmt = (TextView) findViewById(R.id.tvCollAmtSum);//23102019
         ivImgFilter.setOnClickListener(this);
         reportDataList = new ArrayList<>();
         _ct = new CustomToast(this);
@@ -125,7 +128,10 @@ public class DailyFinanceReport_Activity extends AppCompatActivity
         etToDate.setFocusable(false);
         etToDate.setClickable(true);
         ivImgFilter.setOnClickListener(this);
-
+        if(screen == 2 )
+        {
+            rlSumTotCol.setVisibility(View.GONE);//23102019
+        }
         if(screen == 3)
         {
             etFromDate.setVisibility(View.INVISIBLE);
@@ -429,7 +435,9 @@ public class DailyFinanceReport_Activity extends AppCompatActivity
                     tvTotalAmt.setText("00");
                     tvNetAmt.setText("00");
                     tvPDAmt.setText("00");
+                    tvColAmt.setText("00");//23102019
                 }else if(screen==2){
+                    rlSumTotCol.setVisibility(View.INVISIBLE);//23102019
                     tvR2.setVisibility(View.INVISIBLE);
                     tvNetAmt.setVisibility(View.INVISIBLE);
                     tvPDAmt.setVisibility(View.INVISIBLE);
@@ -467,6 +475,7 @@ public class DailyFinanceReport_Activity extends AppCompatActivity
                 tvNetAmt.setText("00");
                 tvTotalAmt.setText("00");
                 tvPDAmt.setText("00");
+                tvColAmt.setText("00");//23102019
             }
             else if(screen == 2 ){
                 tvCount.setText("00");
@@ -484,6 +493,7 @@ public class DailyFinanceReport_Activity extends AppCompatActivity
         _totAmt = 0;
         _netAmt = 0;
         _pdAmt  = 0;
+        _totColAmt = 0;
         if (reportDataList != null && reportDataList.size() > 0) {
             for (ReportData data : reportDataList) {
                 if (data != null) {
@@ -491,6 +501,7 @@ public class DailyFinanceReport_Activity extends AppCompatActivity
                         _totAmt += (Integer.parseInt(data.getAmount()));
                         _netAmt += (Integer.parseInt(data.getNetAmount()));
                         _pdAmt  += (Integer.parseInt(data.getPerDayAmt()));
+                        _totColAmt += (Integer.parseInt(data.getCollAmt()));//23102019
                     }else if(screen==2){
                         _totAmt += (Integer.parseInt(data.getAmount()));
                     }
@@ -501,11 +512,11 @@ public class DailyFinanceReport_Activity extends AppCompatActivity
             tvTotalAmt.setText(String.valueOf(_totAmt));
             tvNetAmt.setText(String.valueOf(_netAmt));
             tvPDAmt.setText(String.valueOf(_pdAmt));
+            tvColAmt.setText(String.valueOf(_totColAmt));//23102019
         }else if(screen==2){
             tvNetAmt.setVisibility(View.INVISIBLE);
             tvR2.setVisibility(View.INVISIBLE);
             tvTotalAmt.setText(String.valueOf(_totAmt));
-
             tvPDAmt.setVisibility(View.INVISIBLE);
             tvR3.setVisibility(View.INVISIBLE);
         }

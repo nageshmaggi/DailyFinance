@@ -60,7 +60,7 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
     ImageView ivBack,ivFilter;
     RecyclerView rvReports;
     TextView tvTtlAmt,tvNetAmt,tvPerDayAmt,tvNetTil,tvPDTil,
-            tvR2,tvR3,tvReportCount;
+            tvR2,tvR3,tvReportCount,tvColAmt;
     RadioGroup rgFilterItems;
     CustomToast _ct;//new change 17102019
 
@@ -70,6 +70,7 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
     String SearchEle="";
     boolean Clicked = true, flagFrom = false;
     SimpleAdapter mAdapter;
+    RelativeLayout rlSumTotCol;//23100219
 
     DatePickerDialog.OnDateSetListener FromdateDialog,ToDateDialog;
     final Calendar myCal = Calendar.getInstance();
@@ -94,6 +95,8 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
         tvTtlAmt = (TextView) findViewById(R.id.tvTtlAmtMD);
         tvPerDayAmt = (TextView) findViewById(R.id.tvPerDayAmtMD);
         ivBack = (ImageView) findViewById(R.id.ivBackMD);
+        rlSumTotCol = (RelativeLayout) findViewById(R.id.rlCollectedSummary);//23102019
+        tvColAmt = (TextView) findViewById(R.id.tvCollAmtSum);//23102019
         tvNetTil = (TextView) findViewById(R.id.tvNetTil);
         tvPDTil = (TextView) findViewById(R.id.tvPerDayTil);
         tvR2 = (TextView) findViewById(R.id.tvR2);
@@ -140,6 +143,7 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
     }
 
     private void ProcessViews() {
+        rlSumTotCol.setVisibility(View.VISIBLE);//23102019
         ivBack.setEnabled(false);
         ivFilter.setEnabled(false);
         ivFilter.setVisibility(View.INVISIBLE);
@@ -184,6 +188,7 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
             tvTtlAmt.setText("00");
             tvNetAmt.setText("00");
             tvPerDayAmt.setText("00");
+            tvColAmt.setText("00");//23102019
         }
         return true;
     }
@@ -518,6 +523,7 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
     public void SetRecyclerViewItem(ReportData data) {
         if(Clicked) {
             if (data != null) {
+                rlSumTotCol.setVisibility(View.GONE);//23102019
                 ivBack.setEnabled(true);
                 ivFilter.setEnabled(true);
                 ivBack.setVisibility(View.VISIBLE);
@@ -559,12 +565,13 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
             return ddMMyyyy.format(date);
     }
 
-    private int _totAmt,_netAmt,_PdAmt;
+    private int _totAmt,_netAmt,_PdAmt,_totColAmt;
 
     private void UpdateFooterData(List<ReportData> reportDataList) {
         _totAmt = 0;
         _netAmt = 0;
         _PdAmt = 0;
+        _totColAmt = 0;
         if (reportDataList != null && reportDataList.size() > 0) {
             for (ReportData data : reportDataList) {
                 if (data != null) {
@@ -572,6 +579,7 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
                         _totAmt += (Integer.parseInt(data.getAmount()));
                         _netAmt += (Integer.parseInt(data.getNetAmount()));
                         _PdAmt += (Integer.parseInt(data.getPerDayAmt()));
+                        _totColAmt += (Integer.parseInt(data.getCollAmt()));//23102019
                     }else if(screen==2){
                         _totAmt += (Integer.parseInt(data.getAmount()));
                     }
@@ -584,6 +592,7 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
             tvTtlAmt.setText(String.valueOf(_totAmt));
             tvNetAmt.setText(String.valueOf(_netAmt));
             tvPerDayAmt.setText(String.valueOf(_PdAmt));
+            tvColAmt.setText(String.valueOf(_totColAmt));//23102019
             tvR3.setVisibility(View.VISIBLE);
             tvR2.setVisibility(View.VISIBLE);
         }else if(screen==2){

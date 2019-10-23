@@ -14,6 +14,7 @@ public class ReportData {
     private String TransId="";
     private String Status="";
     private String ColDate="";
+    private String CollAmt = "";//23102019
 
     public String getColDate() {
         return ColDate;
@@ -109,5 +110,13 @@ public class ReportData {
 
     public void setStatus(String status) {
         Status = status;
+    }
+
+    public String getCollAmt() {
+        return CollAmt;
+    }
+
+    public void setCollAmt(String collAmt) {
+        CollAmt = collAmt;
     }
 }

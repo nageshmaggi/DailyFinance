@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -48,6 +49,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
             holder.tvDate.setText(data.getDate());
             holder.tvNetAmt.setText(data.getNetAmount());
             holder.tvPerDayAmt.setText(data.getPerDayAmt());
+            holder.tvColAmt.setText(data.getCollAmt());//23102019
 //            if(screen!=3) Changes Done Here 22102019
                 if(data.getStatus().equals("0")){
                     holder.tvStatus.setText("Status: Active");
@@ -77,9 +79,10 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         LinearLayout layout;
+        RelativeLayout rlColLayout;//23102019
         ImageView ivCollBtn,ivDueBtn;//22102019
         TextView tvName,tvDate,tvTitle,tvTotalAmt,tvNetAmt,tvPerDayAmt,tvRemarks,tvMobNo,tvRefNo,tvStatus,tvNetTil,tvPDTil,
-                tvR2,tvR3,tvColDate;
+                tvR2,tvR3,tvColDate,tvColAmt;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,6 +97,8 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
             tvTotalAmt = (TextView) itemView.findViewById(R.id.tvTotalAmt);
             tvColDate = (TextView) itemView.findViewById(R.id.tvColDate);//21102019
             if(screen==1 || screen==3) {
+                rlColLayout = (RelativeLayout) itemView.findViewById(R.id.rlColAmtLayout);//23102019
+                tvColAmt = (TextView) itemView.findViewById(R.id.tvCollAmt);//23102019
                 ivCollBtn = (ImageView) itemView.findViewById(R.id.imgvCollectionBtn);//21102019
                 ivDueBtn = (ImageView) itemView.findViewById(R.id.imgvPendingsBtn);//22102019
                 layout = (LinearLayout) itemView.findViewById(R.id.llParentLayoutReportsCV);
@@ -107,6 +112,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyViewHold
                 layout.setOnClickListener(this);
                 ivCollBtn.setOnClickListener(this);
                 ivDueBtn.setOnClickListener(this);//2210219
+                rlColLayout.setVisibility(View.VISIBLE);//23102019
             }
             else{
                 tvColDate.setVisibility(View.VISIBLE);

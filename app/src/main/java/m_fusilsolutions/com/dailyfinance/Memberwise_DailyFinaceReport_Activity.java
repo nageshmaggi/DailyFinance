@@ -64,10 +64,11 @@ public class Memberwise_DailyFinaceReport_Activity extends AppCompatActivity imp
     ImageView ivBack,ivFilter;
     RecyclerView rvReports;
     TextView tvTtlAmt,tvNetAmt,tvPerDayAmt,tvNetTil,tvPDTil,
-            tvR2,tvR3,tvReportCount;
+            tvR2,tvR3,tvReportCount,tvColAmt;
     RadioGroup rgFilterItems;
     CustomToast _ct;//new change 17102019
     public TextView tvWeekDayTotAmt,tvWeekTotCount;//new change 22102019
+    RelativeLayout rlSumTotCol;//23100219
 
     List<ReportData> reportDataList;
     List<DailyFinanceData> weekOffList;//22102019
@@ -101,6 +102,8 @@ public class Memberwise_DailyFinaceReport_Activity extends AppCompatActivity imp
         tvTtlAmt = (TextView) findViewById(R.id.tvTtlAmtMD);
         tvPerDayAmt = (TextView) findViewById(R.id.tvPerDayAmtMD);
         ivBack = (ImageView) findViewById(R.id.ivBackMD);
+        rlSumTotCol = (RelativeLayout) findViewById(R.id.rlCollectedSummary);//23102019
+        tvColAmt = (TextView) findViewById(R.id.tvCollAmtSum);//23102019
         tvNetTil = (TextView) findViewById(R.id.tvNetTil);
         tvPDTil = (TextView) findViewById(R.id.tvPerDayTil);
         tvR2 = (TextView) findViewById(R.id.tvR2);
@@ -149,6 +152,7 @@ public class Memberwise_DailyFinaceReport_Activity extends AppCompatActivity imp
     }
 
     private void ProcessViews() {
+        rlSumTotCol.setVisibility(View.VISIBLE);//23102019
         ivBack.setEnabled(false);
         ivFilter.setEnabled(false);
         ivFilter.setVisibility(View.INVISIBLE);
@@ -179,9 +183,12 @@ public class Memberwise_DailyFinaceReport_Activity extends AppCompatActivity imp
             finish();
         }
         else if(id == R.id.miClear){
-            if(screen == 1)
+            if(screen == 1) {
+                reportDataList = null;
                 rvReports.setAdapter(null);
+            }
             else if(screen == 2) {
+                reportDataList=null;
                 rvReports.setAdapter(null);
                 tvReportCount.setText("0");
                 tvTtlAmt.setText("00");
@@ -189,6 +196,7 @@ public class Memberwise_DailyFinaceReport_Activity extends AppCompatActivity imp
             tvTtlAmt.setText("00");
             tvNetAmt.setText("00");
             tvPerDayAmt.setText("00");
+            tvColAmt.setText("00");//23102019
         }
         return true;
     }
@@ -556,6 +564,7 @@ public class Memberwise_DailyFinaceReport_Activity extends AppCompatActivity imp
     public void SetRecyclerViewItem(ReportData data) {
         if(Clicked) {
             if (data != null) {
+                rlSumTotCol.setVisibility(View.GONE);//23102019
                 ivBack.setEnabled(true);
                 ivFilter.setEnabled(true);
                 ivBack.setVisibility(View.VISIBLE);
@@ -570,12 +579,13 @@ public class Memberwise_DailyFinaceReport_Activity extends AppCompatActivity imp
         }
     }
 
-    private int _totAmt,_netAmt,_PdAmt;
+    private int _totAmt,_netAmt,_PdAmt,_totColAmt;
 
     private void UpdateFooterData(List<ReportData> reportDataList) {
         _totAmt = 0;
         _netAmt = 0;
         _PdAmt = 0;
+        _totColAmt = 0;
         if (reportDataList != null && reportDataList.size() > 0) {
             for (ReportData data : reportDataList) {
                 if (data != null) {
@@ -583,6 +593,7 @@ public class Memberwise_DailyFinaceReport_Activity extends AppCompatActivity imp
                         _totAmt += (Integer.parseInt(data.getAmount()));
                         _netAmt += (Integer.parseInt(data.getNetAmount()));
                         _PdAmt += (Integer.parseInt(data.getPerDayAmt()));
+                        _totColAmt += (Integer.parseInt(data.getCollAmt()));//23102019
                     }else if(screen==2){
                         _totAmt += (Integer.parseInt(data.getAmount()));
                     }
@@ -595,6 +606,7 @@ public class Memberwise_DailyFinaceReport_Activity extends AppCompatActivity imp
             tvTtlAmt.setText(String.valueOf(_totAmt));
             tvNetAmt.setText(String.valueOf(_netAmt));
             tvPerDayAmt.setText(String.valueOf(_PdAmt));
+            tvColAmt.setText(String.valueOf(_totColAmt));//23102019
             tvR3.setVisibility(View.VISIBLE);
             tvR2.setVisibility(View.VISIBLE);
         }else if(screen==2){

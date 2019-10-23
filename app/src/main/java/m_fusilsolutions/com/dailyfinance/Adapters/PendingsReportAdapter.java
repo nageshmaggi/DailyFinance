@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -45,6 +46,7 @@ public class PendingsReportAdapter extends RecyclerView.Adapter<PendingsReportAd
         holder.tvTitle.setText(data.getVSNo());
         holder.tvTotalAmt.setText(data.getAmount());
         if(DF == 1){
+            holder.tvColAmt.setText(data.getCollAmt());//23102019
             holder.tvNetAmt.setText(data.getNetAmount());
             holder.tvPerDayAmt.setText(data.getPerDayAmt());
             if(data.getStatus().equals("0")){
@@ -73,10 +75,11 @@ public class PendingsReportAdapter extends RecyclerView.Adapter<PendingsReportAd
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvName,tvDate,tvTitle,tvTotalAmt,tvNetAmt,tvPerDayAmt,tvRemarks,tvMobNo,tvRefNo,tvStaus,
-                tvNetTil,tvPDtil,tvR2,tvR3;
+                tvNetTil,tvPDtil,tvR2,tvR3,tvColAmt;
         ImageView ivCollection;//22102019
         LinearLayout llMain;
         CardView cvMain;
+        RelativeLayout rlColLayout;//23102019
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -101,11 +104,14 @@ public class PendingsReportAdapter extends RecyclerView.Adapter<PendingsReportAd
             tvMobNo.setTextIsSelectable(true);
             llMain.setOnClickListener(this);
             if(DF==1){
+                rlColLayout = (RelativeLayout) itemView.findViewById(R.id.rlColAmtLayout);//23102019
+                tvColAmt = (TextView) itemView.findViewById(R.id.tvCollAmt);//23102019
                 ivCollection.setOnClickListener(this);
                 tvPDtil.setVisibility(View.VISIBLE);
                 tvNetTil.setVisibility(View.VISIBLE);
                 tvR2.setVisibility(View.VISIBLE);
                 tvR3.setVisibility(View.VISIBLE);
+                rlColLayout.setVisibility(View.VISIBLE);//23102019
             }
             else
             {

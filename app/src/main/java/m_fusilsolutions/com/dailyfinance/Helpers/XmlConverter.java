@@ -526,6 +526,10 @@ public class XmlConverter {
                 {
                     reportData.setColDate(node.getAttributes().getNamedItem("CollDate").getNodeValue());
                 }
+                if(node.getAttributes().getNamedItem("CollAmt")!=null)//23102019
+                {
+                    reportData.setCollAmt(node.getAttributes().getNamedItem("CollAmt").getNodeValue());
+                }
                 reportList.add(reportData);
             }
             if (node.hasChildNodes()) {
