@@ -137,7 +137,7 @@ public class DailyFinance_Activity extends
             typeface = Typeface.createFromAsset(getAssets(), "Caviar-Dreams.ttf");
             typefaceBoldItalic = Typeface.createFromAsset(getAssets(), "CaviarDreams_BoldItalic.ttf");
             typefaceBold = Typeface.createFromAsset(getAssets(), "Caviar_Dreams_Bold.ttf");
-            etRefNo.setTypeface(typeface);
+            //etRefNo.setTypeface(typeface);//23102019 TypeFace for etRef is removed
             btnSave.setTypeface(typefaceBold);
             btnGet.setTypeface(typefaceBold);
             _exeDb = new ExecuteDataBase(this);

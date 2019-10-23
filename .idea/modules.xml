@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DailyFinance.iml" filepath="$PROJECT_DIR$/DailyFinance.iml" />
-      <module fileurl="file://E:\AndroidStudio\DailyFinance\app\DailyFinance-app.iml" filepath="E:\AndroidStudio\DailyFinance\app\DailyFinance-app.iml" />
-      <module fileurl="file://E:\AndroidStudio\DailyFinance\Git Projects-DailyFinance.iml" filepath="E:\AndroidStudio\DailyFinance\Git Projects-DailyFinance.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

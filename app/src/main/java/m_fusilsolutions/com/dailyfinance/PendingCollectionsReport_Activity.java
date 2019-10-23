@@ -351,7 +351,7 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
             }
         }
         if (FilteredReportList.size() > 0) {
-            ReportAdapter adapter = new ReportAdapter(this, FilteredReportList,screen);
+            PendingsReportAdapter adapter = new PendingsReportAdapter(this, FilteredReportList,screen);//changes 2310219
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             rvReports.setLayoutManager(layoutManager);
             rvReports.setAdapter(adapter);
@@ -377,7 +377,7 @@ public class PendingCollectionsReport_Activity extends AppCompatActivity impleme
             e.printStackTrace();
         }
         if (FilteredList.size() > 0) {
-            ReportAdapter adapter = new ReportAdapter(this, FilteredList,screen);
+            PendingsReportAdapter adapter = new PendingsReportAdapter(this, FilteredList,screen);//change made here 2310219
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             rvReports.setLayoutManager(layoutManager);
             rvReports.setAdapter(adapter);
