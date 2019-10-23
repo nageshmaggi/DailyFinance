@@ -6,8 +6,8 @@ package m_fusilsolutions.com.dailyfinance.Constants;
 
 public class Constants
 {
-    //public static final String HTTP_URL="192.168.1.47:55898";//Android-PC
-    public static final String HTTP_URL="192.168.1.23:55126";
+    public static final String HTTP_URL="192.168.1.47:55898";//Android-PC
+    //public static final String HTTP_URL="192.168.1.23:55124";
     //public static final String HTTP_URL="183.82.108.48:55898";//FusilServer
 
     public static final int NO_OF_FINANCE_DAYS=100;
