@@ -1,7 +1,5 @@
 package m_fusilsolutions.com.dailyfinance.Helpers;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 
 import java.io.BufferedReader;
@@ -16,24 +14,6 @@ import java.net.URLEncoder;
  */
 
 public class SaveMechanism extends AsyncTask<String,String,Object> {
-    Context _context;
-    ProgressDialog pd;
-
-    public SaveMechanism(Context context) {
-        _context = context;
-    }
-
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        if (_context != null) {
-            pd = new ProgressDialog(_context);
-            pd.setTitle("Saving please wait...");
-            pd.setCancelable(false);
-            pd.show();
-        }
-    }
 
     @Override
     protected Object doInBackground(String... strings) {
@@ -70,11 +50,5 @@ public class SaveMechanism extends AsyncTask<String,String,Object> {
             e.printStackTrace();
         }
         return resultdata;
-    }
-
-    @Override
-    protected void onPostExecute(Object object) {
-        super.onPostExecute(object);
-        pd.dismiss();
     }
 }

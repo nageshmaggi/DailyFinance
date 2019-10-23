@@ -3,6 +3,7 @@ package m_fusilsolutions.com.dailyfinance;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -42,6 +43,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 import m_fusilsolutions.com.dailyfinance.Adapters.CollectionAdapter;
@@ -54,6 +56,7 @@ import m_fusilsolutions.com.dailyfinance.CustomControls.CustomToast;
 import m_fusilsolutions.com.dailyfinance.Helpers.AsyncResponse;
 import m_fusilsolutions.com.dailyfinance.Helpers.DFSmsHelper;
 import m_fusilsolutions.com.dailyfinance.Helpers.ExecuteDataBase;
+import m_fusilsolutions.com.dailyfinance.Helpers.GetMaxData;
 import m_fusilsolutions.com.dailyfinance.Helpers.MessageBoxHelper;
 import m_fusilsolutions.com.dailyfinance.Helpers.NetworkUtils;
 import m_fusilsolutions.com.dailyfinance.Helpers.SaveMechanism;
@@ -222,12 +225,13 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
         return false;
     }
 
-    private void ShowWeekOffDaysPopUp(){
+
+    private void ShowWeekOffDaysPopUp() {
         final boolean[] flag = {false};
-        AlertDialog.Builder adb  = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+        AlertDialog.Builder adb = new AlertDialog.Builder(this, R.style.MyDialogTheme);
         LayoutInflater li = getLayoutInflater();
         //weekOffList = list();
-        View lv = li.inflate(R.layout.week_off_layout_dialog,null);
+        View lv = li.inflate(R.layout.week_off_layout_dialog, null);
         RecyclerView rv = lv.findViewById(R.id.recyclerView);
         TextView tvdate = lv.findViewById(R.id.tvDate);
         tvWeekDayTotAmt = lv.findViewById(R.id.tvFtrAmount);
@@ -247,7 +251,7 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
         btnOk.setTypeface(typefaceBold);
         tvWeekDayTotAmt.setText(String.valueOf(getTotalAmtOfWeekOfList().intValue()));
         tvWeekTotCount.setText(String.valueOf(weekOffList.size()));
-        WeekOffAdapter adapter = new WeekOffAdapter(this,weekOffList, flag[0]);
+        WeekOffAdapter adapter = new WeekOffAdapter(this, weekOffList, flag[0]);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setHasFixedSize(true);
@@ -271,14 +275,23 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SaveProcess();
-                dialog.dismiss();
-//                int count = getSelectedCount();
-//                if(1 == 1){ SaveProcess();
-//                    dialog.dismiss();
-//                }else{
-//                    _ct.ShowToast("Selected Pending Dates Max Count Exceeded",true);
-//                }
+                final ProgressDialog progDailog = ProgressDialog.show(
+                        Collection_Activity.this, "Message", "Please wait...", true);
+
+                new Thread() {
+                    public void run() {
+                        try {
+                            dialog.dismiss();
+                            SaveProcess("");
+                            //SaveProcess();
+                        } catch (Exception e) {
+
+                        }
+                        progDailog.dismiss();
+                    }
+                }.start();
+                _ct.ShowToast("Transaction Saved Succesfully",true);
+                startActivity(new Intent(Collection_Activity.this,MainActivity.class));
             }
         });
     }
@@ -322,6 +335,56 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
     private void SaveProcess() {
         String serXele = _inputXele.getServerInputXele(Constants.DF_COLLECTION_MENUITEM_ID);
         _exeDb.ExecuteResult(SPName.USP_MA_DF_MaxData.toString(), serXele, TransType.GetMaxData.toString(), "2", Constants.HTTP_URL);
+    }
+
+    private void SaveProcess(String str) {
+        String serXele = _inputXele.getServerInputXele(Constants.DF_COLLECTION_MENUITEM_ID);
+        try {
+            _serverInfoData = new GetMaxData().execute(SPName.USP_MA_DF_MaxData.toString(), serXele, TransType.GetMaxData.toString(), Constants.HTTP_URL).get();
+            if(_serverInfoData!=null){
+                SaveMechanism();
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //_exeDb.ExecuteResult(SPName.USP_MA_DF_MaxData.toString(), serXele, TransType.GetMaxData.toString(), "2", Constants.HTTP_URL);
+    }
+
+    private void SaveMechanism()
+    {
+        if(weekOffList.size() > 1)
+        {
+            long transId = Long.parseLong(_serverInfoData.getTransId());
+            int vn = Integer.parseInt(_serverInfoData.getVSNo());
+            for(DailyFinanceData data : weekOffList) {
+                if(data.isWeekDaySelected()) {
+                    String voucherXele = _inputXele.getVoucherXele( Constants.DF_COLLECTION_MENUITEM_ID, String.valueOf(transId), Constants.DFC_VS, String.valueOf(vn), _serverInfoData.getServerDate(), _serverInfoData.getServerTime());
+                    String collectionXele = _inputXele.getCollectionXelement(data, _collectionData, String.valueOf(transId), Constants.DF_COLLECTION_MENUITEM_ID);
+                    String inputXele = "<Trans><Voucher>" + voucherXele + collectionXele + "</Voucher></Trans>";
+                    new SaveMechanism().execute(SPName.USP_MA_DF_SaveCollection.toString(), inputXele, TransType.SaveDFCData.toString(), Constants.HTTP_URL);
+                    vn++;
+                    transId++;
+                }
+            }
+            //UpdateSMSProperties();
+            //new DFSmsHelper(this,_collectionData).SendSms(LoginUserSession._loginUserData.CollMessage,_collectionData.getMobileNo());
+//            _ct.ShowToast("Transaction Saved Succesfully",true);
+//            startActivity(new Intent(Collection_Activity.this,MainActivity.class));
+            //new MessageBoxHelper(this).ShowMessageBox(true,"Transaction Saved Succesfully");
+
+        }else if(weekOffList.size() ==1){
+            String vXele = _inputXele.getVoucherXele(Constants.DF_COLLECTION_MENUITEM_ID, _serverInfoData.getTransId(), Constants.DFC_VS, _serverInfoData.getVSNo(), _serverInfoData.getServerDate(), _serverInfoData.getServerTime());
+            String cXele = _inputXele.getCollectionXelement(weekOffList.get(0),_collectionData, _serverInfoData.getTransId(), Constants.DF_COLLECTION_MENUITEM_ID);
+            String inputXele = "<Trans><Voucher>" + vXele + cXele + "</Voucher></Trans>";
+            new SaveMechanism().execute(SPName.USP_MA_DF_SaveCollection.toString(), inputXele, TransType.SaveDFCData.toString(), Constants.HTTP_URL);
+//            _ct.ShowToast("Transaction Saved Succesfully",true);
+//            startActivity(new Intent(Collection_Activity.this,MainActivity.class));
+            //new MessageBoxHelper(this).ShowMessageBox(true,"Transaction Saved Succesfully");
+            //_exeDb.ExecuteResult(SPName.USP_MA_DF_SaveCollection.toString(), inputXele, TransType.SaveDFCData.toString(), "3", Constants.HTTP_URL);
+        }
+        weekOffList = new ArrayList<>();
     }
 
 
@@ -513,7 +576,7 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
                             String voucherXele = _inputXele.getVoucherXele( Constants.DF_COLLECTION_MENUITEM_ID, String.valueOf(transId), Constants.DFC_VS, String.valueOf(vn), _serverInfoData.getServerDate(), _serverInfoData.getServerTime());
                             String collectionXele = _inputXele.getCollectionXelement(data, _collectionData, String.valueOf(transId), Constants.DF_COLLECTION_MENUITEM_ID);
                             String inputXele = "<Trans><Voucher>" + voucherXele + collectionXele + "</Voucher></Trans>";
-                            new SaveMechanism(this).execute(SPName.USP_MA_DF_SaveCollection.toString(), inputXele, TransType.SaveDFCData.toString(), Constants.HTTP_URL);
+                            new SaveMechanism().execute(SPName.USP_MA_DF_SaveCollection.toString(), inputXele, TransType.SaveDFCData.toString(), Constants.HTTP_URL);
                             vn++;
                             transId++;
                         }
@@ -580,9 +643,8 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
                 if(weekOffList!=null && weekOffList.size() > 0) {
                     if (weekOffList.size() == 1) {
                         if (TransDateValidation(_collectionData.getTransDate(), _financeDate)) {
-                            if(_collectionData.getTransDate().equals(weekOffList.get(0).getDate())){
-                                weekOffList = new ArrayList<>();
-                                SaveProcess();
+                            if(_collectionData.getDate().equals(weekOffList.get(0).getDate())){
+                                SaveProcess("");
                             }else {
                                 ShowWeekOffDaysPopUp();
                             }
