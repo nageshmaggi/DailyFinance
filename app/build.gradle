@@ -23,12 +23,12 @@ android {
     signingConfigs {
         buildTypes {
             debug {
-                buildConfigField "String", "RELEASE_DATE", "\"19-10-2019\""
-                buildConfigField "String", "RELEASE_NO", "\"1.1\""
+                buildConfigField "String", "RELEASE_DATE", "\"22-10-2019\""
+                buildConfigField "String", "RELEASE_NO", "\"1.2\""
             }
             release {
-                buildConfigField "String", "RELEASE_DATE", "\"19-10-2019\""
-                buildConfigField "String", "RELEASE_NO", "\"1.1\""
+                buildConfigField "String", "RELEASE_DATE", "\"22-10-2019\""
+                buildConfigField "String", "RELEASE_NO", "\"1.2\""
             }
         }
     }

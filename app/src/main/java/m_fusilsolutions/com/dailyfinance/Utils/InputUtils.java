@@ -127,7 +127,7 @@ public class InputUtils
                 "' MenuItemId='" + menuItemId +
                 "' AgainstId='" + data.getTransId() +
                 "' Date='" + getyyyyDDmmDate(collectionData.getDate()) +
-                "' Coll_Date='" + getyyyyDDmmDate(data.getTransDate()) +
+                "' Coll_Date='" + getyyyyDDmmDate(data.getDate()) +
                 "' Name='" +
                 "' MobileNo='" +
                 "' RefNo='" +
