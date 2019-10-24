@@ -84,7 +84,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_weight="0.3"
+                android:layout_weight="0.28"
                 android:weightSum="1.2"
                 >
 
@@ -125,9 +125,9 @@
                     >
                     <TextView
                         android:id="@+id/tvCollAmtTil"
-                        android:layout_width="55dp"
+                        android:layout_width="35dp"
                         android:layout_height="wrap_content"
-                        android:text="Collected"
+                        android:text="Coll"
                         android:textSize="12sp"
                         android:gravity="start"
                         android:layout_alignParentLeft="true"
@@ -163,7 +163,7 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3"
+                android:layout_weight="0.32"
                 >
 
                 <TextView
