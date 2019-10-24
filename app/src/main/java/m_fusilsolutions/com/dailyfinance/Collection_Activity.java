@@ -581,9 +581,8 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
                             transId++;
                         }
                     }
-                    //new DFSmsHelper(this,_collectionData).SendSms(_inputXele.getCollSaveSMSMessage(_collectionData.getPerDayAmt(),_collectionData.getName(),weekOffList,_collectionData.getTransDate(),_collectionData.getMobileNo()),_collectionData.getMobileNo());
                     UpdateSMSProperties();
-                    new DFSmsHelper(this,_collectionData).SendSms(LoginUserSession._loginUserData.CollMessage,_collectionData.getMobileNo());
+                    //new DFSmsHelper(this,_collectionData).SendSms(LoginUserSession._loginUserData.CollMessage,_collectionData.getMobileNo());
                     new MessageBoxHelper(this).ShowMessageBox(true,"Transaction Saved Succesfully");
                 }else{
                     String vXele = _inputXele.getVoucherXele(Constants.DF_COLLECTION_MENUITEM_ID, _serverInfoData.getTransId(), Constants.DFC_VS, _serverInfoData.getVSNo(), _serverInfoData.getServerDate(), _serverInfoData.getServerTime());
@@ -595,10 +594,8 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
                 ResultData res = new ResultData();
                 res = new XmlConverter().ParseSaveData(nodeList, res);
                 if (res.Result.equals("Success")) {
-                    //_ct.ShowToast("Save Successfull", false);
-                    //new DFSmsHelper(this,_collectionData).SendSms(_inputXele.getCollSaveSMSMessage(_collectionData.getAmount(),_collectionData.getName(),weekOffList,_collectionData.getTransDate(),_collectionData.getMobileNo()),_collectionData.getMobileNo());
                     UpdateSMSProperties();
-                    new DFSmsHelper(this,_collectionData).SendSms(LoginUserSession._loginUserData.CollMessage,_collectionData.getMobileNo());
+                    //new DFSmsHelper(this,_collectionData).SendSms(LoginUserSession._loginUserData.CollMessage,_collectionData.getMobileNo());
                     new MessageBoxHelper(this).ShowMessageBox(true,"Transaction Saved Succesfully");
                 }
             }else if(val.equals("4")){
@@ -665,10 +662,10 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
                 etMobileNo.setText("");
                 _ct.ShowToast("Invalid MobileNo (Or) Finance Execution Completed",true);
             }else if(val.equals("6")){
-                _ct.ShowToast("You Cannot delete this Collection",true);
+                _ct.ShowToast("Status Completed, You Cannot delete this Collection",true);
                 _searchDialog.dismiss();
             }else if(val.equals("4")){
-                _ct.ShowToast("No Collection Exist",true);
+                _ct.ShowToast("Status Completed, You Cannot delete this Collection",true);
                 _searchDialog.dismiss();
                 hideKeyboard(this);
             }else if(val.equals("7")){

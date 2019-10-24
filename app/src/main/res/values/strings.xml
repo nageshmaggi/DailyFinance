@@ -33,6 +33,15 @@
     <string name="nav_draw_collections_report">Collections Report</string>
     <string name="nav_draw_act_fin_report">Active Daily Finances Report</string>
     <string name="nav_draw_memwise_report">MemberWise Daily Finances Report</string>
+    <string name="nav_draw_pend_report">Pending Colections Report</string>
+
+
+    <string name="nav_draw_aboutus">About us</string>
+    <string name="nav_draw_appinfo">App info</string>
+    <string name="nav_draw_poweredby">Powered by FusilSolutions pvt ltd</string>
+
+    <string name="nav_draw_trans_title">Transactions</string>
+    <string name="nav_draw_report_title">Reports</string>
 
     <string name="ReleaseDate">11-10-2019</string>
     <string name="VersionNo">1.0</string>

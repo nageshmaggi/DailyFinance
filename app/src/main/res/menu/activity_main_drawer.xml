@@ -3,56 +3,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item android:title="Transaction">
+    <item android:title="@string/nav_draw_trans_title">
         <menu>
             <item
                 android:id="@+id/nav_daily_finance"
                 android:icon="@mipmap/df_dailyfinance"
-                android:title="Daily Finance" />
+                android:title="@string/nav_draw_trans_finances" />
             <item
                 android:id="@+id/nav_collection"
                 android:icon="@mipmap/money_collection"
-                android:title="Collection" />
+                android:title="@string/nav_draw_trans_collections" />
         </menu>
     </item>
 
-    <item android:title="Reports">
+    <item android:title="@string/nav_draw_report_title">
         <menu>
             <item
                 android:id="@+id/nav_daily_finance_report"
                 android:icon="@mipmap/dfreport"
-                android:title="Daily Finance Report" />
+                android:title="@string/nav_draw_finances_report" />
             <item
                 android:id="@+id/nav_collection_report"
                 android:icon="@mipmap/colreport"
-                android:title="Collection Report" />
+                android:title="@string/nav_draw_collections_report" />
             <item
                 android:id="@+id/nav_daily_active_finance_report"
                 android:icon="@mipmap/activedfreport"
-                android:title="Active Daily Finance Report" />
+                android:title="@string/nav_draw_act_fin_report" />
             <item
                 android:id="@+id/nav_memberwise_daily_finance_report"
                 android:icon="@mipmap/memwise_df"
-                android:title="Memberwise Daily Finance Report" />
+                android:title="@string/nav_draw_memwise_report" />
             <item
                 android:id="@+id/nav_pending_collection_report"
                 android:icon="@mipmap/pending_collections"
-                android:title="Pending Colections Report" />
+                android:title="@string/nav_draw_pend_report" />
         </menu>
     </item>
 
 
     <item
         android:id="@+id/nav_about"
-        android:title="About us"
+        android:title="@string/nav_draw_aboutus"
         />
 
     <item
         android:id="@+id/nav_appinfo"
-        android:title="App info"
+        android:title="@string/nav_draw_appinfo"
         />
 
     <item
-        android:title="Powered by FusilSolutions pvt ltd"
+        android:title="@string/nav_draw_poweredby"
         />
 </menu>

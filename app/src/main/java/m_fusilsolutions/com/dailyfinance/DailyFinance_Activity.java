@@ -519,7 +519,7 @@ public class DailyFinance_Activity extends
                 ResultData res = new ResultData();
                 res = new XmlConverter().ParseSaveData(nodeList, res);
                 if (res.Result.equals("Success")) {
-                    new DFSmsHelper(this,_financeData).SendSms(LoginUserSession._loginUserData.FinMessage,_financeData.getMobileNo());
+                    //new DFSmsHelper(this,_financeData).SendSms(LoginUserSession._loginUserData.FinMessage,_financeData.getMobileNo());
                     new MessageBoxHelper(this).ShowMessageBox(true,"Transaction Saved Succesfully");
                 } else {
                     _ct.ShowToast("Transaction UnSucessfull", false);

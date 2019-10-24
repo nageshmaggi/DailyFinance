@@ -122,9 +122,9 @@
 
                     <TextView
                         android:id="@+id/tvCollAmtTilSum"
-                        android:layout_width="65dp"
+                        android:layout_width="55dp"
                         android:layout_height="wrap_content"
-                        android:text="Total Coll"
+                        android:text="Coll"
                         android:textSize="13sp"
                         android:gravity="start"
                         android:layout_alignParentLeft="true"
