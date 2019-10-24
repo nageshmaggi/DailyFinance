@@ -7,7 +7,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -16,18 +16,16 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-
-
     }
 
     signingConfigs {
         buildTypes {
             debug {
-                buildConfigField "String", "RELEASE_DATE", "\"22-10-2019\""
+                buildConfigField "String", "RELEASE_DATE", "\"24-10-2019\""
                 buildConfigField "String", "RELEASE_NO", "\"1.2\""
             }
             release {
-                buildConfigField "String", "RELEASE_DATE", "\"22-10-2019\""
+                buildConfigField "String", "RELEASE_DATE", "\"24-10-2019\""
                 buildConfigField "String", "RELEASE_NO", "\"1.2\""
             }
         }
