@@ -489,19 +489,8 @@ public class DailyFinance_Activity extends
         _financeData.setDate(String.valueOf(dtFddMMyyyy.format(new Date())));
         DatePickerCalling();
         spWeek.setSelection(0);
-
     }
 
-    private ArrayList<Map<String,String>> getList(){
-        ArrayList<Map<String,String>> list = new ArrayList<>();
-        for(int i=1; i<=200; i++){
-            Map<String,String> obj = new HashMap<>();
-            obj.put("Name","Nagesh"+i);
-            obj.put("MobileNo","889781531"+i);
-            list.add(obj);
-        }
-        return list;
-    }
 
     @Override
     public void processFinishing(Object result, String val) {

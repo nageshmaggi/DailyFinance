@@ -219,18 +219,10 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
         }
     }
 
-    private boolean IsTransDateValidation()
-    {
-
-        return false;
-    }
-
-
     private void ShowWeekOffDaysPopUp() {
         final boolean[] flag = {false};
         AlertDialog.Builder adb = new AlertDialog.Builder(this, R.style.MyDialogTheme);
         LayoutInflater li = getLayoutInflater();
-        //weekOffList = list();
         View lv = li.inflate(R.layout.week_off_layout_dialog, null);
         RecyclerView rv = lv.findViewById(R.id.recyclerView);
         TextView tvdate = lv.findViewById(R.id.tvDate);
@@ -296,7 +288,6 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
         });
     }
 
-
     private Double getTotalAmtOfWeekOfList()
     {
         double val =0;
@@ -305,17 +296,6 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
             val = val+Double.parseDouble(data.getAmount());
         }
         return val;
-    }
-
-    private List<DailyFinanceData> list()
-    {
-        List<DailyFinanceData> _list = new ArrayList<>();
-        _list.add(new DailyFinanceData("100","10-10-2019"));
-        _list.add(new DailyFinanceData("100","11-10-2019"));
-        _list.add(new DailyFinanceData("100","13-10-2019"));
-        _list.add(new DailyFinanceData("100","14-10-2019"));
-        _list.add(new DailyFinanceData("100","16-10-2019"));
-        return _list;
     }
 
     private void AssignControlData(){
@@ -332,11 +312,6 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
         ClearProcess();
     }
 
-    private void SaveProcess() {
-        String serXele = _inputXele.getServerInputXele(Constants.DF_COLLECTION_MENUITEM_ID);
-        _exeDb.ExecuteResult(SPName.USP_MA_DF_MaxData.toString(), serXele, TransType.GetMaxData.toString(), "2", Constants.HTTP_URL);
-    }
-
     private void SaveProcess(String str) {
         String serXele = _inputXele.getServerInputXele(Constants.DF_COLLECTION_MENUITEM_ID);
         try {
@@ -349,7 +324,6 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //_exeDb.ExecuteResult(SPName.USP_MA_DF_MaxData.toString(), serXele, TransType.GetMaxData.toString(), "2", Constants.HTTP_URL);
     }
 
     private void SaveMechanism()
@@ -370,18 +344,12 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
             }
             //UpdateSMSProperties();
             //new DFSmsHelper(this,_collectionData).SendSms(LoginUserSession._loginUserData.CollMessage,_collectionData.getMobileNo());
-//            _ct.ShowToast("Transaction Saved Succesfully",true);
-//            startActivity(new Intent(Collection_Activity.this,MainActivity.class));
-            //new MessageBoxHelper(this).ShowMessageBox(true,"Transaction Saved Succesfully");
 
         }else if(weekOffList.size() ==1){
             String vXele = _inputXele.getVoucherXele(Constants.DF_COLLECTION_MENUITEM_ID, _serverInfoData.getTransId(), Constants.DFC_VS, _serverInfoData.getVSNo(), _serverInfoData.getServerDate(), _serverInfoData.getServerTime());
             String cXele = _inputXele.getCollectionXelement(weekOffList.get(0),_collectionData, _serverInfoData.getTransId(), Constants.DF_COLLECTION_MENUITEM_ID);
             String inputXele = "<Trans><Voucher>" + vXele + cXele + "</Voucher></Trans>";
             new SaveMechanism().execute(SPName.USP_MA_DF_SaveCollection.toString(), inputXele, TransType.SaveDFCData.toString(), Constants.HTTP_URL);
-//            _ct.ShowToast("Transaction Saved Succesfully",true);
-//            startActivity(new Intent(Collection_Activity.this,MainActivity.class));
-            //new MessageBoxHelper(this).ShowMessageBox(true,"Transaction Saved Succesfully");
             //_exeDb.ExecuteResult(SPName.USP_MA_DF_SaveCollection.toString(), inputXele, TransType.SaveDFCData.toString(), "3", Constants.HTTP_URL);
         }
         weekOffList = new ArrayList<>();
@@ -435,14 +403,6 @@ public class Collection_Activity extends AppCompatActivity implements AsyncRespo
             }
         });
         etDate.setText(dtFddMMyyyy.format(delCalendar.getTime()));
-    }
-
-    private boolean isValidMobile(String phone) {
-        if (!Pattern.matches("[a-zA-Z]+", phone)) {
-            return phone.length() > 6 && phone.length() <= 13;
-
-        }
-        return false;
     }
 
     private void setActionBar() {

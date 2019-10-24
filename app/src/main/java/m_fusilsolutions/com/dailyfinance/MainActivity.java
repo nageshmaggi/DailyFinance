@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity
             _exeDb.ExecuteResult(SPName.USP_MA_DF_DashBoard.toString(), "<Data Name='abc'/>", TransType.GetFinanceTotals.toString(), "2", Constants.HTTP_URL);
             //swipeLayout.setOnRefreshListener(this);
             checkPermission();
-            checkSelfPermission();
+            //checkSelfPermission();
             GetDistinctMemberList();
         }
         else
@@ -187,6 +187,7 @@ public class MainActivity extends AppCompatActivity
         if(requestCode==1){
             Toast.makeText(this,"Permission Granted",Toast.LENGTH_SHORT).show();
         }
+        checkSelfPermission();
     }
 
 

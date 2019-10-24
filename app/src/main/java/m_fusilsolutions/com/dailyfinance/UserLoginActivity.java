@@ -51,8 +51,8 @@ public class UserLoginActivity extends Activity
         typeface = Typeface.createFromAsset(getAssets(), "Caviar-Dreams.ttf");
         typefaceBoldItalic = Typeface.createFromAsset(getAssets(), "CaviarDreams_BoldItalic.ttf");
         typefaceBold = Typeface.createFromAsset(getAssets(), "Caviar_Dreams_Bold.ttf");
-        etusername.setTypeface(typefaceBold);
-        etuserpassword.setTypeface(typefaceBold);
+        etusername.setTypeface(typeface);
+        etuserpassword.setTypeface(typeface);
         btnLogin.setTypeface(typefaceBold);
         db = new ExecuteDataBase(this);
         btnLogin.setOnClickListener(this);
